@@ -1,8 +1,11 @@
 ﻿package {
+	import org.flixel.*;
 	import com.leapmotion.leap.*;
 	import flash.display.Sprite;
 	import flash.utils.getTimer;
 	import flash.text.TextField;
+	
+	
 	public class ProjectInterface extends Sprite implements Listener {
 		public var statusText: TextField;
 		private var controller: Controller;
@@ -65,10 +68,12 @@
 						var swipe: SwipeGesture = gesture as SwipeGesture;
 						if (Math.abs(swipe.direction.x) > Math.abs(swipe.direction.y)) {
 							if (swipe.direction.x > 0) {
-								trace("swipe pa direita");
+								super(320, 240, PlayState("swipe para a direita"), 2);
+								//trace("swipe pa direita");
 								statusText.appendText("swipe pa direita\n");
 							} else {
-								trace("swipe pa esquerda");
+								super(320, 240, PlayState("swipe para a direita"), 2)
+								//trace("swipe pa esquerda");
 								statusText.appendText("swipe pa esquerda\n");
 							}
 							lastSwipe = now;
