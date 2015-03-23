@@ -6,13 +6,14 @@
 	import flash.text.TextField;
 	
 	
-	public class ProjectInterface extends Sprite implements Listener {
+	public class ProjectInterface extends FlxGame extends Sprite implements Listener {
 		public var statusText: TextField;
 		private var controller: Controller;
 		private var startTime: Number;
 		private var currentTime: Number;
 		private var framesNumber: int = 0;
 		private var lastSwipe:int;
+		privare var result:FlxGame;
 		public function ProjectInterface() {
 			statusText.scrollV = statusText.maxScrollV;
 			statusText.appendText("Creating Controller...\n");
@@ -68,11 +69,11 @@
 						var swipe: SwipeGesture = gesture as SwipeGesture;
 						if (Math.abs(swipe.direction.x) > Math.abs(swipe.direction.y)) {
 							if (swipe.direction.x > 0) {
-								super(320, 240, PlayState("swipe para a direita"), 2);
+								result = new FlxGame(320, 240, PlayState("swipe para a esquerda!"), 2);
 								//trace("swipe pa direita");
 								statusText.appendText("swipe pa direita\n");
 							} else {
-								super(320, 240, PlayState("swipe para a direita"), 2)
+								result = new FlxGame(320, 240, PlayState("swipe para a direita!"), 2);
 								//trace("swipe pa esquerda");
 								statusText.appendText("swipe pa esquerda\n");
 							}
