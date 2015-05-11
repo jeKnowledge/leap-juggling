@@ -1,4 +1,4 @@
-﻿package {
+﻿package  {
 
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -11,29 +11,40 @@
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 
-	public class GameState extends MovieClip {
-
-		private var scoreTextField: TextField;
+	public class GameState extends State {
 		private var player: Sprite;
 		private var playerScore: int;
-		private var playerSpeed: int;
+		private var playerSpeed: int = 10;
 
-		public function GameState() {
+		private var scoreTextField: TextField;
+		
+		public function GameState(game: Game) {
+			super(game);
+			
 			var loader: Loader = new Loader();
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoadComplete);
 			loader.load(new URLRequest("test.png"));
-
+			
 			scoreTextField = new TextField();
-			addChild(scoreTextField);
-
-			addEventListener(Event.ENTER_FRAME, enterFrameHandler);
-
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, reportKeyDown);
-
-			playerSpeed = 10;
+			this.game.addChild(scoreTextField);
+			
+			playerScore = 0;
 		}
 
-		function reportKeyDown(event: KeyboardEvent): void {
+		private function onLoadComplete(e: Event): void {
+			var loaderInfo: LoaderInfo = e.target as LoaderInfo;
+			var loadedBitmap: Bitmap = loaderInfo.content as Bitmap;
+
+			player = new Sprite();
+			player.addChild(loadedBitmap);
+
+			this.game.addChild(player);
+
+			player.x = 100;
+			player.y = 200;
+		}		
+		
+		override public function handleKeyDown(event: KeyboardEvent): void {
 			if (event.keyCode == Keyboard.RIGHT) {
 				player.x += playerSpeed;
 			}
@@ -50,27 +61,12 @@
 				player.x -= playerSpeed;
 			}
 		}
-
-		protected function enterFrameHandler(event: Event): void {
+		
+		override public function update(): void {
 			playerScore++;
-			scoreTextField.text = playerScore.toString();
-
-			scoreTextField.x = 10;
-			scoreTextField.y = 10;
+			scoreTextField.text = "frame nr" + playerScore;
 		}
-
-		private function onLoadComplete(e: Event): void {
-			var loaderInfo: LoaderInfo = e.target as LoaderInfo;
-			var loadedBitmap: Bitmap = loaderInfo.content as Bitmap;
-
-			player = new Sprite();
-			player.addChild(loadedBitmap);
-
-			addChild(player);
-
-			player.x = 100;
-			player.y = 200;
-		}
+		
 	}
 
 }
