@@ -1,4 +1,4 @@
-﻿package  {
+﻿package {
 
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -21,28 +21,18 @@
 		public function GameState(game: Game) {
 			super(game);
 			
-			var loader: Loader = new Loader();
-			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoadComplete);
-			loader.load(new URLRequest("test.png"));
-			
+		}
+		
+		override public function setup(): void {
 			scoreTextField = new TextField();
 			this.game.addChild(scoreTextField);
 			
-			playerScore = 0;
-		}
-
-		private function onLoadComplete(e: Event): void {
-			var loaderInfo: LoaderInfo = e.target as LoaderInfo;
-			var loadedBitmap: Bitmap = loaderInfo.content as Bitmap;
-
 			player = new Sprite();
-			player.addChild(loadedBitmap);
-
+			player.addChild(this.game.resourceMap["test.png"]);
 			this.game.addChild(player);
-
 			player.x = 100;
 			player.y = 200;
-		}		
+		}
 		
 		override public function handleKeyDown(event: KeyboardEvent): void {
 			if (event.keyCode == Keyboard.RIGHT) {
