@@ -20,7 +20,6 @@
 		
 		public function GameState(game: Game) {
 			super(game);
-			
 		}
 		
 		override public function setup(): void {
@@ -28,10 +27,12 @@
 			this.game.addChild(scoreTextField);
 			
 			player = new Sprite();
-			player.addChild(this.game.resourceMap["test.png"]);
+			player.addChild(this.game.resourceMap["player.png"]);
 			this.game.addChild(player);
-			player.x = 100;
-			player.y = 200;
+			player.x = 800 / 2 - 150;
+			player.y = 640 - 220;
+			
+			var myBall: Ball = new Ball(this);
 		}
 		
 		override public function handleKeyDown(event: KeyboardEvent): void {

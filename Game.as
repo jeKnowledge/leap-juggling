@@ -20,10 +20,14 @@
 		public function Game() {
 			resourceMap = new Object();
 			
-			var loader: Loader = new Loader();
-			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoadComplete);
-			loader.load(new URLRequest("test.png"));
+			var resourceURLs: Array = ["player.png", "test2.png"];
 			
+			for each (var resourceURL in resourceURLs) {
+				var loader: Loader = new Loader();
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoadComplete);
+				loader.load(new URLRequest(resourceURL));
+			}
+						
 			currentState = new MenuState(this);
 			currentState.setup();
 
