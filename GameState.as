@@ -10,12 +10,19 @@
 	import flash.text.*;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
+	import flash.geom.Rectangle;
+	import flash.utils.Timer;
+	import flash.events.TimerEvent;
 
 	public class GameState extends State {
 		private var player: Sprite;
 		private var playerScore: int;
 		private var playerSpeed: int = 10;
-
+		private var timer: Timer;
+		private var interval: Number = 1000;
+		
+		public var ballArray: Array;
+		
 		private var scoreTextField: TextField;
 		
 		public function GameState(game: Game) {
@@ -31,9 +38,17 @@
 			this.game.addChild(player);
 			player.x = 800 / 2 - 150;
 			player.y = 640 - 220;
+			timer = new Timer(interval);
+			timer.addEventListener(TimerEvent.TIMER, ballCreate);
+			timer.start();
 			
-			var myBall: Ball = new Ball(this);
 		}
+		
+		public function ballCreate(e: Event): void {
+			var ball: Ball = new Ball(this);
+			ballArray.push(ball);
+		}
+		
 		
 		override public function handleKeyDown(event: KeyboardEvent): void {
 			if (event.keyCode == Keyboard.RIGHT) {
