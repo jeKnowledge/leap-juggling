@@ -20,6 +20,7 @@
 		private var playerSpeed: int = 10;
 		public var timer: Timer;
 		public var velocity: Number;
+		public var spacePressed: Boolean = false;
 		
 		public var force: Number;
 		
@@ -48,19 +49,24 @@
 		}
 		
 		public function startCounting(event: KeyboardEvent): void {
-			if(event.keyCode == Keyboard.SPACE) {
+			if(event.keyCode == Keyboard.SPACE && spacePressed == false) {
 				force = playerScore;
+				trace("Force: " + force);
+				spacePressed = true;
 			}
 		}
 
 		public function ballCreate(event: KeyboardEvent): void {
-			velocity = (playerScore - force) * 100;
+			trace("Player Score: " + playerScore);
+			velocity = (playerScore - force) * 1.1;
+			trace(velocity);
 			if(event.keyCode == Keyboard.SPACE) {
 				trace("space clicked");
 				if(balls.length < 3) {
 					var newBall: Ball = new Ball(this, velocity);
 					balls.push(newBall);
 				}
+				spacePressed = false;
 			}
 		}
 		
