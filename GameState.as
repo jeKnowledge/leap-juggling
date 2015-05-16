@@ -40,17 +40,18 @@
 			this.game.addChild(player);
 			player.x = 800 / 2 - 150;
 			player.y = 640 - 220;
+			this.game.stage.addEventListener(KeyboardEvent.KEY_DOWN, ballCreate);
 
-			timer = new Timer(2000);
-			timer.addEventListener(TimerEvent.TIMER, ballCreate);
-			timer.start();
 		}
 
-		public function ballCreate(e: Event): void {
-			if(ballsInGame < 3) {
-				var newBall: Ball = new Ball(this);
-				balls.push(newBall);
-				ballsInGame+=1;
+		public function ballCreate(event: KeyboardEvent): void {
+			if(event.keyCode == Keyboard.SPACE) {
+				trace("space clicked");
+				if(ballsInGame < 3) {
+					var newBall: Ball = new Ball(this);
+					balls.push(newBall);
+					ballsInGame+=1;
+				}
 			}
 		}
 		
