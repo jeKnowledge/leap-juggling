@@ -30,19 +30,21 @@
 			sprite = new Sprite();
 			sprite.addChild(gameState.game.resourceMap["test2.png"]);
 			sprite.x = Math.random() * 50;
-			sprite.y = 600;
+			sprite.y = Math.random() * 600;
 			gameState.game.addChild(sprite);
-			
+		}
+		
+		public function beginBallAction(): void {
 			sprite.addEventListener(Event.ENTER_FRAME, update);
-			
 		}
 		
 		public function update(e: Event): void {
-			if(vy > 2 && touched == false) {
+		trace(gameState.game.stage.width);
+		if(vy > 2 && touched == false) {
 				sprite.y -= vy;
 				vy*=gravity;
 				sprite.x += vx;
-				trace(vy);
+				trace(sprite.x);
 			} else {
 				touched = true;
 				sprite.y += vy;

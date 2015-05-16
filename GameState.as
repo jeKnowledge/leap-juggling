@@ -18,7 +18,7 @@
 		private var player: Sprite;
 		private var playerScore: int;
 		private var playerSpeed: int = 10;
-		private var timer: Timer;
+		public var timer: Timer = new Timer(interval);
 		private var interval: Number = 1000;
 		
 		public var ballArray: Array;
@@ -38,15 +38,17 @@
 			this.game.addChild(player);
 			player.x = 800 / 2 - 150;
 			player.y = 640 - 220;
-			timer = new Timer(interval);
+			var ball: Ball;
+			var i: Number = 0;
 			timer.addEventListener(TimerEvent.TIMER, ballCreate);
 			timer.start();
 			
 		}
 		
-		public function ballCreate(e: Event): void {
+		public function ballCreate(e: TimerEvent): void {
 			var ball: Ball = new Ball(this);
-			ballArray.push(ball);
+			ball.beginBallAction();
+			trace(ball);
 		}
 		
 		
