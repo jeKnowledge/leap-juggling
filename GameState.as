@@ -40,15 +40,16 @@
 			player.y = 640 - 220;
 			var ball: Ball;
 			var i: Number = 0;
-			timer.addEventListener(TimerEvent.TIMER, ballCreate);
-			timer.start();
+			//timer.addEventListener(TimerEvent.TIMER, ballCreate);
+			//timer.start();
+			var ball: Ball = new Ball(this);
+			ball.beginBallAction();
 			
 		}
 		
-		public function ballCreate(e: TimerEvent): void {
+		public function ballCreate(e: Event): void {
 			var ball: Ball = new Ball(this);
 			ball.beginBallAction();
-			trace(ball);
 		}
 		
 		

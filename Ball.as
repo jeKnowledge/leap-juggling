@@ -29,13 +29,17 @@
 			this.gameState = gameState;
 			sprite = new Sprite();
 			sprite.addChild(gameState.game.resourceMap["test2.png"]);
-			sprite.x = Math.random() * 50;
-			sprite.y = Math.random() * 600;
+			sprite.x = 50;
+			sprite.y = 600;
 			gameState.game.addChild(sprite);
 		}
 		
 		public function beginBallAction(): void {
 			sprite.addEventListener(Event.ENTER_FRAME, update);
+		}
+		
+		public function setBoundries() {
+			
 		}
 		
 		public function update(e: Event): void {
