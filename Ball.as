@@ -22,15 +22,16 @@
 		public var touched: Boolean = false;
 
 		public var vx: Number = 3;
-		public var vy: Number = -20;
+		public var vy: Number;
 		private var gravity: Number = 0.96;
 		private var friction: Number = 0.98;
 
-		public function Ball(gameState: GameState) {
+		public function Ball(gameState: GameState, velocityY: Number) {
 			this.gameState = gameState;
 			setBoundaries();
 			sprite = new Sprite();
 			sprite.addChild(new Bitmap(gameState.game.resourceMap["test2.png"].bitmapData));
+			vy = -velocityY;
 			sprite.x = 100;
 			sprite.y = 300;
 			gameState.game.addChild(sprite);

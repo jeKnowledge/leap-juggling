@@ -19,6 +19,9 @@
 		private var playerScore: int;
 		private var playerSpeed: int = 10;
 		public var timer: Timer;
+		public var velocity: Number;
+		
+		public var force: Number;
 		
 		public var balls: Vector.<Ball>;
 		
@@ -39,15 +42,23 @@
 			this.game.addChild(player);
 			player.x = 800 / 2 - 150;
 			player.y = 640 - 220;
-			this.game.stage.addEventListener(KeyboardEvent.KEY_DOWN, ballCreate);
+			this.game.stage.addEventListener(KeyboardEvent.KEY_DOWN, startCounting);
+			this.game.stage.addEventListener(KeyboardEvent.KEY_UP, ballCreate);
 
+		}
+		
+		public function startCounting(event: KeyboardEvent): void {
+			if(event.keyCode == Keyboard.SPACE) {
+				force = playerScore;
+			}
 		}
 
 		public function ballCreate(event: KeyboardEvent): void {
+			velocity = (playerScore - force) * 100;
 			if(event.keyCode == Keyboard.SPACE) {
 				trace("space clicked");
 				if(balls.length < 3) {
-					var newBall: Ball = new Ball(this);
+					var newBall: Ball = new Ball(this, velocity);
 					balls.push(newBall);
 				}
 			}
