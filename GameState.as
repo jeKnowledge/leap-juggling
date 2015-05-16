@@ -58,7 +58,7 @@
 
 		public function ballCreate(event: KeyboardEvent): void {
 			trace("Player Score: " + playerScore);
-			velocity = (playerScore - force) * 1.1;
+			velocity = (playerScore - force) * 0.50;
 			trace(velocity);
 			if(event.keyCode == Keyboard.SPACE) {
 				trace("space clicked");
