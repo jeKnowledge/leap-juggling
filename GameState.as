@@ -19,7 +19,6 @@
 		private var playerScore: int;
 		private var playerSpeed: int = 10;
 		public var timer: Timer;
-		public var ballsInGame: Number = 0;
 		
 		public var balls: Vector.<Ball>;
 		
@@ -47,10 +46,9 @@
 		public function ballCreate(event: KeyboardEvent): void {
 			if(event.keyCode == Keyboard.SPACE) {
 				trace("space clicked");
-				if(ballsInGame < 3) {
+				if(balls.length < 3) {
 					var newBall: Ball = new Ball(this);
 					balls.push(newBall);
-					ballsInGame+=1;
 				}
 			}
 		}
