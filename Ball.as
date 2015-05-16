@@ -3,6 +3,7 @@
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	import flash.display.DisplayObjectContainer;
+	import flash.display.Bitmap;
 
 	public class Ball {
 
@@ -24,10 +25,11 @@
 		public var vy: Number = 20;
 		private var gravity: Number = 0.96;
 
-		public function Ball(gameState: GameState, sprite: Sprite) {
+		public function Ball(gameState: GameState) {
 			this.gameState = gameState;
-			this.sprite = sprite;
-			//sprite.addChild(gameState.game.resourceMap["test2.png"]);
+			
+			sprite = new Sprite();
+			sprite.addChild(new Bitmap(gameState.game.resourceMap["test2.png"].bitmapData));
 			sprite.x = 50;
 			sprite.y = 600;
 			gameState.game.addChild(sprite);
