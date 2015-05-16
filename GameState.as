@@ -47,6 +47,8 @@
 		
 		public function ballCreate(e: Event): void {
 			trace("comprimento = " + balls.length);
+			trace("numero de children no stage = " + game.numChildren);
+			
 			var newBall: Ball = new Ball(this);
 			balls.push(newBall);
 		}
