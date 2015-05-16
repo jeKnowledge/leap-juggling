@@ -18,40 +18,38 @@
 		private var player: Sprite;
 		private var playerScore: int;
 		private var playerSpeed: int = 10;
-		public var timer: Timer = new Timer(interval);
-		private var interval: Number = 1000;
+		public var timer: Timer;
 		
-		public var ballArray: Array;
+		public var balls: Vector.<Ball>;
 		
 		private var scoreTextField: TextField;
 		
 		public function GameState(game: Game) {
 			super(game);
+
+			balls = new Vector.<Ball>();
 		}
 		
 		override public function setup(): void {
 			scoreTextField = new TextField();
 			this.game.addChild(scoreTextField);
-			
+
 			player = new Sprite();
 			player.addChild(this.game.resourceMap["player.png"]);
 			this.game.addChild(player);
 			player.x = 800 / 2 - 150;
 			player.y = 640 - 220;
-			var ball: Ball;
-			var i: Number = 0;
-			//timer.addEventListener(TimerEvent.TIMER, ballCreate);
-			//timer.start();
-			var ball: Ball = new Ball(this);
-			ball.beginBallAction();
-			
+
+			timer = new Timer(1000);
+			timer.addEventListener(TimerEvent.TIMER, ballCreate);
+			timer.start();
 		}
 		
 		public function ballCreate(e: Event): void {
-			var ball: Ball = new Ball(this);
-			ball.beginBallAction();
+			trace("comprimento = " + balls.length);
+			var newBall: Ball = new Ball(this);
+			balls.push(newBall);
 		}
-		
 		
 		override public function handleKeyDown(event: KeyboardEvent): void {
 			if (event.keyCode == Keyboard.RIGHT) {
@@ -74,8 +72,12 @@
 		override public function update(): void {
 			playerScore++;
 			scoreTextField.text = "frame nr" + playerScore;
+						
+			for each (var ball in balls) {
+				ball.update();
+			}
 		}
-		
+
 	}
 
 }

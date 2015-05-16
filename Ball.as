@@ -34,11 +34,7 @@
 			gameState.game.addChild(sprite);
 		}
 
-		public function beginBallAction(): void {
-			sprite.addEventListener(Event.ENTER_FRAME, update);
-		}
-
-		public function setBoundries() {
+		public function setBoundaries() {
 			bounds = new Rectangle(0, 0, gameState.game.stage.width, gameState.game.stage.height);
 			minX = 0;
 			minY = 0;
@@ -46,17 +42,15 @@
 			maxY = gameState.game.stage.height;
 		}
 
-		public function update(e: Event): void {
-			trace(gameState.game.stage.width);
-			if(vy > 2 && touched == false) {
+		public function update(): void {
+			if (vy > 2 && touched == false) {
 				sprite.y -= vy;
-				vy*=gravity;
+				vy *= gravity;
 				sprite.x += vx;
-				trace(sprite.x);
 			} else {
 				touched = true;
 				sprite.y += vy;
-				vy/=gravity;
+				vy /= gravity;
 				sprite.x += vx;
 			}
 		}
