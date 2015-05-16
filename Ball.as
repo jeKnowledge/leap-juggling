@@ -39,7 +39,11 @@
 		}
 
 		public function setBoundries() {
-
+			bounds = new Rectangle(0, 0, gameState.game.stage.width, gameState.game.stage.height);
+			minX = 0;
+			minY = 0;
+			maxX = gameState.game.stage.width;
+			maxY = gameState.game.stage.height;
 		}
 
 		public function update(e: Event): void {
