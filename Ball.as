@@ -22,7 +22,7 @@
 		public var touched: Boolean = false;
 
 		public var vx: Number = 3;
-		public var vy: Number = 20;
+		public var vy: Number = -20;
 		private var gravity: Number = 0.96;
 		private var friction: Number = 0.98;
 
@@ -31,8 +31,8 @@
 			setBoundaries();
 			sprite = new Sprite();
 			sprite.addChild(new Bitmap(gameState.game.resourceMap["test2.png"].bitmapData));
-			sprite.x = 550;
-			sprite.y = Math.random() * maxY;
+			sprite.x = 100;
+			sprite.y = 300;
 			gameState.game.addChild(sprite);
 		}
 
