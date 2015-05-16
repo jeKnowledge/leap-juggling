@@ -6,9 +6,8 @@
 
 	public class Ball {
 
-		private var sprite: Sprite;
+		public var sprite: Sprite;
 		private var gameState: GameState;
-		private var canvas: DisplayObjectContainer;
 
 		//limits of the window
 		private var bounds: Rectangle;
@@ -25,10 +24,10 @@
 		public var vy: Number = 20;
 		private var gravity: Number = 0.96;
 
-		public function Ball(gameState: GameState) {
+		public function Ball(gameState: GameState, sprite: Sprite) {
 			this.gameState = gameState;
-			sprite = new Sprite();
-			sprite.addChild(gameState.game.resourceMap["test2.png"]);
+			this.sprite = sprite;
+			//sprite.addChild(gameState.game.resourceMap["test2.png"]);
 			sprite.x = 50;
 			sprite.y = 600;
 			gameState.game.addChild(sprite);

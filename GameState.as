@@ -19,6 +19,7 @@
 		private var playerScore: int;
 		private var playerSpeed: int = 10;
 		public var timer: Timer;
+		private var ballFactory:SpriteFactory;
 		
 		public var balls: Vector.<Ball>;
 		
@@ -40,16 +41,22 @@
 			player.x = 800 / 2 - 150;
 			player.y = 640 - 220;
 
+			ballFactory = new SpriteFactory();
+			ballFactory.loadBitmap("ball", "test2.png");
+
 			timer = new Timer(1000);
 			timer.addEventListener(TimerEvent.TIMER, ballCreate);
 			timer.start();
+
+			//var newBall: Ball = new Ball(this, ballFactory.newSprite("ball"));
+			//balls.push(newBall);
 		}
-		
+
 		public function ballCreate(e: Event): void {
 			trace("comprimento = " + balls.length);
 			trace("numero de children no stage = " + game.numChildren);
 			
-			var newBall: Ball = new Ball(this);
+			var newBall: Ball = new Ball(this, ballFactory.newSprite("ball"));
 			balls.push(newBall);
 		}
 		
@@ -75,7 +82,9 @@
 			playerScore++;
 			scoreTextField.text = "frame nr" + playerScore;
 						
+			var i: int = 0;
 			for each (var ball in balls) {
+				trace("ball number " + (i++) + "is at x = " + ball.sprite.x);
 				ball.update();
 			}
 		}
