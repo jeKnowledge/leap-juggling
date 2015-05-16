@@ -19,6 +19,7 @@
 		private var playerScore: int;
 		private var playerSpeed: int = 10;
 		public var timer: Timer;
+		public var ballsInGame: Number = 0;
 		
 		public var balls: Vector.<Ball>;
 		
@@ -40,17 +41,17 @@
 			player.x = 800 / 2 - 150;
 			player.y = 640 - 220;
 
-			timer = new Timer(1000);
+			timer = new Timer(2000);
 			timer.addEventListener(TimerEvent.TIMER, ballCreate);
 			timer.start();
 		}
 
 		public function ballCreate(e: Event): void {
-			trace("comprimento = " + balls.length);
-			trace("numero de children no stage = " + game.numChildren);
-			
-			var newBall: Ball = new Ball(this);
-			balls.push(newBall);
+			if(ballsInGame < 3) {
+				var newBall: Ball = new Ball(this);
+				balls.push(newBall);
+				ballsInGame+=1;
+			}
 		}
 		
 		override public function handleKeyDown(event: KeyboardEvent): void {
@@ -77,7 +78,6 @@
 						
 			var i: int = 0;
 			for each (var ball in balls) {
-				trace("ball number " + (i++) + "is at x = " + ball.sprite.x);
 				ball.update();
 			}
 		}
