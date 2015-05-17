@@ -22,7 +22,6 @@
 			resourceMap = new Object();
 			keyMap = new Object();
 			
-			var resourceURLs: Array = ["player.png", "test2.png", "lefthand.png"];
 			var resourceURLs: Array = ["images/player.png", "images/ball.png", "images/lefthand.png"];
 			
 			for each (var resourceURL in resourceURLs) {
@@ -37,6 +36,8 @@
 			addEventListener(Event.ENTER_FRAME, enterFrameHandler);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, reportKeyDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, reportKeyUp);
+			
+			stage.addEventListener(MouseEvent.
 		}
 
 		private function onLoadComplete(e: Event): void {

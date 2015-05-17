@@ -43,7 +43,7 @@
 		}
 		
 		public function handleCollision(e: Event): void {
-			if(sprite.hitTestObject(gameState.leftHand.sprite)) {
+			if (sprite.hitTestObject(gameState.leftHand.sprite)) {
 				touched = true;
 			} else {
 				trace("not touching");
@@ -60,7 +60,7 @@
 		}
 
 		public function update(): void {
-			if(touched == false) {
+			if (touched == false) {
 				if ((sprite.x - sprite.width <= minX) && vx < 0) {
 					vx = -vx;
 				}
@@ -72,7 +72,7 @@
 				vx *= friction;
 				vy *= friction;
 				
-				vy +=gravity;
+				vy += gravity;
 				
 				sprite.x += vx;
 				
