@@ -39,7 +39,7 @@
 			this.game.addChild(scoreTextField);
 
 			player = new Sprite();
-			player.addChild(this.game.resourceMap["player.png"]);
+			player.addChild(this.game.resourceMap["images/player.png"]);
 			this.game.addChild(player);
 
 			player.x = 800 / 2 - 150;
