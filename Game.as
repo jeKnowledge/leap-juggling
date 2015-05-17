@@ -16,9 +16,11 @@
 		private var currentState: State;
 		
 		public var resourceMap: Object;
+		public var keyMap: Object;
 
 		public function Game() {
 			resourceMap = new Object();
+			keyMap = new Object();
 			
 			var resourceURLs: Array = ["player.png", "test2.png"];
 			
@@ -27,12 +29,13 @@
 				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoadComplete);
 				loader.load(new URLRequest(resourceURL));
 			}
-						
+
 			currentState = new MenuState(this);
 			currentState.setup();
 
 			addEventListener(Event.ENTER_FRAME, enterFrameHandler);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, reportKeyDown);
+			stage.addEventListener(KeyboardEvent.KEY_UP, reportKeyUp);
 		}
 
 		private function onLoadComplete(e: Event): void {
@@ -46,7 +49,11 @@
 		}
 		
 		function reportKeyDown(event: KeyboardEvent): void {
-			currentState.handleKeyDown(event);
+			keyMap[event.keyCode] = true;
+		}
+		
+		function reportKeyUp(event: KeyboardEvent): void {
+			keyMap[event.keyCode] = false;
 		}
 
 		protected function enterFrameHandler(event: Event): void {

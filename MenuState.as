@@ -14,14 +14,15 @@
 		
 		override public function setup(): void {
 			introTextField = new TextField();
-			introTextField.text = "Press SPACE to move on";
+			introTextField.text = "Press ENTER to move on";
 			this.game.addChild(introTextField);
 		}
 		
-		override public function handleKeyDown(event: KeyboardEvent): void {
-			if (event.keyCode == Keyboard.SPACE) {
+		override public function update(): void {
+			if (game.keyMap[Keyboard.ENTER]) {
 				this.game.changeState(new GameState(this.game));
 			}
+
 		}
 
 	}

@@ -11,7 +11,6 @@
 		}
 
 		public function setup(): void { }
-		public function handleKeyDown(event: KeyboardEvent): void { }
 		public function update(): void { }
 
 	}
