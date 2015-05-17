@@ -28,10 +28,8 @@
 		private var gravity: Number = 0.96;
 		private var friction: Number = 0.98;
 
-		public function Ball(gameState: GameState, force: int, state: String) {
+		public function Ball(gameState: GameState, state: String) {
 			this.gameState = gameState;
-
-			setBoundaries();
 			
 			sprite = new Sprite();
 			sprite.addChild(new Bitmap(gameState.game.resourceMap["images/ball.png"].bitmapData));
@@ -43,8 +41,6 @@
 			sprite.addEventListener(Event.ENTER_FRAME, handleCollision);
 			
 			this.state = state;
-			
-			vy = -(force * 2);
 		}
 		
 		public function handleCollision(e: Event): void {
@@ -56,19 +52,11 @@
 			}
 		}
 
-		public function setBoundaries() {
-			bounds = new Rectangle(0, 0, gameState.game.stage.width, gameState.game.stage.height);
-
-			minX = 0;
-			minY = 0;
-			maxX = gameState.game.stage.width;
-			maxY = gameState.game.stage.height;
-		}
-
-		public function launch(): void {
+		public function launch(ballChargeBeginning: int): void {
 			state = BallPosition.NONE;
-			vy = -30;
 			vx = 10;
+			var force: int = (gameState.currentFrame - ballChargeBeginning);
+			vy = -(force * 4);
 		}
 		
 		public function update(): void {
