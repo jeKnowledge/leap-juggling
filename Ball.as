@@ -42,6 +42,8 @@
 			sprite.hitTestObject(gameState.leftHand.sprite);
 			sprite.addEventListener(Event.ENTER_FRAME, handleCollision);
 			
+			state = BallPosition.NONE;
+			
 			vy = -(force * 2);
 		}
 		
@@ -69,7 +71,7 @@
 				sprite.y = gameState.leftHand.sprite.y;
 			} else if (state == BallPosition.RIGHT_HAND) {
 				sprite.x = gameState.rightHand.sprite.x;
-				sprite.y = gameState.rightHand.sprite.y;
+				sprite.y = gameState.rightHand.sprite.y - gameState.findBallsInRightHand().indexOf(this) * 10;
 			} else {
 				if (touched == false) {
 					if ((sprite.x - sprite.width <= minX) && vx < 0) {
