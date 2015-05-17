@@ -20,7 +20,7 @@
 		public var x: Number;
 		public var y: Number;
 
-		public var vx: Number = 3;
+		public var vx: Number = 10;
 		public var vy: Number;
 		private var gravity: Number = 0.96;
 		private var friction: Number = 0.98;
@@ -33,7 +33,7 @@
 			sprite.addChild(new Bitmap(gameState.game.resourceMap["images/ball.png"].bitmapData));
 
 			vy = -(force * 2);
-			sprite.x = 100;
+			sprite.x = 200;
 			sprite.y = 300;
 			gameState.game.addChild(sprite);
 		}
