@@ -4,26 +4,24 @@
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 	
-	public class MenuState extends State {
+	public class OptionsState extends State {
 
 		private var introTextField: TextField;
 		
-		public function MenuState(game: Game) {
+		public function OptionsState(game: Game) {
 			super(game);
 		}
 		
 		override public function setup(): void {
 			introTextField = new TextField();
 			introTextField.width = 200;
-			introTextField.text = "Press 1 for Game \nPress 2 for Options";
+			introTextField.text = "Press ESC to go back to the menu.";
 			this.game.addChild(introTextField);
 		}
 		
 		override public function update(): void {
-			if (game.keyMap[Keyboard.NUMBER_1]) {
-				this.game.changeState(new GameState(this.game));
-			} else if (game.keyMap[Keyboard.NUMBER_2]) {
-				this.game.changeState(new OptionsState(this.game));
+			if (game.keyMap[Keyboard.ESCAPE]) {
+				this.game.changeState(new MenuState(this.game));
 			}
 		}
 
