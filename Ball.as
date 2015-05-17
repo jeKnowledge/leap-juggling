@@ -54,7 +54,6 @@
 			} else {
 				touched = false;
 			}
-			
 		}
 
 		public function launch(ballChargeBeginning: int): void {
@@ -65,7 +64,7 @@
 			timer.start();
 			var force: int = (gameState.currentFrame - ballChargeBeginning);
 			vx = (force * 1.2);
-			vy = -(force * 4);
+			vy = -(force * 4) - 15;
 		}
 		
 		public function update(): void {

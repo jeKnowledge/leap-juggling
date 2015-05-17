@@ -51,8 +51,8 @@
 			for (var i: int = 0; i < 3; i++) {
 				var newBall: Ball = new Ball(this, BallPosition.RIGHT_HAND);
 				balls.push(newBall);
-			}			
-			
+			}
+
 			player.x = 800 / 2 - 150;
 			player.y = 640 - 220;
 		}
@@ -68,7 +68,7 @@
 						ballToLaunch = ball;
 					}
 				}
-			
+
 				ballToLaunch.launch(ballChargeBeginning);
 			}
 		}
@@ -117,6 +117,10 @@
 				}
 			}
 
+			if (game.keyMap[Keyboard.R]) {
+				game.changeState(new GameState(game));
+			}
+			
 			if (game.keyMap[Keyboard.SPACE]) {
 				if (!ballCharging) {
 					ballChargeBeginning = currentFrame;
