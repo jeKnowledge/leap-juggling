@@ -22,7 +22,7 @@
 			resourceMap = new Object();
 			keyMap = new Object();
 			
-			var resourceURLs: Array = ["player.png", "test2.png"];
+			var resourceURLs: Array = ["player.png", "test2.png", "lefthand.png"];
 			
 			for each (var resourceURL in resourceURLs) {
 				var loader: Loader = new Loader();
