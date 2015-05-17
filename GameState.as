@@ -16,23 +16,21 @@
 
 	public class GameState extends State {
 
-		private var scoreTextField: TextField;	
+		private var scoreTextField: TextField;
 		public var timer: Timer;
 		
 		private var player: Sprite;
-		public var playerScore: int;
+		public var currentFrame: int;
 		private var playerSpeed: int = 10;
 		
-		public var force: Number;
-		
+		private var ballChargeBeginning: int;
+		private var ballCharging: Boolean = false;
 		public var balls: Vector.<Ball>;
 		
 		public function GameState(game: Game) {
 			super(game);
 
 			balls = new Vector.<Ball>();
-			
-			force = -1;
 		}
 		
 		override public function setup(): void {
@@ -49,23 +47,25 @@
 		}
 
 		public function createBall(): void {
-			if (force == -1) {
-				force = playerScore;
-			}
-			
 			if (balls.length < 5) {
-				var newBall: Ball = new Ball(this);
+				var newBall: Ball = new Ball(this, currentFrame - ballChargeBeginning);
 				balls.push(newBall);
 			}
 		}
 				
 		override public function update(): void {
-			playerScore ++;
-			scoreTextField.text = "Frame number (player score): " + playerScore;
-			
+			currentFrame++;
+
 			if (game.keyMap[Keyboard.SPACE]) {
-				createBall();
-				game.keyMap[Keyboard.SPACE] = false;
+				if (!ballCharging) {
+					ballChargeBeginning = currentFrame;
+					ballCharging = true;
+				}
+			} else {
+				if (ballCharging) {
+					createBall();
+					ballCharging = false;
+				}
 			}
 			
 			for each (var ball in balls) {

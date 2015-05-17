@@ -26,15 +26,14 @@
 		private var gravity: Number = 0.96;
 		private var friction: Number = 0.98;
 
-		public function Ball(gameState: GameState) {
+		public function Ball(gameState: GameState, force: int) {
 			this.gameState = gameState;
 
-			var velocityY: Number = (this.gameState.playerScore - this.gameState.force) * 0.50;
-			
 			setBoundaries();
 			sprite = new Sprite();
 			sprite.addChild(new Bitmap(gameState.game.resourceMap["test2.png"].bitmapData));
-			vy = -velocityY;
+
+			vy = -(force * 2);
 			sprite.x = 100;
 			sprite.y = 300;
 			gameState.game.addChild(sprite);
