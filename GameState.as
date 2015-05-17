@@ -70,7 +70,7 @@
 		}
 		
 		public function findBallsInRightHand(): Vector.<Ball> {
-			var ballsInRightHand: Vector.<Ball>;
+			var ballsInRightHand: Vector.<Ball> = new Vector.<Ball>();
 			
 			for each (var ball in balls) {
 				if (ball.state == BallPosition.RIGHT_HAND) {
