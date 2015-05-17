@@ -14,14 +14,7 @@
 		public var sprite: Sprite;
 		
 		public var state: String = BallPosition.NONE;
-
-		// Limits of the window
-		private var bounds: Rectangle;
-		private var minX: Number;
-		private var maxX: Number;
-		private var minY: Number;
-		private var maxY: Number;
-
+		
 		public var x: Number;
 		public var y: Number;
 		public var touched: Boolean = false;
@@ -33,10 +26,8 @@
 		
 		public var canCollide: Boolean = false;
 
-		public function Ball(gameState: GameState, force: int, state: String) {
+		public function Ball(gameState: GameState, state: String) {
 			this.gameState = gameState;
-
-			setBoundaries();
 			
 			sprite = new Sprite();
 			sprite.addChild(new Bitmap(gameState.game.resourceMap["images/ball.png"].bitmapData));
@@ -47,8 +38,6 @@
 			sprite.addEventListener(Event.ENTER_FRAME, handleCollision);
 			
 			this.state = state;
-			
-			vy = -(force * 2);
 		}
 		
 		public function updateCanCollide(e: Event): void {
@@ -68,23 +57,15 @@
 			
 		}
 
-		public function setBoundaries() {
-			bounds = new Rectangle(0, 0, gameState.game.stage.width, gameState.game.stage.height);
-
-			minX = 0;
-			minY = 0;
-			maxX = gameState.game.stage.width;
-			maxY = gameState.game.stage.height;
-		}
-
-		public function launch(): void {
+		public function launch(ballChargeBeginning: int): void {
 			canCollide = false;
 			state = BallPosition.NONE;
-			vy = -30;
-			vx = 10;
 			var timer: Timer = new Timer(500, 1);
 			timer.addEventListener("timer", updateCanCollide);
 			timer.start();
+			var force: int = (gameState.currentFrame - ballChargeBeginning);
+			vx = (force * 1.2);
+			vy = -(force * 4);
 		}
 		
 		public function update(): void {

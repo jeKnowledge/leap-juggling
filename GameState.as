@@ -49,7 +49,7 @@
 			rightHand = new Hand(this, 230, 520);
 
 			for (var i: int = 0; i < 3; i++) {
-				var newBall: Ball = new Ball(this, 0, BallPosition.RIGHT_HAND);
+				var newBall: Ball = new Ball(this, BallPosition.RIGHT_HAND);
 				balls.push(newBall);
 			}			
 			
@@ -67,7 +67,7 @@
 				}
 			}
 			
-			ballToLaunch.launch();
+			ballToLaunch.launch(ballChargeBeginning);
 		}
 		
 		private function findBallInLeftHand(): Ball {
