@@ -30,7 +30,7 @@
 
 			setBoundaries();
 			sprite = new Sprite();
-			sprite.addChild(new Bitmap(gameState.game.resourceMap["test2.png"].bitmapData));
+			sprite.addChild(new Bitmap(gameState.game.resourceMap["images/ball.png"].bitmapData));
 
 			vy = -(force * 2);
 			sprite.x = 100;
