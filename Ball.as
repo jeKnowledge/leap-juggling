@@ -28,7 +28,7 @@
 		private var gravity: Number = 0.96;
 		private var friction: Number = 0.98;
 
-		public function Ball(gameState: GameState, force: int) {
+		public function Ball(gameState: GameState, force: int, state: String) {
 			this.gameState = gameState;
 
 			setBoundaries();
@@ -42,7 +42,7 @@
 			sprite.hitTestObject(gameState.leftHand.sprite);
 			sprite.addEventListener(Event.ENTER_FRAME, handleCollision);
 			
-			state = BallPosition.NONE;
+			this.state = state;
 			
 			vy = -(force * 2);
 		}
@@ -65,23 +65,21 @@
 			maxY = gameState.game.stage.height;
 		}
 
+		public function launch(): void {
+			state = BallPosition.NONE;
+			vy = -30;
+			vx = 10;
+		}
+		
 		public function update(): void {
 			if (state == BallPosition.LEFT_HAND) {
 				sprite.x = gameState.leftHand.sprite.x;
 				sprite.y = gameState.leftHand.sprite.y;
 			} else if (state == BallPosition.RIGHT_HAND) {
 				sprite.x = gameState.rightHand.sprite.x;
-				sprite.y = gameState.rightHand.sprite.y - gameState.findBallsInRightHand().indexOf(this) * 10;
+				sprite.y = gameState.rightHand.sprite.y - gameState.findBallsInRightHand().indexOf(this) * (0.8 * sprite.height);
 			} else {
 				if (touched == false) {
-					if ((sprite.x - sprite.width <= minX) && vx < 0) {
-						vx = -vx;
-					}
-				
-					if ((sprite.y - sprite.height <= minY) && vy < 0) {
-						vy = -vy;
-					}
-				
 					vx *= friction;
 					vy *= friction;
 				

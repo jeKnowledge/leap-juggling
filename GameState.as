@@ -48,15 +48,26 @@
 			leftHand = new Hand(this, 440, 520);
 			rightHand = new Hand(this, 230, 520);
 
+			for (var i: int = 0; i < 3; i++) {
+				var newBall: Ball = new Ball(this, 0, BallPosition.RIGHT_HAND);
+				balls.push(newBall);
+			}			
+			
 			player.x = 800 / 2 - 150;
 			player.y = 640 - 220;
 		}
 
-		public function createBall(): void {
-			if (balls.length < 5) {
-				var newBall: Ball = new Ball(this, currentFrame - ballChargeBeginning);
-				balls.push(newBall);
+		public function launchBall(): void {
+			var ballsInRightHand: Vector.<Ball> = findBallsInRightHand();
+			var ballToLaunch: Ball = ballsInRightHand[0];
+	
+			for each (var ball in ballsInRightHand) {
+				if (ball.sprite.y < ballToLaunch.y) {
+					ballToLaunch = ball;
+				}
 			}
+			
+			ballToLaunch.launch();
 		}
 		
 		private function findBallInLeftHand(): Ball {
@@ -103,7 +114,7 @@
 				}
 			} else {
 				if (ballCharging) {
-					createBall();
+					launchBall();
 					ballCharging = false;
 				}
 			}
