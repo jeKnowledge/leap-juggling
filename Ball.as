@@ -10,7 +10,7 @@
 		public var sprite: Sprite;
 		private var gameState: GameState;
 
-		//limits of the window
+		// Limits of the window
 		private var bounds: Rectangle;
 		private var minX: Number;
 		private var maxX: Number;
@@ -26,8 +26,11 @@
 		private var gravity: Number = 0.96;
 		private var friction: Number = 0.98;
 
-		public function Ball(gameState: GameState, velocityY: Number) {
+		public function Ball(gameState: GameState) {
 			this.gameState = gameState;
+
+			var velocityY: Number = (this.gameState.playerScore - this.gameState.force) * 0.50;
+			
 			setBoundaries();
 			sprite = new Sprite();
 			sprite.addChild(new Bitmap(gameState.game.resourceMap["test2.png"].bitmapData));

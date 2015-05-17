@@ -15,27 +15,29 @@
 	import flash.events.TimerEvent;
 
 	public class GameState extends State {
-		private var player: Sprite;
-		private var playerScore: int;
-		private var playerSpeed: int = 10;
+
+		private var scoreTextField: TextField;	
 		public var timer: Timer;
-		public var velocity: Number;
-		public var spacePressed: Boolean = false; // botelho burro muito mas muito mau nome de variavel wtf
+		
+		private var player: Sprite;
+		public var playerScore: int;
+		private var playerSpeed: int = 10;
 		
 		public var force: Number;
 		
 		public var balls: Vector.<Ball>;
 		
-		private var scoreTextField: TextField;
-		
 		public function GameState(game: Game) {
 			super(game);
 
 			balls = new Vector.<Ball>();
+			
+			force = -1;
 		}
 		
 		override public function setup(): void {
 			scoreTextField = new TextField();
+			scoreTextField.width = 200;
 			this.game.addChild(scoreTextField);
 
 			player = new Sprite();
@@ -45,38 +47,27 @@
 			player.x = 800 / 2 - 150;
 			player.y = 640 - 220;
 		}
-		
-		public function startCounting(): void {
-			if (spacePressed == false) {
+
+		public function createBall(): void {
+			if (force == -1) {
 				force = playerScore;
-				spacePressed = true;
 			}
-		}
-
-		public function ballCreate(): void {
-			if (spacePressed) {
-				velocity = (playerScore - force) * 0.50; // botelho burro isto devia ser calculado na Ball
-
-				if (balls.length < 3) {
-					var newBall: Ball = new Ball(this, velocity);
-					balls.push(newBall);
-				}
-
-				spacePressed = false;
+			
+			if (balls.length < 5) {
+				var newBall: Ball = new Ball(this);
+				balls.push(newBall);
 			}
 		}
 				
 		override public function update(): void {
+			playerScore ++;
+			scoreTextField.text = "Frame number (player score): " + playerScore;
+			
 			if (game.keyMap[Keyboard.SPACE]) {
-				startCounting();
-			} else {
-				ballCreate();
+				createBall();
+				game.keyMap[Keyboard.SPACE] = false;
 			}
-
-			playerScore++;
-			scoreTextField.text = "frame nr" + playerScore;
-						
-			var i: int = 0;
+			
 			for each (var ball in balls) {
 				ball.update();
 			}
