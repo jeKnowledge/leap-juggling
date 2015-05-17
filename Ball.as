@@ -48,23 +48,23 @@
 		}
 
 		public function update(): void {
-			if(((sprite.x - sprite.width) <= minX) && (vx < 0)) {
+			if ((sprite.x - sprite.width <= minX) && vx < 0) {
 				vx = -vx;
 			}
 			
-			if(((sprite.y - sprite.height) <= minY) && (vy < 0)) {
+			if ((sprite.y - sprite.height <= minY) && vy < 0) {
 				vy = -vy;
 			}
 			
-			vx*= friction;
-			vy*= friction;
+			vx *= friction;
+			vy *= friction;
 			
-			vy+=gravity;
+			vy +=gravity;
 			
 			sprite.x += vx;
 			
-			if((sprite.y + vy + (sprite.height)) > maxY) {
-				sprite.y = maxY - (sprite.height);
+			if (sprite.y + vy + sprite.height > maxY) {
+				sprite.y = maxY - sprite.height;
 			} else {
 				sprite.y += vy;
 			}
