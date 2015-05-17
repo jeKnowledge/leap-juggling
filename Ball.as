@@ -5,6 +5,9 @@
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Bitmap;
 	import flash.display.DisplayObject;	
+	import flash.utils.Timer;
+	import flash.events.TimerEvent;
+	import flash.events.TouchEvent;
 	
 	public class Ball {
 		private var gameState: GameState;
@@ -27,6 +30,8 @@
 		public var vy: Number;
 		private var gravity: Number = 0.96;
 		private var friction: Number = 0.98;
+		
+		public var canCollide: Boolean = false;
 
 		public function Ball(gameState: GameState, force: int, state: String) {
 			this.gameState = gameState;
@@ -39,7 +44,6 @@
 			sprite.y = 300;                      
 			gameState.game.addChild(sprite);        
 			
-			sprite.hitTestObject(gameState.leftHand.sprite);
 			sprite.addEventListener(Event.ENTER_FRAME, handleCollision);
 			
 			this.state = state;
@@ -47,13 +51,21 @@
 			vy = -(force * 2);
 		}
 		
+		public function updateCanCollide(e: Event): void {
+			canCollide = true;
+		}
+		
 		public function handleCollision(e: Event): void {
-			if (sprite.hitTestObject(gameState.leftHand.sprite)) {
+			if (sprite.hitTestObject(gameState.leftHand.sprite) && canCollide) {
 				touched = true;
 				state = BallPosition.LEFT_HAND;
+			} else if (sprite.hitTestObject(gameState.rightHand.sprite) && canCollide) {
+				touched = true;
+				state = BallPosition.RIGHT_HAND;
 			} else {
 				touched = false;
 			}
+			
 		}
 
 		public function setBoundaries() {
@@ -66,9 +78,13 @@
 		}
 
 		public function launch(): void {
+			canCollide = false;
 			state = BallPosition.NONE;
 			vy = -30;
 			vx = 10;
+			var timer: Timer = new Timer(500, 1);
+			timer.addEventListener("timer", updateCanCollide);
+			timer.start();
 		}
 		
 		public function update(): void {
@@ -86,12 +102,7 @@
 					vy += gravity;
 				
 					sprite.x += vx;
-				
-					if (sprite.y + vy + sprite.height > maxY) {
-						sprite.y = maxY - sprite.height;
-					} else {
-						sprite.y += vy;
-					}
+					sprite.y += vy;		
 				}
 			}
 		}

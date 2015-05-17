@@ -102,7 +102,14 @@
 					var ballInLeftHand: Ball = findBallInLeftHand();
 					
 					if (ballInLeftHand) {
-						ballInLeftHand.state = BallPosition.RIGHT_HAND;
+						ballInLeftHand.canCollide = false;
+						ballInLeftHand.vy = -10;
+						ballInLeftHand.vx = -30;
+						ballInLeftHand.state = BallPosition.NONE;
+						
+						var timer: Timer = new Timer(200, 1);
+						timer.addEventListener("timer", ballInLeftHand.updateCanCollide);
+						timer.start();
 					}
 				}
 			}
