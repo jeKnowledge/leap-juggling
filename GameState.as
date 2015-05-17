@@ -59,15 +59,18 @@
 
 		public function launchBall(): void {
 			var ballsInRightHand: Vector.<Ball> = findBallsInRightHand();
-			var ballToLaunch: Ball = ballsInRightHand[0];
-	
-			for each (var ball in ballsInRightHand) {
-				if (ball.sprite.y < ballToLaunch.y) {
-					ballToLaunch = ball;
-				}
-			}
 			
-			ballToLaunch.launch();
+			if (ballsInRightHand.length > 0) {
+				var ballToLaunch: Ball = ballsInRightHand[0];
+	
+				for each (var ball in ballsInRightHand) {
+					if (ball.sprite.y < ballToLaunch.y) {
+						ballToLaunch = ball;
+					}
+				}
+			
+				ballToLaunch.launch();
+			}
 		}
 		
 		private function findBallInLeftHand(): Ball {
