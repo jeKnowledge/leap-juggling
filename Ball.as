@@ -5,20 +5,16 @@
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Bitmap;
 	import flash.display.DisplayObject;	
+	import flash.utils.Timer;
+	import flash.events.TimerEvent;
+	import flash.events.TouchEvent;
 	
 	public class Ball {
 		private var gameState: GameState;
 		public var sprite: Sprite;
 		
 		public var state: String = BallPosition.NONE;
-
-		// Limits of the window
-		private var bounds: Rectangle;
-		private var minX: Number;
-		private var maxX: Number;
-		private var minY: Number;
-		private var maxY: Number;
-
+		
 		public var x: Number;
 		public var y: Number;
 		public var touched: Boolean = false;
@@ -27,11 +23,11 @@
 		public var vy: Number;
 		private var gravity: Number = 0.96;
 		private var friction: Number = 0.98;
+		
+		public var canCollide: Boolean = false;
 
-		public function Ball(gameState: GameState, force: int, state: String) {
+		public function Ball(gameState: GameState, state: String) {
 			this.gameState = gameState;
-
-			setBoundaries();
 			
 			sprite = new Sprite();
 			sprite.addChild(new Bitmap(gameState.game.resourceMap["images/ball.png"].bitmapData));
@@ -39,36 +35,37 @@
 			sprite.y = 300;                      
 			gameState.game.addChild(sprite);        
 			
-			sprite.hitTestObject(gameState.leftHand.sprite);
 			sprite.addEventListener(Event.ENTER_FRAME, handleCollision);
 			
 			this.state = state;
-			
-			vy = -(force * 2);
+		}
+		
+		public function updateCanCollide(e: Event): void {
+			canCollide = true;
 		}
 		
 		public function handleCollision(e: Event): void {
-			if (sprite.hitTestObject(gameState.leftHand.sprite)) {
+			if (sprite.hitTestObject(gameState.leftHand.sprite) && canCollide) {
 				touched = true;
 				state = BallPosition.LEFT_HAND;
+			} else if (sprite.hitTestObject(gameState.rightHand.sprite) && canCollide) {
+				touched = true;
+				state = BallPosition.RIGHT_HAND;
 			} else {
 				touched = false;
 			}
+			
 		}
 
-		public function setBoundaries() {
-			bounds = new Rectangle(0, 0, gameState.game.stage.width, gameState.game.stage.height);
-
-			minX = 0;
-			minY = 0;
-			maxX = gameState.game.stage.width;
-			maxY = gameState.game.stage.height;
-		}
-
-		public function launch(): void {
+		public function launch(ballChargeBeginning: int): void {
+			canCollide = false;
 			state = BallPosition.NONE;
-			vy = -30;
-			vx = 10;
+			var timer: Timer = new Timer(500, 1);
+			timer.addEventListener("timer", updateCanCollide);
+			timer.start();
+			var force: int = (gameState.currentFrame - ballChargeBeginning);
+			vx = (force * 1.2);
+			vy = -(force * 4);
 		}
 		
 		public function update(): void {
@@ -86,12 +83,7 @@
 					vy += gravity;
 				
 					sprite.x += vx;
-				
-					if (sprite.y + vy + sprite.height > maxY) {
-						sprite.y = maxY - sprite.height;
-					} else {
-						sprite.y += vy;
-					}
+					sprite.y += vy;		
 				}
 			}
 		}

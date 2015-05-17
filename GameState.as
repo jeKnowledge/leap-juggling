@@ -49,7 +49,7 @@
 			rightHand = new Hand(this, 230, 520);
 
 			for (var i: int = 0; i < 3; i++) {
-				var newBall: Ball = new Ball(this, 0, BallPosition.RIGHT_HAND);
+				var newBall: Ball = new Ball(this, BallPosition.RIGHT_HAND);
 				balls.push(newBall);
 			}			
 			
@@ -69,7 +69,7 @@
 					}
 				}
 			
-				ballToLaunch.launch();
+				ballToLaunch.launch(ballChargeBeginning);
 			}
 		}
 		
@@ -105,7 +105,14 @@
 					var ballInLeftHand: Ball = findBallInLeftHand();
 					
 					if (ballInLeftHand) {
-						ballInLeftHand.state = BallPosition.RIGHT_HAND;
+						ballInLeftHand.canCollide = false;
+						ballInLeftHand.vy = -10;
+						ballInLeftHand.vx = -30;
+						ballInLeftHand.state = BallPosition.NONE;
+						
+						var timer: Timer = new Timer(200, 1);
+						timer.addEventListener("timer", ballInLeftHand.updateCanCollide);
+						timer.start();
 					}
 				}
 			}
