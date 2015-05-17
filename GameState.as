@@ -63,6 +63,14 @@
 			currentFrame++;
 
 			leftHand.sprite.x = game.mouse.x;
+			
+			if (game.mouse.down) {
+				if (balls.length > 0) {
+					if (balls[0].state == Ball.LEFT_HAND) {
+						balls[0].state = Ball.RIGHT_HAND;
+					}
+				}
+			}
 
 			if (game.keyMap[Keyboard.SPACE]) {
 				if (!ballCharging) {

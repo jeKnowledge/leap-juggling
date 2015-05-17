@@ -68,7 +68,7 @@
 		}
 
 		function reportMouseUp(event: MouseEvent): void {
-			mouse.up = false;
+			mouse.down = false;
 		}
 		
 		function reportMouseMove(event: MouseEvent): void {

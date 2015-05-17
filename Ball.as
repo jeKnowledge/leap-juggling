@@ -7,9 +7,13 @@
 	import flash.display.DisplayObject;
 
 	public class Ball {
-
-		public var sprite: Sprite;
 		private var gameState: GameState;
+		public var sprite: Sprite;
+		
+		public static const LEFT_HAND: int = 1; 
+		public static const RIGHT_HAND: int = 2;
+		public static const NONE: int = 3;
+		public var state: int;
 
 		// Limits of the window
 		private var bounds: Rectangle;
@@ -31,20 +35,25 @@
 			this.gameState = gameState;
 
 			setBoundaries();
+			
 			sprite = new Sprite();
 			sprite.addChild(new Bitmap(gameState.game.resourceMap["images/ball.png"].bitmapData));
-
-			vy = -(force * 2);
 			sprite.x = 200;
-			sprite.y = 300;                              			
+			sprite.y = 300;                      
+			gameState.game.addChild(sprite);        
+			
 			sprite.hitTestObject(gameState.leftHand.sprite);
-			gameState.game.addChild(sprite);
 			sprite.addEventListener(Event.ENTER_FRAME, handleCollision);
+			
+			vy = -(force * 2);
+			
+			state = NONE;
 		}
 		
 		public function handleCollision(e: Event): void {
 			if (sprite.hitTestObject(gameState.leftHand.sprite)) {
 				touched = true;
+				state = LEFT_HAND;
 			} else {
 				touched = false;
 			}
@@ -60,26 +69,34 @@
 		}
 
 		public function update(): void {
-			if (touched == false) {
-				if ((sprite.x - sprite.width <= minX) && vx < 0) {
-					vx = -vx;
-				}
+			if (state == LEFT_HAND) {
+				sprite.x = gameState.leftHand.sprite.x;
+				sprite.y = gameState.leftHand.sprite.y;
+			} else if (state == RIGHT_HAND) {
+				sprite.x = gameState.rightHand.sprite.x;
+				sprite.y = gameState.rightHand.sprite.y;
+			} else {
+				if (touched == false) {
+					if ((sprite.x - sprite.width <= minX) && vx < 0) {
+						vx = -vx;
+					}
 				
-				if ((sprite.y - sprite.height <= minY) && vy < 0) {
-					vy = -vy;
-				}
+					if ((sprite.y - sprite.height <= minY) && vy < 0) {
+						vy = -vy;
+					}
 				
-				vx *= friction;
-				vy *= friction;
+					vx *= friction;
+					vy *= friction;
 				
-				vy += gravity;
+					vy += gravity;
 				
-				sprite.x += vx;
+					sprite.x += vx;
 				
-				if (sprite.y + vy + sprite.height > maxY) {
-					sprite.y = maxY - sprite.height;
-				} else {
-					sprite.y += vy;
+					if (sprite.y + vy + sprite.height > maxY) {
+						sprite.y = maxY - sprite.height;
+					} else {
+						sprite.y += vy;
+					}
 				}
 			}
 		}
