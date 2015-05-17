@@ -4,6 +4,7 @@
 	import flash.geom.Rectangle;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Bitmap;
+	import flash.display.DisplayObject;
 
 	public class Ball {
 
@@ -19,6 +20,7 @@
 
 		public var x: Number;
 		public var y: Number;
+		public var touched: Boolean = false;
 
 		public var vx: Number = 10;
 		public var vy: Number;
@@ -34,8 +36,18 @@
 
 			vy = -(force * 2);
 			sprite.x = 200;
-			sprite.y = 300;
+			sprite.y = 300;                              			
+			sprite.hitTestObject(gameState.leftHand.sprite);
 			gameState.game.addChild(sprite);
+			sprite.addEventListener(Event.ENTER_FRAME, handleCollision);
+		}
+		
+		public function handleCollision(e: Event): void {
+			if(sprite.hitTestObject(gameState.leftHand.sprite)) {
+				touched = true;
+			} else {
+				trace("not touching");
+			}
 		}
 
 		public function setBoundaries() {
@@ -48,25 +60,27 @@
 		}
 
 		public function update(): void {
-			if ((sprite.x - sprite.width <= minX) && vx < 0) {
-				vx = -vx;
-			}
-			
-			if ((sprite.y - sprite.height <= minY) && vy < 0) {
-				vy = -vy;
-			}
-			
-			vx *= friction;
-			vy *= friction;
-			
-			vy +=gravity;
-			
-			sprite.x += vx;
-			
-			if (sprite.y + vy + sprite.height > maxY) {
-				sprite.y = maxY - sprite.height;
-			} else {
-				sprite.y += vy;
+			if(touched == false) {
+				if ((sprite.x - sprite.width <= minX) && vx < 0) {
+					vx = -vx;
+				}
+				
+				if ((sprite.y - sprite.height <= minY) && vy < 0) {
+					vy = -vy;
+				}
+				
+				vx *= friction;
+				vy *= friction;
+				
+				vy +=gravity;
+				
+				sprite.x += vx;
+				
+				if (sprite.y + vy + sprite.height > maxY) {
+					sprite.y = maxY - sprite.height;
+				} else {
+					sprite.y += vy;
+				}
 			}
 		}
 	}

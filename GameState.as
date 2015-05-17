@@ -22,6 +22,7 @@
 		private var player: Sprite;
 		public var currentFrame: int;
 		private var playerSpeed: int = 10;
+		public var leftHand: LeftHand;
 		
 		private var ballChargeBeginning: int;
 		private var ballCharging: Boolean = false;
@@ -41,6 +42,8 @@
 			player = new Sprite();
 			player.addChild(this.game.resourceMap["images/player.png"]);
 			this.game.addChild(player);
+			leftHand = new LeftHand(this);
+			
 
 			player.x = 800 / 2 - 150;
 			player.y = 640 - 220;
