@@ -43,7 +43,6 @@
 			player.addChild(this.game.resourceMap["images/player.png"]);
 			this.game.addChild(player);
 			leftHand = new LeftHand(this);
-			
 
 			player.x = 800 / 2 - 150;
 			player.y = 640 - 220;
@@ -58,6 +57,8 @@
 				
 		override public function update(): void {
 			currentFrame++;
+
+			leftHand.sprite.x = game.mouse.x;
 
 			if (game.keyMap[Keyboard.SPACE]) {
 				if (!ballCharging) {

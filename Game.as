@@ -10,6 +10,7 @@
 	import flash.text.*;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
+	import flash.events.MouseEvent;
 
 	public class Game extends MovieClip {
 
@@ -17,6 +18,8 @@
 		
 		public var resourceMap: Object;
 		public var keyMap: Object;
+		
+		public var mouse: Object = { x: 0, y: 0, down: false };
 
 		public function Game() {
 			resourceMap = new Object();
@@ -37,7 +40,9 @@
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, reportKeyDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, reportKeyUp);
 			
-			stage.addEventListener(MouseEvent.
+			stage.addEventListener(MouseEvent.MOUSE_DOWN, reportMouseDown);
+			stage.addEventListener(MouseEvent.MOUSE_UP, reportMouseUp);
+			stage.addEventListener(MouseEvent.MOUSE_MOVE, reportMouseMove);
 		}
 
 		private function onLoadComplete(e: Event): void {
@@ -57,7 +62,20 @@
 		function reportKeyUp(event: KeyboardEvent): void {
 			keyMap[event.keyCode] = false;
 		}
+		
+		function reportMouseDown(event: MouseEvent): void {
+			mouse.down = true;
+		}
 
+		function reportMouseUp(event: MouseEvent): void {
+			mouse.up = false;
+		}
+		
+		function reportMouseMove(event: MouseEvent): void {
+			mouse.x = event.stageX;
+			mouse.y = event.stageY;
+		}
+		
 		protected function enterFrameHandler(event: Event): void {
 			currentState.update();
 		}

@@ -46,13 +46,13 @@
 			if (sprite.hitTestObject(gameState.leftHand.sprite)) {
 				touched = true;
 			} else {
-				trace("not touching");
+				touched = false;
 			}
 		}
 
 		public function setBoundaries() {
 			bounds = new Rectangle(0, 0, gameState.game.stage.width, gameState.game.stage.height);
-			trace(bounds);
+
 			minX = 0;
 			minY = 0;
 			maxX = gameState.game.stage.width;
