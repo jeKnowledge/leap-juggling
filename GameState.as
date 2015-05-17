@@ -107,7 +107,7 @@
 					if (ballInLeftHand) {
 						ballInLeftHand.canCollide = false;
 						ballInLeftHand.vy = -10;
-						ballInLeftHand.vx = -30;
+						ballInLeftHand.vx = -25;
 						ballInLeftHand.state = BallPosition.NONE;
 						
 						var timer: Timer = new Timer(200, 1);

@@ -59,12 +59,18 @@
 		public function launch(ballChargeBeginning: int): void {
 			canCollide = false;
 			state = BallPosition.NONE;
+
 			var timer: Timer = new Timer(500, 1);
 			timer.addEventListener("timer", updateCanCollide);
 			timer.start();
+
 			var force: int = (gameState.currentFrame - ballChargeBeginning);
 			vx = (force * 1.2);
 			vy = -(force * 4) - 15;
+			
+			if (vy < -35) {
+				vy = -35;
+			}
 		}
 		
 		public function update(): void {
