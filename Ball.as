@@ -19,7 +19,6 @@
 
 		public var x: Number;
 		public var y: Number;
-		public var touched: Boolean = false;
 
 		public var vx: Number = 3;
 		public var vy: Number;
@@ -69,17 +68,6 @@
 			} else {
 				sprite.y += vy;
 			}
-			//if(sprite.x + sprite.height > minX )
-			/*if (vy > 2 && touched == false) {
-				sprite.y -= vy;
-				vy *= gravity;
-				sprite.x += vx;
-			} else {
-				touched = true;
-				sprite.y += vy;
-				vy /= gravity;
-				sprite.x += vx;
-			}*/
 		}
 	}
 }
