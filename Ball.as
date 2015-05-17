@@ -4,16 +4,13 @@
 	import flash.geom.Rectangle;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Bitmap;
-	import flash.display.DisplayObject;
-
+	import flash.display.DisplayObject;	
+	
 	public class Ball {
 		private var gameState: GameState;
 		public var sprite: Sprite;
 		
-		public static const LEFT_HAND: int = 1; 
-		public static const RIGHT_HAND: int = 2;
-		public static const NONE: int = 3;
-		public var state: int;
+		public var state: String = BallPosition.NONE;
 
 		// Limits of the window
 		private var bounds: Rectangle;
@@ -46,14 +43,12 @@
 			sprite.addEventListener(Event.ENTER_FRAME, handleCollision);
 			
 			vy = -(force * 2);
-			
-			state = NONE;
 		}
 		
 		public function handleCollision(e: Event): void {
 			if (sprite.hitTestObject(gameState.leftHand.sprite)) {
 				touched = true;
-				state = LEFT_HAND;
+				state = BallPosition.LEFT_HAND;
 			} else {
 				touched = false;
 			}
@@ -69,10 +64,10 @@
 		}
 
 		public function update(): void {
-			if (state == LEFT_HAND) {
+			if (state == BallPosition.LEFT_HAND) {
 				sprite.x = gameState.leftHand.sprite.x;
 				sprite.y = gameState.leftHand.sprite.y;
-			} else if (state == RIGHT_HAND) {
+			} else if (state == BallPosition.RIGHT_HAND) {
 				sprite.x = gameState.rightHand.sprite.x;
 				sprite.y = gameState.rightHand.sprite.y;
 			} else {

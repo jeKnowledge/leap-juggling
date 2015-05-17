@@ -58,6 +58,16 @@
 				balls.push(newBall);
 			}
 		}
+		
+		private function findBallInLeftHand(): Ball {
+			for each (var ball in balls) {
+				if (ball.state == BallPosition.LEFT_HAND) {
+					return ball;
+				}
+			}
+			
+			return null;
+		}
 				
 		override public function update(): void {
 			currentFrame++;
@@ -66,8 +76,10 @@
 			
 			if (game.mouse.down) {
 				if (balls.length > 0) {
-					if (balls[0].state == Ball.LEFT_HAND) {
-						balls[0].state = Ball.RIGHT_HAND;
+					var ballInLeftHand: Ball = findBallInLeftHand();
+					
+					if (ballInLeftHand) {
+						ballInLeftHand.state = BallPosition.RIGHT_HAND;
 					}
 				}
 			}
