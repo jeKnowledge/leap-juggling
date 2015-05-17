@@ -68,6 +68,18 @@
 			
 			return null;
 		}
+		
+		public function findBallsInRightHand(): Vector.<Ball> {
+			var ballsInRightHand: Vector.<Ball>;
+			
+			for each (var ball in balls) {
+				if (ball.state == BallPosition.RIGHT_HAND) {
+					ballsInRightHand.push(ball);
+				}
+			}
+			
+			return ballsInRightHand;
+		}
 				
 		override public function update(): void {
 			currentFrame++;
