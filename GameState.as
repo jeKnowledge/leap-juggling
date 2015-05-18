@@ -58,8 +58,8 @@
 				balls.push(newBall);
 			}
 
-			launchSound = game.resourceMap["launch.mp3"];
-			gameSound = game.resourceMap["circus.mp3"];
+			launchSound = game.resourceMap["sounds/launch.mp3"];
+			gameSound = game.resourceMap["sounds/circus.mp3"];
 			
 			var volumeAdjust:SoundTransform = new SoundTransform();
 			volumeAdjust.volume = .5;
