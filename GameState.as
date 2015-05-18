@@ -13,6 +13,7 @@
 	import flash.geom.Rectangle;
 	import flash.utils.Timer;
 	import flash.events.TimerEvent;
+	import flash.media.Sound;
 
 	public class GameState extends State {
 
@@ -29,6 +30,8 @@
 		private var ballChargeBeginning: int;
 		private var ballCharging: Boolean = false;
 		public var balls: Vector.<Ball>;
+		
+		private var launchSound: Sound;
 		
 		public function GameState(game: Game) {
 			super(game);
@@ -48,10 +51,13 @@
 			leftHand = new Hand(this, 440, 520);
 			rightHand = new Hand(this, 230, 520);
 
-			for (var i: int = 0; i < 5; i++) {
+			for (var i: int = 0; i < 4; i++) {
 				var newBall: Ball = new Ball(this, BallPosition.RIGHT_HAND);
 				balls.push(newBall);
 			}
+			
+			launchSound = game.resourceMap["launch.wav"];
+			launchSound.play();
 
 			player.x = 800 / 2 - 150;
 			player.y = 640 - 220;
@@ -128,6 +134,7 @@
 				}
 			} else {
 				if (ballCharging) {
+					launchSound.play();
 					launchBall();
 					ballCharging = false;
 				}

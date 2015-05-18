@@ -11,6 +11,7 @@
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 	import flash.events.MouseEvent;
+	import flash.media.Sound;
 
 	public class Game extends MovieClip {
 
@@ -32,6 +33,15 @@
 				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoadComplete);
 				loader.load(new URLRequest(resourceURL));
 			}
+			
+			var soundURLs: Array = ["launch.wav"];
+			
+			for each (var soundURL in soundURLs) {
+				var s: Sound = new Sound();
+				s.addEventListener(Event.COMPLETE, onSoundLoaded);
+				var req:URLRequest = new URLRequest(soundURL);
+				s.load(req);
+			}
 
 			currentState = new MenuState(this);
 			currentState.setup();
@@ -47,12 +57,25 @@
 
 		private function onLoadComplete(e: Event): void {
 			var loaderInfo: LoaderInfo = e.target as LoaderInfo;
-			var loadedBitmap: Bitmap = loaderInfo.content as Bitmap;
 			
 			var resourceName: String = loaderInfo.url.slice(5);
-			
-			resourceMap[resourceName] = loadedBitmap;
+			var resourceExtension: String = resourceName.substring(resourceName.lastIndexOf(".") + 1, resourceName.length);
+						
+			if (resourceExtension == "png") {
+				var loadedBitmap: Bitmap = loaderInfo.content as Bitmap;
+				resourceMap[resourceName] = loadedBitmap;
+			}
+
 			trace("New object called " + resourceName + " has been added to resourceMap.");
+		}
+		
+		private function onSoundLoaded(e: Event): void {
+			var resourceName: String = e.target.url.slice(5);
+			resourceMap[resourceName] = e.target as Sound;
+			
+			resourceMap[resourceName].play(0, 20);
+			
+			trace("New sound called " + resourceName + " has been added to resourceMap.");
 		}
 		
 		function reportKeyDown(event: KeyboardEvent): void {
