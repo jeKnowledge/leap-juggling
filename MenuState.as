@@ -17,8 +17,8 @@
 			introTextField.x = 400;
 			introTextField.y = 400;
 			introTextField.width = 800;
-			introTextField.defaultTextFormat = new TextFormat('Arial', 30, 0x000);
-			introTextField.text = "Press 1 for Game \nPress 2 for Options";
+			introTextField.defaultTextFormat = new TextFormat('Helvetica', 30, 0x000);
+			introTextField.text = "[1] Play \n[2] Options";
 
 			this.game.addChild(introTextField);
 		}

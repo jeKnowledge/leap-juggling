@@ -65,7 +65,12 @@
 			timer.start();
 
 			var force: int = (gameState.currentFrame - ballChargeBeginning);
-			vx = (force * 1.2);
+			vx = 4 + (force * 0.5);
+			
+			if (vx > 12) {
+				vx = 12;
+			}
+			
 			vy = -(force * 4) - 15;
 			
 			if (vy < -35) {

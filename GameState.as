@@ -48,7 +48,7 @@
 			leftHand = new Hand(this, 440, 520);
 			rightHand = new Hand(this, 230, 520);
 
-			for (var i: int = 0; i < 3; i++) {
+			for (var i: int = 0; i < 5; i++) {
 				var newBall: Ball = new Ball(this, BallPosition.RIGHT_HAND);
 				balls.push(newBall);
 			}
@@ -107,9 +107,9 @@
 					if (ballInLeftHand) {
 						ballInLeftHand.canCollide = false;
 						ballInLeftHand.vy = -10;
-						ballInLeftHand.vx = -25;
+						ballInLeftHand.vx = -0.05 * (leftHand.sprite.x - rightHand.sprite.x);
 						ballInLeftHand.state = BallPosition.NONE;
-						
+
 						var timer: Timer = new Timer(200, 1);
 						timer.addEventListener("timer", ballInLeftHand.updateCanCollide);
 						timer.start();
