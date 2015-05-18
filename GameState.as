@@ -14,6 +14,7 @@
 	import flash.utils.Timer;
 	import flash.events.TimerEvent;
 	import flash.media.Sound;
+	import flash.media.SoundTransform;
 
 	public class GameState extends State {
 
@@ -32,6 +33,7 @@
 		public var balls: Vector.<Ball>;
 		
 		private var launchSound: Sound;
+		private var gameSound: Sound;
 		
 		public function GameState(game: Game) {
 			super(game);
@@ -57,6 +59,12 @@
 			}
 
 			launchSound = game.resourceMap["launch.mp3"];
+			gameSound = game.resourceMap["circus.mp3"];
+			
+			var volumeAdjust:SoundTransform = new SoundTransform();
+			volumeAdjust.volume = .5;
+
+			gameSound.play(0, 1, volumeAdjust);
 
 			player.x = 800 / 2 - 150;
 			player.y = 640 - 220;
