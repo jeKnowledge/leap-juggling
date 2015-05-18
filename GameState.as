@@ -147,8 +147,10 @@
 				
 		override public function update(): void {
 			currentFrame++;
-
-			leftHand.sprite.x = game.mouse.x;
+			
+			if (game.mouse.x <= 550 && game.mouse.x >= 350) {
+				leftHand.sprite.x = game.mouse.x; 
+			}
 			
 			if (game.mouse.down) {
 				if (balls.length > 0) {
