@@ -24,11 +24,13 @@
 		private var gravity: Number = 0.96;
 		private var friction: Number = 0.98;
 		
+		private var floor: Number;
+		
 		public var canCollide: Boolean = false;
 
 		public function Ball(gameState: GameState, state: String) {
 			this.gameState = gameState;
-			
+			floor = gameState.game.stage.height;
 			sprite = new Sprite();
 			sprite.addChild(new Bitmap(gameState.game.resourceMap["images/ball.png"].bitmapData));
 			sprite.x = 200;
@@ -85,6 +87,8 @@
 			} else if (state == BallPosition.RIGHT_HAND) {
 				sprite.x = gameState.rightHand.sprite.x;
 				sprite.y = gameState.rightHand.sprite.y - gameState.findBallsInRightHand().indexOf(this) * (0.8 * sprite.height);
+			} else if (state == BallPosition.LOST) {
+				state = BallPosition.RIGHT_HAND;
 			} else {
 				if (touched == false) {
 					vx *= friction;
@@ -93,7 +97,12 @@
 					vy += gravity;
 
 					sprite.x += vx;
-					sprite.y += vy;		
+					sprite.y += vy;
+					
+					if (sprite.y >= floor) {
+						gameState.decreaseLives();
+						this.state = BallPosition.LOST;
+					}
 				}
 			}
 		}

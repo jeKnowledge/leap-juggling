@@ -31,7 +31,7 @@
 		private var ballChargeBeginning: int;
 		private var ballCharging: Boolean = false;
 		public var balls: Vector.<Ball>;
-		public var hitPoints: Vector.<Sprite>;
+		public var lives: Vector.<Sprite>;
 		
 		private var launchSound: Sound;
 		private var gameSound: Sound;
@@ -40,7 +40,7 @@
 			super(game);
 
 			balls = new Vector.<Ball>();
-			hitPoints = new Vector.<Sprite>();
+			lives = new Vector.<Sprite>();
 		}
 		
 		override public function setup(): void {
@@ -54,12 +54,12 @@
 			
 			/* Creates the hitpoints*/
 			for(var i: Number = 0; i < 5; i++) {
-				var hitPoint: Sprite = new Sprite();
-				hitPoint.addChild(new Bitmap(this.game.resourceMap["images/heart.png"].bitmapData));
-				hitPoint.x = (i + 1) * 20;
-				hitPoint.y = 10;
-				this.game.addChild(hitPoint);
-				hitPoints.push(hitPoint);
+				var live: Sprite = new Sprite();
+				live.addChild(new Bitmap(this.game.resourceMap["images/heart.png"].bitmapData));
+				live.x = (i + 1) * 20;
+				live.y = 10;
+				this.game.addChild(live);
+				lives.push(live);
 			}
 			
 			leftHand = new Hand(this, 440, 520);
@@ -80,6 +80,11 @@
 
 			player.x = 800 / 2 - 150;
 			player.y = 640 - 220;
+		}
+		
+		public function decreaseLives(): void {
+			var live: Sprite = lives.pop();
+			this.game.removeChild(live);
 		}
 
 		public function launchBall(): void {
@@ -146,10 +151,6 @@
 				game.changeState(new GameState(game));
 			}
 			
-			if (game.keyMap[Keyboard.G]) { // test G for Game Over screen
-				game.changeState(new GameOverState(game));
-			}
-			
 			if (game.keyMap[Keyboard.SPACE]) {
 				if (!ballCharging) {
 					ballChargeBeginning = currentFrame;
@@ -165,6 +166,10 @@
 			
 			for each (var ball in balls) {
 				ball.update();
+			}
+			
+			if(lives.length == 0) {
+				game.changeState(new GameOverState(game));
 			}
 		}
 
