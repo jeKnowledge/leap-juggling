@@ -100,6 +100,7 @@
 					if (sprite.y >= floor) {
 						gameState.decreaseLives();
 						this.state = BallPosition.RIGHT_HAND;
+						gameState.resetBallPosition();
 					}
 				}
 			}
