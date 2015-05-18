@@ -103,7 +103,7 @@
 			}
 		}
 		
-		private function findBallInLeftHand(): Ball {
+		private function findFirstBallInLeftHand(): Ball {
 			for each (var ball in balls) {
 				if (ball.state == BallPosition.LEFT_HAND) {
 					return ball;
@@ -111,6 +111,18 @@
 			}
 			
 			return null;
+		}
+		
+		public function findBallsInLeftHand(): Vector.<Ball> {
+			var ballsInLeftHand: Vector.<Ball> = new Vector.<Ball>();
+			
+			for each (var ball in balls) {
+				if (ball.state == BallPosition.LEFT_HAND) {
+					ballsInLeftHand.push(ball);
+				}
+			}
+			
+			return ballsInLeftHand;
 		}
 		
 		public function findBallsInRightHand(): Vector.<Ball> {
@@ -124,6 +136,14 @@
 			
 			return ballsInRightHand;
 		}
+		
+		public function resetBallPosition(): void {
+			for each (var ball in balls) {
+				ball.sprite.x = this.rightHand.sprite.x;
+				ball.sprite.y = this.rightHand.sprite.y - this.findBallsInRightHand().indexOf(ball) * (0.8 * ball.sprite.height);
+				ball.state = BallPosition.RIGHT_HAND;
+			}
+		}
 				
 		override public function update(): void {
 			currentFrame++;
@@ -132,7 +152,7 @@
 			
 			if (game.mouse.down) {
 				if (balls.length > 0) {
-					var ballInLeftHand: Ball = findBallInLeftHand();
+					var ballInLeftHand: Ball = findFirstBallInLeftHand();
 					
 					if (ballInLeftHand) {
 						ballInLeftHand.canCollide = false;
@@ -168,7 +188,12 @@
 				ball.update();
 			}
 			
-			if(lives.length == 0) {
+			if (findBallsInLeftHand().length > 1) {
+				resetBallPosition();
+				decreaseLives();
+			}
+			
+			if (lives.length == 0) {
 				game.changeState(new GameOverState(game));
 			}
 		}
