@@ -89,9 +89,9 @@
 				if (touched == false) {
 					vx *= friction;
 					vy *= friction;
-				
+
 					vy += gravity;
-				
+
 					sprite.x += vx;
 					sprite.y += vy;		
 				}

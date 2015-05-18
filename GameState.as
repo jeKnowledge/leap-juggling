@@ -55,9 +55,8 @@
 				var newBall: Ball = new Ball(this, BallPosition.RIGHT_HAND);
 				balls.push(newBall);
 			}
-			
-			launchSound = game.resourceMap["launch.wav"];
-			launchSound.play();
+
+			launchSound = game.resourceMap["launch.mp3"];
 
 			player.x = 800 / 2 - 150;
 			player.y = 640 - 220;
@@ -125,6 +124,10 @@
 
 			if (game.keyMap[Keyboard.R]) {
 				game.changeState(new GameState(game));
+			}
+			
+			if (game.keyMap[Keyboard.G]) { // test G for Game Over screen
+				game.changeState(new GameOverState(game));
 			}
 			
 			if (game.keyMap[Keyboard.SPACE]) {

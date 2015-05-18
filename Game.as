@@ -33,9 +33,9 @@
 				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoadComplete);
 				loader.load(new URLRequest(resourceURL));
 			}
-			
-			var soundURLs: Array = ["launch.wav"];
-			
+
+			var soundURLs: Array = ["launch.mp3"];
+
 			for each (var soundURL in soundURLs) {
 				var s: Sound = new Sound();
 				s.addEventListener(Event.COMPLETE, onSoundLoaded);
@@ -72,9 +72,7 @@
 		private function onSoundLoaded(e: Event): void {
 			var resourceName: String = e.target.url.slice(5);
 			resourceMap[resourceName] = e.target as Sound;
-			
-			resourceMap[resourceName].play(0, 20);
-			
+						
 			trace("New sound called " + resourceName + " has been added to resourceMap.");
 		}
 		
