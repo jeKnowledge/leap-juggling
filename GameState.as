@@ -31,6 +31,7 @@
 		private var ballChargeBeginning: int;
 		private var ballCharging: Boolean = false;
 		public var balls: Vector.<Ball>;
+		public var hitPoints: Vector.<Sprite>;
 		
 		private var launchSound: Sound;
 		private var gameSound: Sound;
@@ -39,6 +40,7 @@
 			super(game);
 
 			balls = new Vector.<Ball>();
+			hitPoints = new Vector.<Sprite>();
 		}
 		
 		override public function setup(): void {
@@ -50,10 +52,20 @@
 			player.addChild(this.game.resourceMap["images/player.png"]);
 			this.game.addChild(player);
 			
+			/* Creates the hitpoints*/
+			for(var i: Number = 0; i < 5; i++) {
+				var hitPoint: Sprite = new Sprite();
+				hitPoint.addChild(new Bitmap(this.game.resourceMap["images/heart.png"].bitmapData));
+				hitPoint.x = (i + 1) * 20;
+				hitPoint.y = 10;
+				this.game.addChild(hitPoint);
+				hitPoints.push(hitPoint);
+			}
+			
 			leftHand = new Hand(this, 440, 520);
 			rightHand = new Hand(this, 230, 520);
 
-			for (var i: int = 0; i < 4; i++) {
+			for (i = 0; i < 4; i++) {
 				var newBall: Ball = new Ball(this, BallPosition.RIGHT_HAND);
 				balls.push(newBall);
 			}
