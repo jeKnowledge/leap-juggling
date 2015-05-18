@@ -76,23 +76,23 @@
 			trace("New sound called " + resourceName + " has been added to resourceMap.");
 		}
 		
-		function reportKeyDown(event: KeyboardEvent): void {
+		public function reportKeyDown(event: KeyboardEvent): void {
 			keyMap[event.keyCode] = true;
 		}
 		
-		function reportKeyUp(event: KeyboardEvent): void {
+		public function reportKeyUp(event: KeyboardEvent): void {
 			keyMap[event.keyCode] = false;
 		}
 		
-		function reportMouseDown(event: MouseEvent): void {
+		public function reportMouseDown(event: MouseEvent): void {
 			mouse.down = true;
 		}
 
-		function reportMouseUp(event: MouseEvent): void {
+		public function reportMouseUp(event: MouseEvent): void {
 			mouse.down = false;
 		}
 		
-		function reportMouseMove(event: MouseEvent): void {
+		public function reportMouseMove(event: MouseEvent): void {
 			mouse.x = event.stageX;
 			mouse.y = event.stageY;
 		}
