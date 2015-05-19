@@ -16,7 +16,7 @@
 	public class NormalGameState extends GameState {
 		
 		// Game Settings
-		private var NUM_BALLS: int = 4;
+		private var NUM_BALLS: int = 3;
 		
 		public function NormalGameState(game: Game) {
 			super(game);
