@@ -1,9 +1,7 @@
 ﻿package {
 
-	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.display.Bitmap;
-	import flash.net.URLRequest;
 	import flash.events.Event;
 	import flash.display.Loader;
 	import flash.display.LoaderInfo;
@@ -83,6 +81,7 @@
 				game.changeState(new MenuState(game));
 			}
 			
+			// Update Player
 			player.update();
 			
 			// Update Balls
@@ -90,7 +89,7 @@
 				ball.update();
 			}
 			
-			// Check if game is lost
+			// Check if the player lost
 			if (player.lives.length == 0) {
 				game.changeState(new GameOverState(game));
 			}
