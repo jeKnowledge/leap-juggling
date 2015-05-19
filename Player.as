@@ -98,8 +98,7 @@
 		
 		public override function update(): void {
 			// Mouse Track Left Hand
-			leftHand.sprite.x = gameState.game.mouse.x;
-			if (gameState.game.mouse.x <= 550 && gameState.game.mouse.x >= 350) {
+			if (gameState.game.mouse.x <= 600 && gameState.game.mouse.x >= 400) {
 				leftHand.sprite.x = gameState.game.mouse.x; 
 			}
 			
