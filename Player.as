@@ -113,7 +113,7 @@
 						ballInLeftHand.vy = -10;
 						ballInLeftHand.vx = -0.05 * (leftHand.sprite.x - rightHand.sprite.x);
 						ballInLeftHand.state = BallPosition.NONE;
-
+						trace("switched");
 						var timer: Timer = new Timer(200, 1);
 						timer.addEventListener("timer", ballInLeftHand.updateCanCollide);
 						timer.start();
@@ -129,7 +129,7 @@
 				}
 			} else {
 				if (gameState.ballCharging) {
-					gameState.launchSound.play();
+					gameState.launchSound.play(0, 1, gameState.volumeAdjust);
 					launchBall();
 					gameState.ballCharging = false;
 				}
