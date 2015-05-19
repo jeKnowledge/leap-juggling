@@ -158,6 +158,9 @@
 
 			// Mouse Track Left Hand
 			leftHand.sprite.x = game.mouse.x;
+			if (game.mouse.x <= 550 && game.mouse.x >= 350) {
+				leftHand.sprite.x = game.mouse.x; 
+			}
 			
 			// Mouse Click
 			if (game.mouse.down) {
