@@ -84,7 +84,7 @@
 				sprite.y = gameState.player.leftHand.sprite.y;
 			} else if (state == BallPosition.RIGHT_HAND) {
 				sprite.x = gameState.player.rightHand.sprite.x;
-				sprite.y = gameState.player.rightHand.sprite.y - gameState.findBallsInRightHand().indexOf(this) * (0.8 * sprite.height);
+				sprite.y = gameState.player.rightHand.sprite.y - gameState.player.findBallsInRightHand().indexOf(this) * (0.8 * sprite.height);
 			} else {
 				if (touched == false) {
 					vx *= FRICTION;
@@ -96,7 +96,7 @@
 					sprite.y += vy;
 
 					if (sprite.y >= floor) {
-						gameState.decreaseLives();
+						gameState.player.decreaseLives();
 						gameState.resetBallPosition();
 						this.state = BallPosition.RIGHT_HAND;
 					}
