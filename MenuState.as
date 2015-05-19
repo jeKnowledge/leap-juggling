@@ -29,7 +29,7 @@
 				game.keyMap[Keyboard.NUMBER_1] = false;
 				game.keyMap[Keyboard.NUMBER_2] = false;
 			} else if (game.keyMap[Keyboard.NUMBER_2]) {
-				this.game.changeState(new OptionsState(this.game));
+				this.game.changeState(new OptionsMenuState(this.game));
 			}
 		}
 

@@ -13,7 +13,6 @@
 
 			sprite = new Sprite();
 			sprite.addChild(new Bitmap(gameState.game.resourceMap["images/hand.png"].bitmapData));
-
 			sprite.x = xPosition;
 			sprite.y = yPosition;
 			gameState.game.addChild(sprite);

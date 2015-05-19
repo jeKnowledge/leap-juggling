@@ -21,18 +21,21 @@
 		// Game Settings
 		public static const NUM_BALLS: int = 3;
 
-		private var player: Sprite;
-		public var currentFrame: int;
-		private var playerSpeed: int = 10;
+		// Player
+		public var player: Player;
 		
-		public var leftHand: Hand;
-		public var rightHand: Hand;
-		
+		// Balls
 		private var ballChargeBeginning: int;
 		private var ballCharging: Boolean = false;
 		public var balls: Vector.<Ball>;
+		
+		// Lives
 		public var lives: Vector.<Sprite>;
 		
+		// Aux Variables
+		public var currentFrame: int;
+
+		// Sounds
 		private var launchSound: Sound;
 		private var gameSound: Sound;
 		
@@ -44,16 +47,9 @@
 		}
 		
 		override public function setup(): void {
-			// Player Sprite
-			player = new Sprite();
-			player.addChild(this.game.resourceMap["images/player.png"]);
-			player.x = 800 / 2 - 150;
-			player.y = 640 - 220;
-			this.game.addChild(player);
-			
-			// Hand Sprites
-			leftHand = new Hand(this, 440, 520);
-			rightHand = new Hand(this, 230, 520);
+			// Player
+			player = new Player(this);
+			player.setup();
 			
 			// Lives Sprites
 			for(var i: Number = 0; i < 5; i++) {
@@ -67,7 +63,8 @@
 
 			// Ball Sprites
 			for (i = 0; i < NUM_BALLS; i++) {
-				var newBall: Ball = new Ball(this, BallPosition.RIGHT_HAND);
+				var newBall: Ball = new Ball(this);
+				newBall.setup();
 				balls.push(newBall);
 			}
 
@@ -93,7 +90,7 @@
 				var ballToLaunch: Ball = ballsInRightHand[0];
 	
 				for each (var ball in ballsInRightHand) {
-					if (ball.sprite.y < ballToLaunch.y) {
+					if (ball.sprite.y < ballToLaunch.sprite.y) {
 						ballToLaunch = ball;
 					}
 				}
@@ -104,8 +101,8 @@
 		
 		public function resetBallPosition(): void {
 			for each (var ball in balls) {
-				ball.sprite.x = this.rightHand.sprite.x;
-				ball.sprite.y = this.rightHand.sprite.y - this.findBallsInRightHand().indexOf(ball) * (0.8 * ball.sprite.height);
+				ball.sprite.x = player.rightHand.sprite.x;
+				ball.sprite.y = player.rightHand.sprite.y - this.findBallsInRightHand().indexOf(ball) * (0.8 * ball.sprite.height);
 				ball.state = BallPosition.RIGHT_HAND;
 			}
 		}
@@ -157,9 +154,9 @@
 			}
 
 			// Mouse Track Left Hand
-			leftHand.sprite.x = game.mouse.x;
+			player.leftHand.sprite.x = game.mouse.x;
 			if (game.mouse.x <= 550 && game.mouse.x >= 350) {
-				leftHand.sprite.x = game.mouse.x; 
+				player.leftHand.sprite.x = game.mouse.x; 
 			}
 			
 			// Mouse Click
@@ -170,7 +167,7 @@
 					if (ballInLeftHand) {
 						ballInLeftHand.canCollide = false;
 						ballInLeftHand.vy = -10;
-						ballInLeftHand.vx = -0.05 * (leftHand.sprite.x - rightHand.sprite.x);
+						ballInLeftHand.vx = -0.05 * (player.leftHand.sprite.x - player.rightHand.sprite.x);
 						ballInLeftHand.state = BallPosition.NONE;
 
 						var timer: Timer = new Timer(200, 1);

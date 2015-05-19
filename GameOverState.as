@@ -14,11 +14,11 @@
 		
 		override public function setup(): void {
 			introTextField = new TextField();
-			introTextField.x = 400;
-			introTextField.y = 400;
+			introTextField.x = 200;
+			introTextField.y = 200;
 			introTextField.width = 800;
 			introTextField.defaultTextFormat = new TextFormat('Helvetica', 30, 0x000);
-			introTextField.text = "Game Over - Press [ENTER] To Play Again";
+			introTextField.text = "Game Over\nPress [ENTER] to play again\nPress [ESC] to go back to menu";
 
 			this.game.addChild(introTextField);
 		}
@@ -26,6 +26,8 @@
 		override public function update(): void {
 			if (game.keyMap[Keyboard.ENTER]) {
 				this.game.changeState(new GameState(this.game));
+			} else if (game.keyMap[Keyboard.ESCAPE]) {
+				this.game.changeState(new MenuState(this.game));	
 			}
 		}
 

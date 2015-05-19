@@ -9,37 +9,35 @@
 	import flash.events.TimerEvent;
 	import flash.events.TouchEvent;
 
-	public class Ball {
-		private var gameState: GameState;
-		public var sprite: Sprite;
+	public class Ball extends GameObject {
 
-		public var state: String = BallPosition.NONE;
-
-		public var x: Number;
-		public var y: Number;
-		public var touched: Boolean = false;
-
+		// Velocities
 		public var vx: Number = 10;
 		public var vy: Number;
-		private var gravity: Number = 0.96;
-		private var friction: Number = 0.98;
-
+		
+		// Constants
+		private static const GRAVITY: Number = 0.96;
+		private static const FRICTION: Number = 0.98;
+		
+		// Aux Variables
+		public var state: String = BallPosition.NONE;
+		public var canCollide: Boolean = false;
+		public var touched: Boolean = false;
 		private var floor: Number;
 
-		public var canCollide: Boolean = false;
-
-		public function Ball(gameState: GameState, state: String) {
-			this.gameState = gameState;
+		public function Ball(gameState: GameState) {
+			super(gameState);
+		}
+		
+		public override function setup(): void {
+			this.state = BallPosition.RIGHT_HAND;
+			
 			floor = gameState.game.stage.height;
-			sprite = new Sprite();
+			
 			sprite.addChild(new Bitmap(gameState.game.resourceMap["images/ball.png"].bitmapData));
-			sprite.x = 200;
-			sprite.y = 300;
 			gameState.game.addChild(sprite);
 
 			sprite.addEventListener(Event.ENTER_FRAME, handleCollision);
-
-			this.state = state;
 		}
 
 		public function updateCanCollide(e: Event): void {
@@ -47,10 +45,10 @@
 		}
 
 		public function handleCollision(e: Event): void {
-			if (sprite.hitTestObject(gameState.leftHand.sprite) && canCollide) {
+			if (sprite.hitTestObject(gameState.player.leftHand.sprite) && canCollide) {
 				touched = true;
 				state = BallPosition.LEFT_HAND;
-			} else if (sprite.hitTestObject(gameState.rightHand.sprite) && canCollide) {
+			} else if (sprite.hitTestObject(gameState.player.rightHand.sprite) && canCollide) {
 				touched = true;
 				state = BallPosition.RIGHT_HAND;
 			} else {
@@ -62,7 +60,7 @@
 			canCollide = false;
 			state = BallPosition.NONE;
 
-			var timer: Timer = new Timer(500, 1);
+			var timer: Timer = new Timer(300, 1);
 			timer.addEventListener("timer", updateCanCollide);
 			timer.start();
 
@@ -80,27 +78,27 @@
 			}
 		}
 
-		public function update(): void {
+		public override function update(): void {
 			if (state == BallPosition.LEFT_HAND) {
-				sprite.x = gameState.leftHand.sprite.x;
-				sprite.y = gameState.leftHand.sprite.y;
+				sprite.x = gameState.player.leftHand.sprite.x;
+				sprite.y = gameState.player.leftHand.sprite.y;
 			} else if (state == BallPosition.RIGHT_HAND) {
-				sprite.x = gameState.rightHand.sprite.x;
-				sprite.y = gameState.rightHand.sprite.y - gameState.findBallsInRightHand().indexOf(this) * (0.8 * sprite.height);
+				sprite.x = gameState.player.rightHand.sprite.x;
+				sprite.y = gameState.player.rightHand.sprite.y - gameState.findBallsInRightHand().indexOf(this) * (0.8 * sprite.height);
 			} else {
 				if (touched == false) {
-					vx *= friction;
-					vy *= friction;
+					vx *= FRICTION;
+					vy *= FRICTION;
 
-					vy += gravity;
+					vy += GRAVITY;
 
 					sprite.x += vx;
 					sprite.y += vy;
 
 					if (sprite.y >= floor) {
 						gameState.decreaseLives();
-						this.state = BallPosition.RIGHT_HAND;
 						gameState.resetBallPosition();
+						this.state = BallPosition.RIGHT_HAND;
 					}
 				}
 			}

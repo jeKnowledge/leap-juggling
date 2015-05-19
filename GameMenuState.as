@@ -5,7 +5,7 @@
 	import flash.text.engine.TextBaseline;
 	import flash.text.TextField;
 	
-	public class GameMenuState extends State{
+	public class GameMenuState extends State {
 		
 		private var gameMenuTextField: TextField;
 
