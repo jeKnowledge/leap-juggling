@@ -26,7 +26,7 @@
 		
 		override public function update(): void {
 			if (game.keyMap[Keyboard.NUMBER_1]) {
-				this.game.changeState(new GameState(this.game));
+				this.game.changeState(new TutorialState(this.game));
 			} else if (game.keyMap[Keyboard.NUMBER_2]) {
 				this.game.changeState(new GameState(this.game));
 			}

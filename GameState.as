@@ -19,7 +19,7 @@
 	public class GameState extends State {
 		
 		// Game Settings
-		private static const NUM_BALLS: int = 3;
+		private static const NUM_BALLS: int = 6;
 
 		// Player
 		public var player: Player;
