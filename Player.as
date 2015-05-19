@@ -81,8 +81,8 @@
 			sprite.y = 640 - 220;
 			this.gameState.game.addChild(sprite);
 			
-			this.leftHand = new Hand(this.gameState, 440, 520);
-			this.rightHand = new Hand(this.gameState, 230, 520);
+			this.leftHand = new Hand(this.gameState, 440, 520, "images/left_hand.png");
+			this.rightHand = new Hand(this.gameState, 230, 520, "images/right_hand.png");
 			
 			// Lives Sprites
 			lives = new Vector.<Sprite>();
@@ -99,7 +99,8 @@
 		public override function update(): void {
 			// Mouse Track Left Hand
 			if (gameState.game.mouse.x <= 600 && gameState.game.mouse.x >= 400) {
-				leftHand.sprite.x = gameState.game.mouse.x; 
+				//leftHand.sprite.x = gameState.game.mouse.x; 
+				leftHand.sprite.x = gameState.game.stage.mouseX;
 			}
 			
 			// Mouse Click
