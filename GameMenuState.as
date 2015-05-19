@@ -19,7 +19,7 @@
 			gameMenuTextField.y = 200;
 			gameMenuTextField.width = 800;
 			gameMenuTextField.defaultTextFormat = new TextFormat('Helvetica', 30, 0x000);
-			gameMenuTextField.text = "[1] Tutorial\n[2] Endless";
+			gameMenuTextField.text = "[1] Tutorial\n[2] Arcade";
 			
 			this.game.addChild(gameMenuTextField);
 		}
