@@ -67,6 +67,7 @@
 				}
 
 				ballToLaunch.launch(gameState.ballChargeBeginning);
+				gameState.launchSound.play(0, 1, gameState.volumeAdjust);
 			}
 		}
 		
@@ -129,7 +130,7 @@
 				}
 			} else {
 				if (gameState.ballCharging) {
-					gameState.launchSound.play(0, 1, gameState.volumeAdjust);
+					
 					launchBall();
 					gameState.ballCharging = false;
 				}

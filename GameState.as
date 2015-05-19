@@ -52,6 +52,7 @@
 				var newBall: Ball = new Ball(this);
 				newBall.setup();
 				balls.push(newBall);
+				trace("Ball " + i + " created");
 			}
 
 			// Sounds

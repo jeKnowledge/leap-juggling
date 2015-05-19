@@ -9,6 +9,7 @@
 		public override function setup(): void {
 			player = new Player(this);
 			player.setup();
+			
 		}
 		
 		public override function update(): void {
