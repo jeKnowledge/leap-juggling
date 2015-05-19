@@ -1,4 +1,5 @@
 ﻿package  {
+	
 	import flash.text.*;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
@@ -26,9 +27,11 @@
 		
 		override public function update(): void {
 			if (game.keyMap[Keyboard.NUMBER_1]) {
-				this.game.changeState(new TutorialState(this.game));
+				this.game.changeState(new TutorialGameState(this.game));
 			} else if (game.keyMap[Keyboard.NUMBER_2]) {
-				this.game.changeState(new GameState(this.game));
+				this.game.changeState(new NormalGameState(this.game));
+			} else if (game.keyMap[Keyboard.NUMBER_3]) {
+				this.game.changeState(new ChallangeGameState(this.game));
 			}
 		}
 
