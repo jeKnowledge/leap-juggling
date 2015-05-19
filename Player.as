@@ -67,6 +67,7 @@
 				}
 
 				ballToLaunch.launch(gameState.ballChargeBeginning);
+				gameState.launchSound.play(0, 1, gameState.volumeAdjust);
 			}
 		}
 		
@@ -81,8 +82,8 @@
 			sprite.y = 640 - 220;
 			this.gameState.game.addChild(sprite);
 			
-			this.leftHand = new Hand(this.gameState, 440, 520);
-			this.rightHand = new Hand(this.gameState, 230, 520);
+			this.leftHand = new Hand(this.gameState, 440, 520, "images/left_hand.png");
+			this.rightHand = new Hand(this.gameState, 230, 520, "images/right_hand.png");
 			
 			// Lives Sprites
 			lives = new Vector.<Sprite>();
@@ -98,9 +99,9 @@
 		
 		public override function update(): void {
 			// Mouse Track Left Hand
-			leftHand.sprite.x = gameState.game.mouse.x;
-			if (gameState.game.mouse.x <= 550 && gameState.game.mouse.x >= 350) {
-				leftHand.sprite.x = gameState.game.mouse.x; 
+			if (gameState.game.mouse.x <= 600 && gameState.game.mouse.x >= 400) {
+				//leftHand.sprite.x = gameState.game.mouse.x; 
+				leftHand.sprite.x = gameState.game.stage.mouseX;
 			}
 			
 			// Mouse Click
@@ -109,14 +110,18 @@
 					var ballInLeftHand: Ball = findFirstBallInLeftHand();
 					
 					if (ballInLeftHand) {
-						ballInLeftHand.canCollide = false;
-						ballInLeftHand.vy = -10;
-						ballInLeftHand.vx = -0.05 * (leftHand.sprite.x - rightHand.sprite.x);
-						ballInLeftHand.state = BallPosition.NONE;
-
-						var timer: Timer = new Timer(200, 1);
-						timer.addEventListener("timer", ballInLeftHand.updateCanCollide);
-						timer.start();
+						if (findBallsInRightHand().length == 0) {
+							ballInLeftHand.canCollide = false;
+							ballInLeftHand.vy = -10;
+							ballInLeftHand.vx = -0.05 * (leftHand.sprite.x - rightHand.sprite.x);
+							ballInLeftHand.state = BallPosition.NONE;
+							var timer: Timer = new Timer(200, 1);
+							timer.addEventListener("timer", ballInLeftHand.updateCanCollide);
+							timer.start();
+						} else {
+							decreaseLives();
+							gameState.resetBallPosition();
+						}
 					}
 				}
 			}
@@ -129,7 +134,7 @@
 				}
 			} else {
 				if (gameState.ballCharging) {
-					gameState.launchSound.play();
+					
 					launchBall();
 					gameState.ballCharging = false;
 				}

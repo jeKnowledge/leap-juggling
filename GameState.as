@@ -17,7 +17,7 @@
 	public class GameState extends State {
 		
 		// Game Settings
-		private static const NUM_BALLS: int = 3;
+		private static const NUM_BALLS: int = 4;
 
 		// Player
 		public var player: Player;
@@ -33,6 +33,7 @@
 		// Sounds
 		public var launchSound: Sound;
 		public var gameSound: Sound;
+		public var volumeAdjust: SoundTransform;
 		
 		public function GameState(game: Game) {
 			super(game);
@@ -55,7 +56,7 @@
 			launchSound = game.resourceMap["sounds/launch.mp3"];
 			gameSound = game.resourceMap["sounds/circus.mp3"];
 			
-			var volumeAdjust:SoundTransform = new SoundTransform();
+			volumeAdjust = new SoundTransform();
 			volumeAdjust.volume = .5;
 			
 			gameSound.play(0, 1, volumeAdjust);

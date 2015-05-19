@@ -19,14 +19,14 @@
 			gameMenuTextField.y = 200;
 			gameMenuTextField.width = 800;
 			gameMenuTextField.defaultTextFormat = new TextFormat('Helvetica', 30, 0x000);
-			gameMenuTextField.text = "[1] Tutorial\n[2] Endless";
+			gameMenuTextField.text = "[1] Tutorial\n[2] Endless\n[3] Challenge";
 			
 			this.game.addChild(gameMenuTextField);
 		}
 		
 		override public function update(): void {
 			if (game.keyMap[Keyboard.NUMBER_1]) {
-				this.game.changeState(new GameState(this.game));
+				this.game.changeState(new TutorialState(this.game));
 			} else if (game.keyMap[Keyboard.NUMBER_2]) {
 				this.game.changeState(new GameState(this.game));
 			}

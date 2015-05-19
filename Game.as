@@ -26,7 +26,8 @@
 			resourceMap = new Object();
 			keyMap = new Object();
 			
-			var resourceURLs: Array = ["images/player.png", "images/ball.png", "images/hand.png", "images/heart.png"];
+			var resourceURLs: Array = ["images/player.png", "images/ball.png", "images/left_hand.png",
+									   "images/right_hand.png", "images/heart.png"];
 			
 			for each (var resourceURL in resourceURLs) {
 				var loader: Loader = new Loader();
