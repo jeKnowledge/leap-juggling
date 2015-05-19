@@ -14,8 +14,8 @@
 		
 		override public function setup(): void {
 			introTextField = new TextField();
-			introTextField.x = 400;
-			introTextField.y = 400;
+			introTextField.x = 200;
+			introTextField.y = 200;
 			introTextField.width = 800;
 			introTextField.defaultTextFormat = new TextFormat('Helvetica', 30, 0x000);
 			introTextField.text = "[1] Play \n[2] Options";

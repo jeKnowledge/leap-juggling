@@ -17,10 +17,10 @@
 	import flash.media.SoundTransform;
 
 	public class GameState extends State {
-
-		private var scoreTextField: TextField;
-		public var timer: Timer;
 		
+		// Game Settings
+		public static const NUM_BALLS: int = 3;
+
 		private var player: Sprite;
 		public var currentFrame: int;
 		private var playerSpeed: int = 10;
@@ -44,15 +44,18 @@
 		}
 		
 		override public function setup(): void {
-			scoreTextField = new TextField();
-			scoreTextField.width = 200;
-			this.game.addChild(scoreTextField);
-
+			// Player Sprite
 			player = new Sprite();
 			player.addChild(this.game.resourceMap["images/player.png"]);
+			player.x = 800 / 2 - 150;
+			player.y = 640 - 220;
 			this.game.addChild(player);
 			
-			/* Creates the hitpoints*/
+			// Hand Sprites
+			leftHand = new Hand(this, 440, 520);
+			rightHand = new Hand(this, 230, 520);
+			
+			// Lives Sprites
 			for(var i: Number = 0; i < 5; i++) {
 				var live: Sprite = new Sprite();
 				live.addChild(new Bitmap(this.game.resourceMap["images/heart.png"].bitmapData));
@@ -61,25 +64,21 @@
 				this.game.addChild(live);
 				lives.push(live);
 			}
-			
-			leftHand = new Hand(this, 440, 520);
-			rightHand = new Hand(this, 230, 520);
 
-			for (i = 0; i < 4; i++) {
+			// Ball Sprites
+			for (i = 0; i < NUM_BALLS; i++) {
 				var newBall: Ball = new Ball(this, BallPosition.RIGHT_HAND);
 				balls.push(newBall);
 			}
 
+			// Sounds
 			launchSound = game.resourceMap["sounds/launch.mp3"];
 			gameSound = game.resourceMap["sounds/circus.mp3"];
 			
 			var volumeAdjust:SoundTransform = new SoundTransform();
 			volumeAdjust.volume = .5;
-
+			
 			gameSound.play(0, 1, volumeAdjust);
-
-			player.x = 800 / 2 - 150;
-			player.y = 640 - 220;
 		}
 		
 		public function decreaseLives(): void {
@@ -100,6 +99,14 @@
 				}
 
 				ballToLaunch.launch(ballChargeBeginning);
+			}
+		}
+		
+		public function resetBallPosition(): void {
+			for each (var ball in balls) {
+				ball.sprite.x = this.rightHand.sprite.x;
+				ball.sprite.y = this.rightHand.sprite.y - this.findBallsInRightHand().indexOf(ball) * (0.8 * ball.sprite.height);
+				ball.state = BallPosition.RIGHT_HAND;
 			}
 		}
 		
@@ -136,20 +143,23 @@
 			
 			return ballsInRightHand;
 		}
-		
-		public function resetBallPosition(): void {
-			for each (var ball in balls) {
-				ball.sprite.x = this.rightHand.sprite.x;
-				ball.sprite.y = this.rightHand.sprite.y - this.findBallsInRightHand().indexOf(ball) * (0.8 * ball.sprite.height);
-				ball.state = BallPosition.RIGHT_HAND;
-			}
-		}
 				
 		override public function update(): void {
-			currentFrame++;
+			currentFrame ++;
+			
+			// Restart and escape keys
+			if (game.keyMap[Keyboard.R]) {
+				game.changeState(new GameState(game));
+			}
+			
+			if (game.keyMap[Keyboard.ESCAPE]) {
+				game.changeState(new MenuState(game));
+			}
 
+			// Mouse Track Left Hand
 			leftHand.sprite.x = game.mouse.x;
 			
+			// Mouse Click
 			if (game.mouse.down) {
 				if (balls.length > 0) {
 					var ballInLeftHand: Ball = findFirstBallInLeftHand();
@@ -167,10 +177,7 @@
 				}
 			}
 
-			if (game.keyMap[Keyboard.R]) {
-				game.changeState(new GameState(game));
-			}
-			
+			// Space Bar Click			
 			if (game.keyMap[Keyboard.SPACE]) {
 				if (!ballCharging) {
 					ballChargeBeginning = currentFrame;
@@ -184,15 +191,18 @@
 				}
 			}
 			
+			// Update Balls
 			for each (var ball in balls) {
 				ball.update();
 			}
 			
+			// Check if should lose a live
 			if (findBallsInLeftHand().length > 1) {
 				resetBallPosition();
 				decreaseLives();
 			}
 			
+			// Check if game is lost
 			if (lives.length == 0) {
 				game.changeState(new GameOverState(game));
 			}
