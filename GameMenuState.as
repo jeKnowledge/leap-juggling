@@ -15,14 +15,9 @@
 		}
 		
 		override public function setup(): void {
-			gameMenuTextField = new TextField();
-			gameMenuTextField.x = 200;
-			gameMenuTextField.y = 200;
-			gameMenuTextField.width = 800;
-			gameMenuTextField.defaultTextFormat = new TextFormat('Helvetica', 30, 0x000);
-			gameMenuTextField.text = "[1] Tutorial\n[2] Endless\n[3] Challenge";
+			this.textFields = new CustomTextFields(this.game);
 			
-			this.game.addChild(gameMenuTextField);
+			textFields.createCustomTextField("menu", "[1] Tutorial\n[2] Endless\n[3] Challenge", 200, 200);
 		}
 		
 		override public function update(): void {

@@ -9,6 +9,9 @@
 
 	public class Player extends GameObject {
 		
+		// Player Settings
+		private var NUM_LIVES: int = 3;
+		
 		// Hands
 		public var leftHand: Hand;
 		public var rightHand: Hand;
@@ -90,7 +93,7 @@
 			
 			// Lives Sprites
 			lives = new Vector.<Sprite>();
-			for(var i: Number = 0; i < 5; i++) {
+			for(var i: Number = 0; i < NUM_LIVES; i++) {
 				var live: Sprite = new Sprite();
 				live.addChild(new Bitmap(gameState.game.resourceMap["images/heart.png"].bitmapData));
 				live.x = (i + 1) * 20;

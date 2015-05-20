@@ -15,6 +15,9 @@
 	
 	public class TutorialGameState extends GameState {
 		
+		// Game Settings
+		private var NUM_BALLS: int = 2;
+		
 		public function TutorialGameState(game: Game) {
 			super(game);
 		}
@@ -22,7 +25,6 @@
 		public override function setup(): void {
 			player = new Player(this);
 			player.setup();
-			
 		}
 		
 		public override function update(): void {

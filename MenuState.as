@@ -5,22 +5,15 @@
 	import flash.ui.Keyboard;
 	
 	public class MenuState extends State {
-
-		private var introTextField: TextField;
 		
 		public function MenuState(game: Game) {
 			super(game);
 		}
 		
 		override public function setup(): void {
-			introTextField = new TextField();
-			introTextField.x = 200;
-			introTextField.y = 200;
-			introTextField.width = 800;
-			introTextField.defaultTextFormat = new TextFormat('Helvetica', 30, 0x000);
-			introTextField.text = "[1] Play \n[2] Options";
-
-			this.game.addChild(introTextField);
+			this.textFields = new CustomTextFields(this.game);
+			
+			textFields.createCustomTextField("menu", "[1] Play \n[2] Options", 200, 200);
 		}
 		
 		override public function update(): void {

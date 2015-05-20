@@ -13,13 +13,9 @@
 		}
 		
 		override public function setup(): void {
-			introTextField = new TextField();
-			introTextField.x = 200;
-			introTextField.y = 200;
-			introTextField.width = 800;
-			introTextField.defaultTextFormat = new TextFormat('Helvetica', 30, 0x000);
-			introTextField.text = "[ESC] Go back to the menu.";
-			this.game.addChild(introTextField);
+			this.textFields = new CustomTextFields(this.game);
+			
+			textFields.createCustomTextField("menu", "[ESC] Go back to the menu.", 200, 200);
 		}
 		
 		override public function update(): void {

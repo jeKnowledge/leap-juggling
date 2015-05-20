@@ -5,6 +5,7 @@
 	public class State {
 
 		public var game: Game;
+		public var textFields: CustomTextFields;
 		
 		public function State(game: Game) {
 			this.game = game;
