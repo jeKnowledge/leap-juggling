@@ -6,7 +6,6 @@
 	
 	public class GameOverState extends State {
 
-		private var introTextField: TextField;
 		private var score: int;
 		private var lastState: State;
 		

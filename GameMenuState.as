@@ -7,8 +7,6 @@
 	import flash.text.TextField;
 	
 	public class GameMenuState extends State {
-		
-		private var gameMenuTextField: TextField;
 
 		public function GameMenuState(game: Game) {
 			super(game);

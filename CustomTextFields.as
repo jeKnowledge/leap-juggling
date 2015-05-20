@@ -18,6 +18,7 @@
 			textField.x = x;
 			textField.y = y;
 			textField.width = 800; // FIX: hardcoded value
+			textField.height = 600; // FIX: hardcoded value
 			textField.defaultTextFormat = new TextFormat('Helvetica', fontSize, 0x000);
 			textField.text = text;
 			

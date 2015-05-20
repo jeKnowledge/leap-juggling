@@ -13,7 +13,7 @@
 		override public function setup(): void {
 			this.textFields = new CustomTextFields(this.game);
 			
-			textFields.createCustomTextField("menu", "[1] Play \n[2] Options", 200, 200);
+			textFields.createCustomTextField("menu", "[1] Play \n[2] Options\n[3] Credits", 200, 200);
 		}
 		
 		override public function update(): void {
@@ -23,6 +23,8 @@
 				game.keyMap[Keyboard.NUMBER_2] = false;
 			} else if (game.keyMap[Keyboard.NUMBER_2]) {
 				this.game.changeState(new OptionsMenuState(this.game));
+			} else if (game.keyMap[Keyboard.NUMBER_3]) {
+				this.game.changeState(new CreditsState(this.game));
 			}
 		}
 
