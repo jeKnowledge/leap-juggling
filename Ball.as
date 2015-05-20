@@ -59,6 +59,8 @@
 		public function launch(ballChargeBeginning: int): void {
 			canCollide = false;
 			state = BallPosition.NONE;
+			
+			trace(ballChargeBeginning);
 
 			var timer: Timer = new Timer(300, 1);
 			timer.addEventListener("timer", updateCanCollide);

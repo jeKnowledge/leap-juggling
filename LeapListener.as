@@ -1,4 +1,5 @@
 ﻿package  {
+	
 	import com.leapmotion.leap.*;
 	import com.leapmotion.leap.events.*;
 	import com.leapmotion.leap.util.*;
@@ -6,11 +7,13 @@
 	public class LeapListener implements Listener {
 		
 		public var controller: Controller;
-		public var hand: Hand;
+		public var hands: Object;
 		public var game: Game;
 
 		public function LeapListener(game: Game) {
 			this.game = game;
+			
+			this.hands = new Object();
 			controller = new Controller();
 			controller.setListener(this);
 		}
@@ -56,69 +59,44 @@
 			trace("Exited");
 		}
 		
-		public function foundHand(controller: Controller, frame: Frame): void {
-			
-		}
-		
-		public function onFrame(controller: Controller, frame:Frame): void {
-			var hands: Object = game.myLeapMotion.leapHands;
+		public function onFrame(controller: Controller, frame: Frame): void {
 			var frameHands: Vector.<Hand> = frame.hands;
+			var gestures: Vector.<Gesture> = frame.gestures();
+			
 			if (frameHands.length == 2) {
-				hands = {right: true, left: true};
+				hands = { right: true, left: true };
 				
 				if (frame.hands[0].isLeft == true) {
-					hands = {rightX: frameHands[1].palmPosition.x, rightY: frameHands[1].palmPosition.y,
-							 leftX: frameHands[0].palmPosition.x, leftY: frameHands[0].palmPosition.y};
+					hands = { rightX: frameHands[1].palmPosition.x, rightY: frameHands[1].palmPosition.y,
+							  leftX: frameHands[0].palmPosition.x, leftY: frameHands[0].palmPosition.y };
 					
 				} else {
-					hands = {rightX: frameHands[0].palmPosition.x, rightY: frameHands[0].palmPosition.y,
-							 leftX: frameHands[1].palmPosition.x, leftY: frameHands[1].palmPosition.y};
+					hands = { rightX: frameHands[0].palmPosition.x, rightY: frameHands[0].palmPosition.y,
+							  leftX: frameHands[1].palmPosition.x, leftY: frameHands[1].palmPosition.y };
 				}
-				trace("Right Hand: " + hands.rightX);
-				trace("Left Hand: " + hands.leftX);
 			} else if (frameHands.length == 1) {
 				if (frame.hands[0].isLeft == true) {
-					hands = {right: false, left: true, 
-							 leftX: frameHands[0].palmPosition.x, leftY: frameHands[0].palmPosition.y};
+					hands = { right: false, left: true, 
+							  leftX: frameHands[0].palmPosition.x, leftY: frameHands[0].palmPosition.y };
 				} else {
-					hands = {right: true, left: false, 
-							 rightX: frameHands[0].palmPosition.x, rightY: frameHands[0].palmPosition.y};
+					hands = { right: true, left: false, 
+							  rightX: frameHands[0].palmPosition.x, rightY: frameHands[0].palmPosition.y };
 				}
-				trace("Right Hand: " + hands.rightX);
-				trace("Left Hand: " + hands.leftX);
-			}
-		
-			//trace("Hands: " + frame.hands.length + ", Fingers: " + frame.fingers.length + ", Gestures: " + frame.gestures().length);
-			if (frame.hands.length > 0) {
-				hand = frame.hands[0];
-				//trace(hand);
-				var fingers:Vector.<Finger> = hand.fingers;
-				if(hand.isLeft == true) {
-					//trace("Palm Position: " + hand.palmPosition.x);
-				}
-				var normal: Vector3  = hand.palmNormal;
-				var direction: Vector3 = hand.direction;
 			}
 			
-			var gestures: Vector.<Gesture> = frame.gestures();
 			for (var i: int = 0; i < gestures.length; i++) {
 				var gesture: Gesture = gestures[i];
+				var auxHands: Vector.<Hand> = gesture.hands;
 				
-				switch(gesture.type) {
-					case Gesture.TYPE_SWIPE:
-						var swipe: SwipeGesture = SwipeGesture(gesture);
-						//trace("Swipe Direction: " + swipe.direction);
-						break;
-					
-					case Gesture.TYPE_SCREEN_TAP:
-						var screenTap: ScreenTapGesture = ScreenTapGesture(gesture);
-						trace("Tapped Screen");
-						break;
-					
-					case Gesture.TYPE_KEY_TAP:
-						var keyTap: KeyTapGesture = KeyTapGesture(gesture);
-						trace("Key Tapped");
-						break;
+				if (gesture.type == Gesture.TYPE_KEY_TAP) {
+					trace("Leap: Key Tapped");
+					for (var j: int = 0; j < auxHands.length; j++) {
+						if (auxHands[j].isLeft) {
+							game.leapMap[LeapPosition.LEFT_TAP] = true;
+						} else if (auxHands[j].isRight) {
+							game.leapMap[LeapPosition.RIGHT_TAP] = true;
+						}
+					}
 				}
 			}
 		}

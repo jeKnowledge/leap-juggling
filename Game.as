@@ -19,19 +19,23 @@
 		
 		public var resourceMap: Object;
 		public var keyMap: Object;
+		
+		// Leap Motion
+		public var leapMap: Object;
 		public var leapMotion: LeapListener;
-		public var myLeapMotion: LeapMotionWrapper;
+		public var leapMode: Boolean = true; // Change here to play with leap
 		
 		public var mouse: Object = { x: 0, y: 0, down: false };
 
 		public function Game() {
 			resourceMap = new Object();
 			keyMap = new Object();
-			myLeapMotion = new LeapMotionWrapper();
+
 			leapMotion = new LeapListener(this);
+			leapMap = new Object();
 			
-			var resourceURLs: Array = ["images/player.png", "images/ball.png", "images/left_hand.png",
-									   "images/right_hand.png", "images/heart.png"];
+			var resourceURLs: Array = [ "images/player.png", "images/ball.png", "images/left_hand.png",
+										"images/right_hand.png", "images/heart.png" ];
 			
 			for each (var resourceURL in resourceURLs) {
 				var loader: Loader = new Loader();
@@ -39,7 +43,7 @@
 				loader.load(new URLRequest(resourceURL));
 			}
 
-			var soundURLs: Array = ["sounds/launch.mp3", "sounds/circus.mp3"];
+			var soundURLs: Array = [ "sounds/launch.mp3", "sounds/circus.mp3" ];
 
 			for each (var soundURL in soundURLs) {
 				var s: Sound = new Sound();
