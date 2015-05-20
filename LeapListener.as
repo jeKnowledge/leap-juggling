@@ -82,9 +82,13 @@
 				if (frame.hands[0].isLeft == true) {
 					game.myLeapMotion.leapHands.left = true;
 					game.myLeapMotion.leapHands.right = false;
+					game.myLeapMotion.leapHands.leftX = frame.hands[0].direction.x;
+					game.myLeapMotion.leapHands.leftY = frame.hands[0].direction.y;
 				} else {
 					game.myLeapMotion.leapHands.left = false;
 					game.myLeapMotion.leapHands.right = true;
+					game.myLeapMotion.leapHands.rightX = frame.hands[0].direction.x;
+					game.myLeapMotion.leapHands.rightY = frame.hands[0].direction.y;
 				}
 			}
 		
