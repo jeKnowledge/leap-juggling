@@ -7,6 +7,7 @@
 
 		public var gameState: GameState;
 		public var sprite: Sprite;
+		public var textFields: CustomTextFields;
 		
 		public function GameObject(gameState: GameState) {
 			this.gameState = gameState;
