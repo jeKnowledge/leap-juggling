@@ -61,41 +61,37 @@
 		}
 		
 		public function onFrame(controller: Controller, frame:Frame): void {
-			
-			if (frame.hands.length == 2) {
-				game.myLeapMotion.leapHands.right = true;
-				game.myLeapMotion.leapHands.left = true;
+			var hands: Object = game.myLeapMotion.leapHands;
+			var frameHands: Vector.<Hand> = frame.hands;
+			if (frameHands.length == 2) {
+				hands = {right: true, left: true};
 				
 				if (frame.hands[0].isLeft == true) {
-					game.myLeapMotion.leapHands.rightX = frame.hands[1].direction.x;
-					game.myLeapMotion.leapHands.rightY = frame.hands[1].direction.y;
-					game.myLeapMotion.leapHands.leftX = frame.hands[0].direction.x;
-					game.myLeapMotion.leapHands.leftY = frame.hands[0].direction.y;
-					trace(game.myLeapMotion.leapHands.leftX);
+					hands = {rightX: frameHands[1].palmPosition.x, rightY: frameHands[1].palmPosition.y,
+							 leftX: frameHands[0].palmPosition.x, leftY: frameHands[0].palmPosition.y};
+					
 				} else {
-					game.myLeapMotion.leapHands.rightX = frame.hands[0].direction.x;
-					game.myLeapMotion.leapHands.rightY = frame.hands[0].direction.y;
-					game.myLeapMotion.leapHands.leftX = frame.hands[1].direction.x;
-					game.myLeapMotion.leapHands.leftY = frame.hands[1].direction.y;
+					hands = {rightX: frameHands[0].palmPosition.x, rightY: frameHands[0].palmPosition.y,
+							 leftX: frameHands[1].palmPosition.x, leftY: frameHands[1].palmPosition.y};
 				}
-			} else if (frame.hands.length == 1) {
+				trace("Right Hand: " + hands.rightX);
+				trace("Left Hand: " + hands.leftX);
+			} else if (frameHands.length == 1) {
 				if (frame.hands[0].isLeft == true) {
-					game.myLeapMotion.leapHands.left = true;
-					game.myLeapMotion.leapHands.right = false;
-					game.myLeapMotion.leapHands.leftX = frame.hands[0].direction.x;
-					game.myLeapMotion.leapHands.leftY = frame.hands[0].direction.y;
+					hands = {right: false, left: true, 
+							 leftX: frameHands[0].palmPosition.x, leftY: frameHands[0].palmPosition.y};
 				} else {
-					game.myLeapMotion.leapHands.left = false;
-					game.myLeapMotion.leapHands.right = true;
-					game.myLeapMotion.leapHands.rightX = frame.hands[0].direction.x;
-					game.myLeapMotion.leapHands.rightY = frame.hands[0].direction.y;
+					hands = {right: true, left: false, 
+							 rightX: frameHands[0].palmPosition.x, rightY: frameHands[0].palmPosition.y};
 				}
+				trace("Right Hand: " + hands.rightX);
+				trace("Left Hand: " + hands.leftX);
 			}
 		
 			//trace("Hands: " + frame.hands.length + ", Fingers: " + frame.fingers.length + ", Gestures: " + frame.gestures().length);
 			if (frame.hands.length > 0) {
 				hand = frame.hands[0];
-				trace(hand);
+				//trace(hand);
 				var fingers:Vector.<Finger> = hand.fingers;
 				if(hand.isLeft == true) {
 					//trace("Palm Position: " + hand.palmPosition.x);
