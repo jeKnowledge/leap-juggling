@@ -67,7 +67,7 @@
 			
 			// Check if the player lost
 			if (player.lives.length == 0) {
-				game.changeState(new GameOverState(game));
+				game.changeState(new GameOverState(game, player.score));
 			}
 		}
 

@@ -7,9 +7,11 @@
 	public class GameOverState extends State {
 
 		private var introTextField: TextField;
+		private var finalScore: int;
 		
-		public function GameOverState(game: Game) {
+		public function GameOverState(game: Game, finalScore: int) {
 			super(game);
+			this.finalScore = finalScore;
 		}
 		
 		override public function setup(): void {
@@ -18,7 +20,7 @@
 			introTextField.y = 200;
 			introTextField.width = 800;
 			introTextField.defaultTextFormat = new TextFormat('Helvetica', 30, 0x000);
-			introTextField.text = "Game Over\nPress [ENTER] to play again\nPress [ESC] to go back to menu";
+			introTextField.text = "Game Over\nYou got " + this.finalScore.toString() + " points.\nPress [ENTER] to play again\nPress [ESC] to go back to menu";
 
 			this.game.addChild(introTextField);
 		}

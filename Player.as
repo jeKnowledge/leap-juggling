@@ -16,6 +16,9 @@
 		// Lives
 		public var lives: Vector.<Sprite>;
 		
+		// Score
+		public var score: int = 0;
+		
 		public function Player(gameState: GameState) {
 			super(gameState);
 		}
@@ -91,10 +94,14 @@
 				var live: Sprite = new Sprite();
 				live.addChild(new Bitmap(gameState.game.resourceMap["images/heart.png"].bitmapData));
 				live.x = (i + 1) * 20;
-				live.y = 10;
+				live.y = 20;
 				gameState.game.addChild(live);
 				lives.push(live);
 			}
+			
+			// Text Fields
+			this.textFields = new CustomTextFields(this.gameState.game);
+			textFields.createCustomTextField("score", "Score: " + this.score.toString(), 700, 20, 20);
 		}
 		
 		public override function update(): void {
@@ -118,6 +125,7 @@
 							var timer: Timer = new Timer(200, 1);
 							timer.addEventListener("timer", ballInLeftHand.updateCanCollide);
 							timer.start();
+							score ++;
 						} else {
 							decreaseLives();
 							gameState.resetBallPosition();
@@ -145,6 +153,8 @@
 				gameState.resetBallPosition();
 				decreaseLives();
 			}
+			
+			textFields.updateCustomTextField("score", "Score: " + this.score.toString());
 		}
 
 	}
