@@ -23,7 +23,7 @@
 		// Leap Motion
 		public var leapMap: Object;
 		public var leapMotion: LeapListener;
-		public var leapMode: Boolean = true; // Change here to play with leap
+		public var leapMode: Boolean = false; // Change here to play with leap
 		
 		public var mouse: Object = { x: 0, y: 0, down: false };
 

@@ -149,20 +149,15 @@
 					var ballInLeftHand: Ball = findFirstBallInLeftHand();
 
 					if (ballInLeftHand) {
-						if (findBallsInRightHand().length == 0) {
-							ballInLeftHand.canCollide = false;
-							ballInLeftHand.vy = -10;
-							ballInLeftHand.vx = -0.05 * (leftHand.sprite.x - rightHand.sprite.x);
-							ballInLeftHand.state = BallPosition.NONE;
+						ballInLeftHand.canCollide = false;
+						ballInLeftHand.vy = -10;
+						ballInLeftHand.vx = -0.05 * (leftHand.sprite.x - rightHand.sprite.x);
+						ballInLeftHand.state = BallPosition.NONE;
 
-							var timer: Timer = new Timer(200, 1);
-							timer.addEventListener("timer", ballInLeftHand.updateCanCollide);
-							timer.start();
-							score++;
-						} else {
-							decreaseLives();
-							gameState.resetBallPosition();
-						}
+						var timer: Timer = new Timer(200, 1);
+						timer.addEventListener("timer", ballInLeftHand.updateCanCollide);
+						timer.start();
+						score++;
 					}
 				}
 			}
