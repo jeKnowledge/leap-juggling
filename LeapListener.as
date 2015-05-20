@@ -6,6 +6,7 @@
 	public class LeapListener implements Listener {
 		
 		public var controller: Controller;
+		public var hand: Hand;
 
 		public function LeapListener() {
 			controller = new Controller();
@@ -53,11 +54,16 @@
 			trace("Exited");
 		}
 		
+		public function foundHand(controller: Controller, frame: Frame): void {
+			
+		}
+		
 		public function onFrame(controller: Controller, frame:Frame): void {
 		
 			//trace("Hands: " + frame.hands.length + ", Fingers: " + frame.fingers.length + ", Gestures: " + frame.gestures().length);
 			if (frame.hands.length > 0) {
-				var hand: Hand = frame.hands[0];
+				hand = frame.hands[0];
+				trace(hand);
 				var fingers:Vector.<Finger> = hand.fingers;
 				if(hand.isLeft == true) {
 					trace("Palm Position: " + hand.palmPosition.x);
