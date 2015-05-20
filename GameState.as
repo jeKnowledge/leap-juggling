@@ -41,7 +41,7 @@
 		public function resetBallPosition(): void {
 			for each (var ball in balls) {
 				ball.sprite.x = player.rightHand.sprite.x;
-				ball.sprite.y = player.rightHand.sprite.y - player.findBallsInRightHand().indexOf(ball) * (0.8 * ball.sprite.height);
+				ball.sprite.y = player.rightHand.sprite.y - ballsInHand(player.rightHand).indexOf(ball) * (0.8 * ball.sprite.height);
 				ball.state = BallPosition.RIGHT_HAND;
 			}
 		}
@@ -50,8 +50,12 @@
 			var ballsInHand: Vector.<Ball> = new Vector.<Ball>();
 			
 			for each (var ball in balls) {
-				ballsInHand.push(ball);
+				if (ball.state == hand.state) {
+					ballsInHand.push(ball);
+				}
 			}
+			
+			return ballsInHand;
 		}
 		
 		override public function setup(): void { }

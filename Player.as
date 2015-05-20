@@ -33,52 +33,18 @@
 		public function Player(gameState: GameState) {
 			super(gameState);
 		}
-
-		private function findFirstBallInLeftHand(): Ball {
-			for each(var ball in gameState.balls) {
-				if (ball.state == BallPosition.LEFT_HAND) {
-					return ball;
-				}
-			}
-
-			return null;
-		}
-
-		public function findBallsInLeftHand(): Vector.<Ball> {
-			var ballsInLeftHand: Vector.<Ball> = new Vector.<Ball>();
-
-			for each(var ball in gameState.balls) {
-				if (ball.state == BallPosition.LEFT_HAND) {
-					ballsInLeftHand.push(ball);
-				}
-			}
-
-			return ballsInLeftHand;
-		}
-
-		public function findBallsInRightHand(): Vector.<Ball> {
-			var ballsInRightHand: Vector.<Ball> = new Vector.<Ball>();
-
-			for each(var ball in gameState.balls) {
-				if (ball.state == BallPosition.RIGHT_HAND) {
-					ballsInRightHand.push(ball);
-				}
-			}
-
-			return ballsInRightHand;
-		}
 		
 		private function updateCanLaunch(e: TimerEvent): void {
 			this.canLaunch = true;
 		}
 
 		public function launchBall(): void {
-			var ballsInRightHand: Vector.<Ball> = findBallsInRightHand();
+			var ballsInRightHand: Vector.<Ball> = gameState.ballsInHand(rightHand);
 
 			if (ballsInRightHand.length > 0 && canLaunch) {
-				var ballToLaunch: Ball = ballsInRightHand[0];
+				var ballToLaunch: Ball = gameState.ballsInHand(this.rightHand)[0];
 
-				for each(var ball in ballsInRightHand) {
+				for each(var ball in gameState.ballsInHand(this.rightHand)[0]) {
 					if (ball.sprite.y < ballToLaunch.sprite.y) {
 						ballToLaunch = ball;
 					}
@@ -108,8 +74,8 @@
 			sprite.y = 640 - 220;
 			this.gameState.game.addChild(sprite);
 
-			this.leftHand = new GameHand(this.gameState, 440, 520, "images/left_hand.png");
-			this.rightHand = new GameHand(this.gameState, 230, 520, "images/right_hand.png");
+			this.leftHand = new GameHand(this.gameState, 440, 520, "images/left_hand.png", HandType.LEFT_HAND);
+			this.rightHand = new GameHand(this.gameState, 230, 520, "images/right_hand.png", HandType.RIGHT_HAND);
 
 			// Lives Sprites
 			lives = new Vector.<Sprite>();
@@ -146,16 +112,16 @@
 				}
 				
 				if (gameState.balls.length > 0) {
-					var ballInLeftHand: Ball = findFirstBallInLeftHand();
-
-					if (ballInLeftHand) {
-						ballInLeftHand.canCollide = false;
-						ballInLeftHand.vy = -10;
-						ballInLeftHand.vx = -0.05 * (leftHand.sprite.x - rightHand.sprite.x);
-						ballInLeftHand.state = BallPosition.NONE;
+					var ballsInLeftHand: Vector.<Ball> = gameState.ballsInHand(leftHand);
+					
+					if (ballsInLeftHand.length > 0) {
+						ballsInLeftHand[0].canCollide = false;
+						ballsInLeftHand[0].vy = -10;
+						ballsInLeftHand[0].vx = -0.05 * (leftHand.sprite.x - rightHand.sprite.x);
+						ballsInLeftHand[0].state = BallPosition.NONE;
 
 						var timer: Timer = new Timer(200, 1);
-						timer.addEventListener("timer", ballInLeftHand.updateCanCollide);
+						timer.addEventListener("timer", ballsInLeftHand[0].updateCanCollide);
 						timer.start();
 						score++;
 					}
@@ -184,7 +150,7 @@
 			}
 
 			// Check if should lose a live
-			if (findBallsInLeftHand().length > 1) {
+			if (gameState.ballsInHand(leftHand).length > 1) {
 				gameState.resetBallPosition();
 				decreaseLives();
 			}
