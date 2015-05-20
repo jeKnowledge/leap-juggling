@@ -7,8 +7,10 @@
 		
 		public var controller: Controller;
 		public var hand: Hand;
+		public var game: Game;
 
-		public function LeapListener() {
+		public function LeapListener(game: Game) {
+			this.game = game;
 			controller = new Controller();
 			controller.setListener(this);
 		}
@@ -59,6 +61,32 @@
 		}
 		
 		public function onFrame(controller: Controller, frame:Frame): void {
+			
+			if (frame.hands.length == 2) {
+				game.myLeapMotion.leapHands.right = true;
+				game.myLeapMotion.leapHands.left = true;
+				
+				if (frame.hands[0].isLeft == true) {
+					game.myLeapMotion.leapHands.rightX = frame.hands[1].direction.x;
+					game.myLeapMotion.leapHands.rightY = frame.hands[1].direction.y;
+					game.myLeapMotion.leapHands.leftX = frame.hands[0].direction.x;
+					game.myLeapMotion.leapHands.leftY = frame.hands[0].direction.y;
+					trace(game.myLeapMotion.leapHands.leftX);
+				} else {
+					game.myLeapMotion.leapHands.rightX = frame.hands[0].direction.x;
+					game.myLeapMotion.leapHands.rightY = frame.hands[0].direction.y;
+					game.myLeapMotion.leapHands.leftX = frame.hands[1].direction.x;
+					game.myLeapMotion.leapHands.leftY = frame.hands[1].direction.y;
+				}
+			} else if (frame.hands.length == 1) {
+				if (frame.hands[0].isLeft == true) {
+					game.myLeapMotion.leapHands.left = true;
+					game.myLeapMotion.leapHands.right = false;
+				} else {
+					game.myLeapMotion.leapHands.left = false;
+					game.myLeapMotion.leapHands.right = true;
+				}
+			}
 		
 			//trace("Hands: " + frame.hands.length + ", Fingers: " + frame.fingers.length + ", Gestures: " + frame.gestures().length);
 			if (frame.hands.length > 0) {
@@ -66,7 +94,7 @@
 				trace(hand);
 				var fingers:Vector.<Finger> = hand.fingers;
 				if(hand.isLeft == true) {
-					trace("Palm Position: " + hand.palmPosition.x);
+					//trace("Palm Position: " + hand.palmPosition.x);
 				}
 				var normal: Vector3  = hand.palmNormal;
 				var direction: Vector3 = hand.direction;
@@ -79,7 +107,7 @@
 				switch(gesture.type) {
 					case Gesture.TYPE_SWIPE:
 						var swipe: SwipeGesture = SwipeGesture(gesture);
-						trace("Swipe Direction: " + swipe.direction);
+						//trace("Swipe Direction: " + swipe.direction);
 						break;
 					
 					case Gesture.TYPE_SCREEN_TAP:

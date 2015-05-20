@@ -20,13 +20,15 @@
 		public var resourceMap: Object;
 		public var keyMap: Object;
 		public var leapMotion: LeapListener;
+		public var myLeapMotion: LeapMotionWrapper;
 		
 		public var mouse: Object = { x: 0, y: 0, down: false };
 
 		public function Game() {
 			resourceMap = new Object();
 			keyMap = new Object();
-			leapMotion = new LeapListener();
+			myLeapMotion = new LeapMotionWrapper();
+			leapMotion = new LeapListener(this);
 			
 			var resourceURLs: Array = ["images/player.png", "images/ball.png", "images/left_hand.png",
 									   "images/right_hand.png", "images/heart.png"];
