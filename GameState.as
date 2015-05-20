@@ -46,6 +46,14 @@
 			}
 		}
 		
+		public function ballsInHand(hand: GameHand): Vector.<Ball> {
+			var ballsInHand: Vector.<Ball> = new Vector.<Ball>();
+			
+			for each (var ball in balls) {
+				ballsInHand.push(ball);
+			}
+		}
+		
 		override public function setup(): void { }
 				
 		override public function update(): void { }
