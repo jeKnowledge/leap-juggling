@@ -130,7 +130,9 @@
 		public override function update(): void {
 			// Mouse/Leap Track Left Hand
 			if (gameState.game.leapMode) {
-				leftHand.sprite.x = gameState.game.leapMotion.hands.rightX + 420;
+				if (gameState.game.leapMotion.hands.rightX + 420 <= 600 && gameState.game.leapMotion.hands.rightX + 420 >= 400) {
+					leftHand.sprite.x = gameState.game.leapMotion.hands.rightX + 420;
+				}
 			} else {
 				if (gameState.game.mouse.x <= 600 && gameState.game.mouse.x >= 400) {
 					leftHand.sprite.x = gameState.game.stage.mouseX;
