@@ -13,8 +13,8 @@
 		private var NUM_LIVES: int = 3;
 		
 		// Hands
-		public var leftHand: Hand;
-		public var rightHand: Hand;
+		public var leftHand: GameHand;
+		public var rightHand: GameHand;
 		
 		// Lives
 		public var lives: Vector.<Sprite>;
@@ -88,8 +88,8 @@
 			sprite.y = 640 - 220;
 			this.gameState.game.addChild(sprite);
 			
-			this.leftHand = new Hand(this.gameState, 440, 520, "images/left_hand.png");
-			this.rightHand = new Hand(this.gameState, 230, 520, "images/right_hand.png");
+			this.leftHand = new GameHand(this.gameState, 440, 520, "images/left_hand.png");
+			this.rightHand = new GameHand(this.gameState, 230, 520, "images/right_hand.png");
 			
 			// Lives Sprites
 			lives = new Vector.<Sprite>();
