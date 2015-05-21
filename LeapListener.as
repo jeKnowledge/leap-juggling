@@ -92,9 +92,16 @@
 					trace("Leap: Key Tapped");
 					for (var j: int = 0; j < auxHands.length; j++) {
 						if (auxHands[j].isLeft) {
-							game.leapMap[LeapPosition.LEFT_TAP] = true;
+							game.leapMap[LeapPosition.LEFT_TAP] = false;
 						} else if (auxHands[j].isRight) {
 							game.leapMap[LeapPosition.RIGHT_TAP] = true;
+						}
+					}
+				} else if (gesture.type == Gesture.TYPE_SWIPE) {
+					trace("Swiped");
+					for (var j: int = 0; j < auxHands.length; j++) {
+						if (auxHands[j].isLeft) {
+							game.leapMap[LeapPosition.SWIPE_UP] = true;
 						}
 					}
 				}

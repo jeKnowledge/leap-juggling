@@ -138,8 +138,8 @@
 
 			// Space Bar Click
 			if (gameState.game.leapMode) {
-				if (gameState.game.leapMap[LeapPosition.LEFT_TAP]) {
-					gameState.game.leapMap[LeapPosition.LEFT_TAP] = false;
+				if (gameState.game.leapMap[LeapPosition.SWIPE_UP]) {
+					gameState.game.leapMap[LeapPosition.SWIPE_UP] = false;
 					launchBall();
 				}
 			} else {
