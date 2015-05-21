@@ -111,8 +111,8 @@
 
 			// Mouse Click / Leap Tap
 			if (gameState.game.mouse.down || gameState.game.leapMap[LeapPosition.RIGHT_TAP]) {
-				if (gameState.game.leapMap[Gesture.TYPE_KEY_TAP]) {
-					gameState.game.leapMap[Gesture.TYPE_KEY_TAP] = false;
+				if (gameState.game.leapMap[LeapPosition.RIGHT_TAP]) {
+					gameState.game.leapMap[LeapPosition.RIGHT_TAP] = false;
 				}
 				
 				if (gameState.balls.length > 0) {
@@ -139,8 +139,8 @@
 			// Space Bar Click
 			if (gameState.game.leapMode) {
 				if (gameState.game.leapMap[LeapPosition.SWIPE_UP]) {
-					gameState.game.leapMap[LeapPosition.SWIPE_UP] = false;
 					launchBall();
+					gameState.game.leapMap[LeapPosition.SWIPE_UP] = false;
 				}
 			} else {
 				if (gameState.game.keyMap[Keyboard.SPACE]) {
