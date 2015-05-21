@@ -38,6 +38,7 @@
 			super(game);
 		}
 
+		// Reset Ball Position
 		public function resetBallPosition(): void {
 			for each (var ball in balls) {
 				ball.sprite.x = player.rightHand.sprite.x;
@@ -47,6 +48,7 @@
 			}
 		}
 
+		// Get balls in passed hand
 		public function ballsInHand(hand: GameHand): Vector.<Ball> {
 			var ballsInHand: Vector.<Ball> = new Vector.<Ball>();
 

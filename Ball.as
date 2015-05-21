@@ -29,22 +29,12 @@
 			super(gameState);
 		}
 		
-		public override function setup(): void {
-			this.state = BallPosition.RIGHT_HAND;
-			
-			floor = gameState.game.stage.height;
-			
-			sprite.addChild(new Bitmap(gameState.game.resourceMap["images/ball.png"].bitmapData));
-			gameState.game.addChild(sprite);
-
-			sprite.addEventListener(Event.ENTER_FRAME, handleCollision);
-		}
-
 		public function updateCanCollide(e: Event): void {
 			canCollide = true;
 		}
 
 		public function handleCollision(e: Event): void {
+			// Check if player should lose lives
 			if (gameState.ballsInHand(gameState.player.leftHand).length > 1) {
 				gameState.player.decreaseLives();
 				gameState.resetBallPosition();
@@ -70,22 +60,32 @@
 			canCollide = false;
 			state = BallPosition.NONE;
 
-			var timer: Timer = new Timer(300, 1);
+			var timer: Timer = new Timer(200, 1);
 			timer.addEventListener("timer", updateCanCollide);
 			timer.start();
 
 			var force: int = (gameState.currentFrame - ballChargeBeginning);
+			
 			vx = 4 + (force * 0.5);
-
 			if (vx > 10) {
 				vx = 10;
 			}
 
 			vy = -(force * 4) - 15;
-
 			if (vy < -35) {
 				vy = -35;
 			}
+		}
+		
+		public override function setup(): void {
+			this.state = BallPosition.RIGHT_HAND;
+			
+			floor = gameState.game.stage.height;
+			
+			sprite.addChild(new Bitmap(gameState.game.resourceMap["images/ball.png"].bitmapData));
+			gameState.game.addChild(sprite);
+
+			sprite.addEventListener(Event.ENTER_FRAME, handleCollision);
 		}
 
 		public override function update(): void {

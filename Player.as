@@ -45,7 +45,7 @@
 			if (ballsInRightHand.length > 0 && canLaunch) {
 				var ballToLaunch: Ball = gameState.ballsInHand(this.rightHand)[0];
 
-				for each(var ball in gameState.ballsInHand(this.rightHand)[0]) {
+				for each(var ball in gameState.ballsInHand(this.rightHand)) {
 					if (ball.sprite.y < ballToLaunch.sprite.y) {
 						ballToLaunch = ball;
 					}
@@ -60,6 +60,7 @@
 				} else {
 					ballToLaunch.launch(gameState.ballChargeBeginning);
 				}
+				
 				gameState.launchSound.play(0, 1, gameState.volumeAdjust);
 			}
 		}
@@ -70,11 +71,13 @@
 		}
 
 		public override function setup(): void {
+			// Sprite
 			sprite.addChild(gameState.game.resourceMap["images/player.png"]);
 			sprite.x = 800 / 2 - 150;
 			sprite.y = 640 - 220;
 			this.gameState.game.addChild(sprite);
 
+			// Hands
 			this.leftHand = new GameHand(this.gameState, 440, 520, "images/left_hand.png", HandType.LEFT_HAND);
 			this.rightHand = new GameHand(this.gameState, 230, 520, "images/right_hand.png", HandType.RIGHT_HAND);
 
@@ -106,7 +109,7 @@
 				}
 			}
 
-			// Mouse Click / Leap Swipe
+			// Mouse Click / Leap Tap
 			if (gameState.game.mouse.down || gameState.game.leapMap[LeapPosition.RIGHT_TAP]) {
 				if (gameState.game.leapMap[Gesture.TYPE_KEY_TAP]) {
 					gameState.game.leapMap[Gesture.TYPE_KEY_TAP] = false;
@@ -116,10 +119,10 @@
 					var ballsInLeftHand: Vector.<Ball> = gameState.ballsInHand(leftHand);
 					
 					if (ballsInLeftHand.length > 0) {
-						trace("passou");
-						if(firstLaunch) {
+						if (firstLaunch) {
 							firstLaunch = false;
 						}
+						
 						ballsInLeftHand[0].canCollide = false;
 						ballsInLeftHand[0].vy = -10;
 						ballsInLeftHand[0].vx = -0.05 * (leftHand.sprite.x - rightHand.sprite.x);
@@ -132,7 +135,6 @@
 					}
 				}
 			}
-
 
 			// Space Bar Click
 			if (gameState.game.leapMode) {
