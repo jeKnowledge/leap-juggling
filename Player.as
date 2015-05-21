@@ -29,6 +29,7 @@
 		
 		// Aux Variables
 		private var canLaunch: Boolean = true;
+		public var firstLaunch: Boolean = true;
 
 		public function Player(gameState: GameState) {
 			super(gameState);
@@ -115,6 +116,10 @@
 					var ballsInLeftHand: Vector.<Ball> = gameState.ballsInHand(leftHand);
 					
 					if (ballsInLeftHand.length > 0) {
+						trace("passou");
+						if(firstLaunch) {
+							firstLaunch = false;
+						}
 						ballsInLeftHand[0].canCollide = false;
 						ballsInLeftHand[0].vy = -10;
 						ballsInLeftHand[0].vx = -0.05 * (leftHand.sprite.x - rightHand.sprite.x);
@@ -147,12 +152,6 @@
 						gameState.ballCharging = false;
 					}
 				}
-			}
-
-			// Check if should lose a live
-			if (gameState.ballsInHand(leftHand).length > 1) {
-				gameState.resetBallPosition();
-				decreaseLives();
 			}
 
 			textFields.updateCustomTextField("score", "Score: " + this.score.toString());

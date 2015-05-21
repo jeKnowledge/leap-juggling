@@ -45,6 +45,16 @@
 		}
 
 		public function handleCollision(e: Event): void {
+			if (gameState.ballsInHand(gameState.player.leftHand).length > 1) {
+				gameState.player.decreaseLives();
+				gameState.resetBallPosition();
+			}
+			
+			if (gameState.ballsInHand(gameState.player.rightHand).length > 1 && gameState.player.firstLaunch == false) {
+				gameState.player.decreaseLives();
+				gameState.resetBallPosition();
+			}
+			
 			if (sprite.hitTestObject(gameState.player.leftHand.sprite) && canCollide) {
 				touched = true;
 				state = BallPosition.LEFT_HAND;
@@ -59,8 +69,6 @@
 		public function launch(ballChargeBeginning: int): void {
 			canCollide = false;
 			state = BallPosition.NONE;
-			
-			trace(ballChargeBeginning);
 
 			var timer: Timer = new Timer(300, 1);
 			timer.addEventListener("timer", updateCanCollide);

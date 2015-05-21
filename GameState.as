@@ -43,6 +43,7 @@
 				ball.sprite.x = player.rightHand.sprite.x;
 				ball.sprite.y = player.rightHand.sprite.y - ballsInHand(player.rightHand).indexOf(ball) * (0.8 * ball.sprite.height);
 				ball.state = BallPosition.RIGHT_HAND;
+				player.firstLaunch = true;
 			}
 		}
 		
