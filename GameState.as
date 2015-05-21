@@ -14,18 +14,18 @@
 	import flash.media.SoundTransform;
 
 	public class GameState extends State {
-		
+
 		// Game Settings
 		private var NUM_BALLS: int;
 
 		// Player
 		public var player: Player;
-		
+
 		// Balls
 		public var ballChargeBeginning: int;
 		public var ballCharging: Boolean = false;
 		public var balls: Vector.<Ball>;
-		
+
 		// Aux Variables
 		public var currentFrame: int;
 
@@ -33,11 +33,11 @@
 		public var launchSound: Sound;
 		public var gameSound: Sound;
 		public var volumeAdjust: SoundTransform;
-		
+
 		public function GameState(game: Game) {
 			super(game);
 		}
-		
+
 		public function resetBallPosition(): void {
 			for each (var ball in balls) {
 				ball.sprite.x = player.rightHand.sprite.x;
@@ -46,21 +46,21 @@
 				player.firstLaunch = true;
 			}
 		}
-		
+
 		public function ballsInHand(hand: GameHand): Vector.<Ball> {
 			var ballsInHand: Vector.<Ball> = new Vector.<Ball>();
-			
+
 			for each (var ball in balls) {
 				if (ball.state == hand.state) {
 					ballsInHand.push(ball);
 				}
 			}
-			
+
 			return ballsInHand;
 		}
-		
+
 		override public function setup(): void { }
-				
+
 		override public function update(): void { }
 	}
 
