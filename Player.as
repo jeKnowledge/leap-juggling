@@ -51,7 +51,7 @@
 					}
 				}
 
-				if (gameState.game.leapMode) {
+				if (gameState.game.settings.leapMode) {
 					ballToLaunch.launch(10);
 					canLaunch = false;
 					var timer: Timer = new Timer(200, 1);
@@ -99,18 +99,18 @@
 
 		public override function update(): void {
 			// Mouse/Leap Track Left Hand
-			if (gameState.game.leapMode) {
+			if (gameState.game.settings.leapMode) {
 				if (gameState.game.leapMotion.hands.rightX + 420 <= 600 && gameState.game.leapMotion.hands.rightX + 420 >= 400) {
 					leftHand.sprite.x = gameState.game.leapMotion.hands.rightX + 420;
 				}
 			} else {
-				if (gameState.game.mouse.x <= 600 && gameState.game.mouse.x >= 400) {
+				if (gameState.game.stage.mouseX <= 600 && gameState.game.stage.mouseX >= 400) {
 					leftHand.sprite.x = gameState.game.stage.mouseX;
 				}
 			}
 
 			// Mouse Click / Leap Tap
-			if (gameState.game.mouse.down || gameState.game.leapMap[LeapPosition.RIGHT_TAP]) {
+			if (gameState.game.mouseDown || gameState.game.leapMap[LeapPosition.RIGHT_TAP]) {
 				if (gameState.game.leapMap[Gesture.TYPE_KEY_TAP]) {
 					gameState.game.leapMap[Gesture.TYPE_KEY_TAP] = false;
 				}
@@ -137,7 +137,7 @@
 			}
 
 			// Space Bar Click
-			if (gameState.game.leapMode) {
+			if (gameState.game.settings.leapMode) {
 				if (gameState.game.leapMap[LeapPosition.LEFT_TAP]) {
 					gameState.game.leapMap[LeapPosition.LEFT_TAP] = false;
 					launchBall();

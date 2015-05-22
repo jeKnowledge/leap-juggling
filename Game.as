@@ -12,20 +12,25 @@
 	import flash.ui.Keyboard;
 	import flash.events.MouseEvent;
 	import flash.media.Sound;
+    import flash.net.URLLoader;
+    import flash.net.URLRequest;
 
 	public class Game extends MovieClip {
 
+		// Current State
 		private var currentState: State;
 		
+		// Maps
 		public var resourceMap: Object;
 		public var keyMap: Object;
+		public var mouseDown: Boolean = false;
 		
 		// Leap Motion
 		public var leapMap: Object;
 		public var leapMotion: LeapListener;
-		public var leapMode: Boolean = false; // Change here to play with leap
 		
-		public var mouse: Object = { x: 0, y: 0, down: false };
+		// Settings
+		public var settings: Object = { leapMode: false, volume: 50, windowSize: 'size' };
 
 		public function Game() {
 			resourceMap = new Object();
@@ -34,6 +39,7 @@
 			leapMotion = new LeapListener(this);
 			leapMap = new Object();
 			
+			// Load Resources
 			var resourceURLs: Array = [ "images/player.png", "images/ball.png", "images/left_hand.png",
 										"images/right_hand.png", "images/heart.png" ];
 			
@@ -51,17 +57,22 @@
 				var req:URLRequest = new URLRequest(soundURL);
 				s.load(req);
 			}
+			
+			// Load Settings
+			loadSettings();
 
-			currentState = new MenuState(this);
-			currentState.setup();
-
+			// Events
 			addEventListener(Event.ENTER_FRAME, enterFrameHandler);
+			
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, reportKeyDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, reportKeyUp);
 			
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, reportMouseDown);
 			stage.addEventListener(MouseEvent.MOUSE_UP, reportMouseUp);
-			stage.addEventListener(MouseEvent.MOUSE_MOVE, reportMouseMove);
+			
+			// Start game on the menu
+			currentState = new MenuState(this);
+			currentState.setup();
 		}
 
 		private function onLoadComplete(e: Event): void {
@@ -94,16 +105,11 @@
 		}
 		
 		public function reportMouseDown(event: MouseEvent): void {
-			mouse.down = true;
+			mouseDown = true;
 		}
 
 		public function reportMouseUp(event: MouseEvent): void {
-			mouse.down = false;
-		}
-		
-		public function reportMouseMove(event: MouseEvent): void {
-			mouse.x = event.stageX;
-			mouse.y = event.stageY;
+			mouseDown = false;
 		}
 		
 		protected function enterFrameHandler(event: Event): void {
@@ -123,7 +129,27 @@
 			newState.setup();
 			currentState = newState;
 		}
+		
+		public function loadSettings(): void {
+			var loader: URLLoader = new URLLoader();
+			loader.addEventListener(Event.COMPLETE, onLoaded);
 
+			function onLoaded(e:Event):void {
+				var array: Array = e.target.data.split(/\n/);
+				
+				for (var i: int = 0; i < array.length; i++) {
+					if (i == 0) {
+						settings.leapMode = array[i] as Boolean;
+					} else if (i == 1) {
+						settings.volume = Number(array[i]);
+					} else if (i == 2) {
+						settings.windowSize = array[i];
+					}
+				}
+			}
+			
+			loader.load(new URLRequest("settings.txt"));
+		}
 	}
 
 }

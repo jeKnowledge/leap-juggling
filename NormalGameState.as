@@ -40,7 +40,7 @@
 			gameSound = game.resourceMap["sounds/circus.mp3"];
 			
 			volumeAdjust = new SoundTransform();
-			volumeAdjust.volume = 0; // FIX: have volume in final version
+			volumeAdjust.volume = game.settings.volume;
 			
 			gameSound.play(0, 1, volumeAdjust);	
 		}
