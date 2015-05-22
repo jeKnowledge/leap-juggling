@@ -130,6 +130,14 @@
 			currentState = newState;
 		}
 		
+		private function stringToBoolean(string: String): Boolean {
+			if (string == "true") {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
 		public function loadSettings(): void {
 			var loader: URLLoader = new URLLoader();
 			loader.addEventListener(Event.COMPLETE, onLoaded);
@@ -139,7 +147,7 @@
 				
 				for (var i: int = 0; i < array.length; i++) {
 					if (i == 0) {
-						settings.leapMode = array[i] as Boolean;
+						settings.leapMode = stringToBoolean(array[i]);
 					} else if (i == 1) {
 						settings.volume = Number(array[i]);
 					} else if (i == 2) {
