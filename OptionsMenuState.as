@@ -13,7 +13,7 @@
 		override public function setup(): void {
 			this.textFields = new CustomTextFields(this.game);
 			
-			textFields.createCustomTextField("menu", "[ESC] Go back to the menu.", 200, 200);
+			textFields.createCustomTextField("menu", "[ESC] Go back to the menu.\n[U] Volume Up.\n[D] Volume Down", 200, 200);
 		}
 		
 		override public function update(): void {
