@@ -30,7 +30,7 @@
 		public var leapMotion: LeapListener;
 		
 		// Settings
-		public var settings: Object = { leapMode: false, volume: 50, windowSize: 'size' };
+		public var settings: Object = { leapMode: false, volume: 1, windowSize: 'size' };
 
 		public function Game() {
 			resourceMap = new Object();
