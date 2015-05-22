@@ -88,14 +88,15 @@
 				var gesture: Gesture = gestures[i];
 				var auxHands: Vector.<Hand> = gesture.hands;
 				
+				var j: int;
 				if (gesture.type == Gesture.TYPE_KEY_TAP) {
-					for (var j: int = 0; j < auxHands.length; j++) {
+					for (j = 0; j < auxHands.length; j++) {
 						if (auxHands[j].isRight) {
 							game.leapMap[LeapPosition.RIGHT_TAP] = true;
 						}
 					}
 				} else if (gesture.type == Gesture.TYPE_SWIPE) {
-					for (var j: int = 0; j < auxHands.length; j++) {
+					for (j = 0; j < auxHands.length; j++) {
 						if (auxHands[j].isLeft) {
 							game.leapMap[LeapPosition.SWIPE_UP] = true;
 						}
