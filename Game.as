@@ -9,11 +9,15 @@
 	import flash.display.LoaderInfo;
 	import flash.text.*;
 	import flash.events.KeyboardEvent;
+	import flash.events.IOErrorEvent;
 	import flash.ui.Keyboard;
 	import flash.events.MouseEvent;
 	import flash.media.Sound;
     import flash.net.URLLoader;
     import flash.net.URLRequest;
+	import flash.filesystem.File;
+	import flash.filesystem.FileMode;
+	import flash.filesystem.FileStream;
 
 	public class Game extends MovieClip {
 
@@ -138,22 +142,40 @@
 			}
 		}
 		
-		public function loadSettings(): void {
-			var loader: URLLoader = new URLLoader();
-			loader.addEventListener(Event.COMPLETE, onLoaded);
-
-			function onLoaded(e:Event):void {
-				var array: Array = e.target.data.split(/\n/);
-				
-				for (var i: int = 0; i < array.length; i++) {
-					if (i == 0) {
-						settings.leapMode = stringToBoolean(array[i]);
-					} else if (i == 1) {
-						settings.volume = Number(array[i]);
-					} else if (i == 2) {
-						settings.windowSize = array[i];
-					}
+		public function loadSettingsFromTextFileAsArray(array: Array) {
+			for (var i: int = 0; i < array.length; i++) {
+				if (i == 0) {
+					settings.leapMode = stringToBoolean(array[i]);
+				} else if (i == 1) {
+					settings.volume = Number(array[i]);
+				} else if (i == 2) {
+					settings.windowSize = array[i];
 				}
+			}
+		}
+		
+		public function loadSettings(): void {
+			var loader: Loader = new Loader();
+			loader.addEventListener(Event.COMPLETE, onLoaded);
+			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, onLoadError);
+
+			/* Called when the settings file fails to load (does not exist) */
+			function onLoadError(e: Event): void {
+				var pathToFile: String = File.applicationDirectory.resolvePath("settings.txt").nativePath;
+				var file: File = new File(pathToFile);
+
+
+				var stream:FileStream = new FileStream();
+				stream.open(file, FileMode.WRITE);
+				stream.writeUTFBytes("false\n0.5\nwindowSize\n");
+				stream.close();
+				
+				loadSettingsFromTextFileAsArray(["false", "0.5", "windowSize"]);
+			}
+			
+			function onLoaded(e: Event):void {
+				var array: Array = e.target.data.split(/\n/);
+				loadSettingsFromTextFileAsArray(array);
 			}
 			
 			loader.load(new URLRequest("settings.txt"));
