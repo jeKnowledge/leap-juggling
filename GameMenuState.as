@@ -20,7 +20,11 @@
 		
 		override public function update(): void {
 			if (game.keyMap[Keyboard.NUMBER_1]) {
-				this.game.changeState(new TutorialGameState(this.game));
+				if (game.settings.leapMode) {
+					this.game.changeState(new TutorialLeapGameState(this.game));
+				} else {
+					this.game.changeState(new TutorialGameState(this.game));
+				}
 			} else if (game.keyMap[Keyboard.NUMBER_2]) {
 				this.game.changeState(new EndlessGameState(this.game));
 			} else if (game.keyMap[Keyboard.NUMBER_3]) {

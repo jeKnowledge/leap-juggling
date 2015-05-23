@@ -101,6 +101,12 @@
 							game.leapMap[LeapPosition.SWIPE_UP] = true;
 						}
 					}
+				} else if (gesture.type == Gesture.TYPE_SCREEN_TAP) {
+					for (j = 0; j < auxHands.length; j++) {
+						if (auxHands[j].isRight) {
+							game.leapMap[LeapPosition.SCREEN_TAP] = true;
+						}
+					}
 				}
 			}
 		}
