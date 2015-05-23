@@ -16,7 +16,7 @@
 	public class GameState extends State {
 
 		// Game Settings
-		private var NUM_BALLS: int;
+		protected var NUM_BALLS: int;
 
 		// Player
 		public var player: Player;
@@ -33,6 +33,7 @@
 		public var launchSound: Sound;
 		public var gameSound: Sound;
 		public var volumeAdjust: SoundTransform;
+		public var transitionSound: Sound;
 
 		public function GameState(game: Game) {
 			super(game);
@@ -61,7 +62,29 @@
 			return ballsInHand;
 		}
 
-		override public function setup(): void { }
+		override public function setup(): void {
+			// Player
+			player = new Player(this);
+			player.setup();
+			
+			// Ball Sprites
+			balls = new Vector.<Ball>();
+			for (var i: int = 0; i < NUM_BALLS; i++) {
+				var newBall: Ball = new Ball(this);
+				newBall.setup();
+				balls.push(newBall);
+			}
+
+			// Sounds
+			launchSound = game.resourceMap["sounds/launch.mp3"];
+			gameSound = game.resourceMap["sounds/circus.mp3"];
+			transitionSound = game.resourceMap["sounds/transition.mp3"];
+			
+			volumeAdjust = new SoundTransform();
+			volumeAdjust.volume = game.settings.volume;
+			
+			gameSound.play(0, 1, volumeAdjust);
+		}
 
 		override public function update(): void { }
 	}

@@ -132,6 +132,8 @@
 						timer.addEventListener("timer", ballsInLeftHand[0].updateCanCollide);
 						timer.start();
 						score++;
+						
+						gameState.transitionSound.play();
 					}
 				}
 			}
