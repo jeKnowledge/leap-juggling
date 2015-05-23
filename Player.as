@@ -139,7 +139,6 @@
 			}
 
 			// Space Bar Click
-
 			if (gameState.game.settings.leapMode) {
 				if (gameState.game.leapMap[LeapPosition.SWIPE_UP]) {
 					launchBall();

@@ -29,11 +29,11 @@
 		public override function update(): void {
 			currentFrame ++;
 			
-			// Restart and escape keys
 			if (game.keyMap[Keyboard.R]) {
-				game.changeState(new GameState(game));
+				game.highScoreSender.sendScore("manel", 12);
 			}
 			
+			// Escape key
 			if (game.keyMap[Keyboard.ESCAPE]) {
 				game.changeState(new MenuState(game));
 			}

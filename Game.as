@@ -43,8 +43,11 @@
 		// Settings
 		public var settings: Object = { leapMode: false, volume: 1, windowSize: 'size' };
 		
-		// BackGround Image
-		var backgroundImage: Sprite;
+		// Background Image
+		public var backgroundImage: Sprite;
+		
+		// Server
+		public var highScoreSender: HighScoreSender;
 
 		public function Game() {
 			resourceMap = new Object();
@@ -64,6 +67,9 @@
 			
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, reportMouseDown);
 			stage.addEventListener(MouseEvent.MOUSE_UP, reportMouseUp);
+			
+			// Server
+			highScoreSender = new HighScoreSender("http://malabarismo.herokuapp.com/new-score");
 			
 			// Start game on the menu
 			currentState = new LoadingState(this);
