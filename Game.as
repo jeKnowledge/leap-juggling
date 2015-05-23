@@ -35,6 +35,9 @@
 		
 		// Settings
 		public var settings: Object = { leapMode: false, volume: 1, windowSize: 'size' };
+		
+		// BackGround Image
+		var backgroundImage: Sprite;
 
 		public function Game() {
 			resourceMap = new Object();
@@ -45,7 +48,7 @@
 			
 			// Load Resources
 			var resourceURLs: Array = [ "images/player.png", "images/ball.png", "images/left_hand.png",
-										"images/right_hand.png", "images/heart.png" ];
+										"images/right_hand.png", "images/heart.png", "images/background_image.png" ];
 			
 			for each (var resourceURL in resourceURLs) {
 				var loader: Loader = new Loader();
@@ -63,7 +66,12 @@
 			}
 			
 			// Load Settings
-			loadSettings();
+			//loadSettings();
+			
+			// Background Image
+			backgroundImage = new Sprite();
+			backgroundImage.addChild(this.resourceMap["images/background_image.png"]);
+			addChild(backgroundImage);
 
 			// Events
 			addEventListener(Event.ENTER_FRAME, enterFrameHandler);
