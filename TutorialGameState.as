@@ -46,7 +46,6 @@
 				}
 			} else if (currentLevel == 2) {
 				this.textFields.updateCustomTextField("tutorial_text", "Good Job now lets scale it up a bit!\n\t\t\t2 balls now!");
-				NUM_BALLS = 2;
 				this.addBalls(1);
 				this.resetBallPosition();
 				currentLevel++;

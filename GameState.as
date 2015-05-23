@@ -63,6 +63,7 @@
 		}
 		
 		public function addBalls(numberOfBalls: int): void {
+			NUM_BALLS += numberOfBalls; 
 			for (var i: int = 0; i < numberOfBalls; i++) {
 				var newBall: Ball = new Ball(this);
 				newBall.setup();
