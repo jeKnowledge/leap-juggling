@@ -20,11 +20,14 @@
 			
 			var text: String = "Game Over\nYou got " + this.score.toString() + " points.\nPress [ENTER] to play again\nPress [ESC] to go back to menu";
 			textFields.createCustomTextField("menu", text, 200, 200);
+			
+			// Send score to server
+			game.highScoreSender.sendScore("user", this.score);
 		}
 		
 		override public function update(): void {
 			if (game.keyMap[Keyboard.ENTER]) {
-				this.game.changeState(this.lastState); // Fix this to go back to the previous GameMode
+				this.game.changeState(this.lastState);
 			} else if (game.keyMap[Keyboard.ESCAPE]) {
 				this.game.changeState(new MenuState(this.game));	
 			}

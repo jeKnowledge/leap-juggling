@@ -63,9 +63,8 @@
 			} else if (currentLevel == 5) {
 				if (game.keyMap[Keyboard.ENTER]) {
 					game.keyMap[Keyboard.ENTER] = false;
-					game.changeState(new MenuState(game));
+					game.changeState(new GameMenuState(game));
 				}
-				
 			}
 			
 			// Escape key

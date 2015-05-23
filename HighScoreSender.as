@@ -24,7 +24,7 @@
 			request.data = variables;
  
 			loader.addEventListener(Event.COMPLETE, onComplete);
-			loader.dataFormat = URLLoaderDataFormat.VARIABLES;e
+			loader.dataFormat = URLLoaderDataFormat.VARIABLES;
 			loader.load(request);
 		}
 		
