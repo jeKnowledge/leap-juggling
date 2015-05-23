@@ -3,11 +3,22 @@
 	import flash.text.*;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
+	import flash.display.Sprite;
 	
 	public class MenuState extends State {
 		
 		public function MenuState(game: Game) {
 			super(game);
+			
+			/*
+				This is the first function called after the LoadingState. Global resources
+				should be loaded here.
+			*/
+
+			// Background Image
+			game.backgroundImage = new Sprite();
+			game.backgroundImage.addChild(game.resourceMap["images/background_image.png"]);
+			game.addChild(game.backgroundImage);
 		}
 		
 		override public function setup(): void {

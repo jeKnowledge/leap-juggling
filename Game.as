@@ -55,11 +55,6 @@
 			// Load Settings
 			//loadSettings();
 			
-			// Background Image
-			backgroundImage = new Sprite();
-			//backgroundImage.addChild(this.resourceMap["images/background_image.png"]);
-			//addChild(backgroundImage);
-
 			// Events
 			addEventListener(Event.ENTER_FRAME, enterFrameHandler);
 			
