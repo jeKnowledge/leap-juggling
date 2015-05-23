@@ -34,13 +34,13 @@
 			
 			if (currentLevel == 0) {
 				this.textFields.updateCustomTextField("tutorial_text", "Make the Tap Movement with the Left Hand key to send the ball flying !");
-				//Image missing
+				// FIX: Image missing
 				if (this.ballsInHand(player.leftHand).length == 1) {
 					currentLevel++;
 				}
 			} else if (currentLevel == 1) {
 				this.textFields.updateCustomTextField("tutorial_text", "Make Tap Movement with right Hand to pass \n\tthe ball to your right hand!");
-				//Image Missing
+				// FIX: Image Missing
 				if (this.ballsInHand(player.rightHand).length == 1) {
 					currentLevel++;
 				}
@@ -63,9 +63,8 @@
 			} else if (currentLevel == 5) {
 				if (game.leapMap[LeapPosition.SCREEN_TAP]) {
 					game.leapMap[LeapPosition.SCREEN_TAP] = false;
-					game.changeState(new MenuState(game));
+					game.changeState(new GameMenuState(game));
 				}
-				
 			}
 			
 			// Aux key
