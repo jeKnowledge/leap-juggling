@@ -34,31 +34,34 @@
 			
 			if (currentLevel == 0) {
 				this.textFields.updateCustomTextField("tutorial_text", "Make the Tap Movement with the Left Hand key to send the ball flying !");
+				
 				// FIX: Image missing
-				if (this.ballsInHand(player.leftHand).length == 1) {
-					currentLevel++;
-				}
+				
+				if (this.ballsInHand(player.leftHand).length == 1) { currentLevel++; }
 			} else if (currentLevel == 1) {
 				this.textFields.updateCustomTextField("tutorial_text", "Make Tap Movement with right Hand to pass \n\tthe ball to your right hand!");
+				
 				// FIX: Image Missing
-				if (this.ballsInHand(player.rightHand).length == 1) {
-					currentLevel++;
-				}
+				
+				if (this.ballsInHand(player.rightHand).length == 1) { currentLevel++;}
 			} else if (currentLevel == 2) {
 				this.textFields.updateCustomTextField("tutorial_text", "Good Job now lets scale it up a bit!\n\t\t\t2 balls now!\n Do a screen Tap to continue!");
-				NUM_BALLS = 2;
+				
 				this.addBalls(1);
 				this.resetBallPosition();
+				
 				currentLevel++;
 			} else if (currentLevel == 3) {
 				if(game.leapMap[LeapPosition.SCREEN_TAP]) {
-					currentLevel++;
 					game.leapMap[LeapPosition.SCREEN_TAP] = false;
+					currentLevel++;
 				}
 			} else if (currentLevel == 4) {
 				this.textFields.updateCustomTextField("tutorial_text", "Now try it with three balls and continue when \n\tyou feel ready for the real challenge!\n Do a screen Tap to continue!");
+				
 				this.addBalls(1);
 				this.resetBallPosition();
+				
 				currentLevel++;
 			} else if (currentLevel == 5) {
 				if (game.leapMap[LeapPosition.SCREEN_TAP]) {

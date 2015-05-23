@@ -13,11 +13,11 @@
 	import flash.media.Sound;
 	import flash.media.SoundTransform;
 	
-	public class TutorialGameState extends GameState {
+	public class TutorialMouseGameState extends GameState {
 		
 		private var currentLevel: Number = 0;
 		
-		public function TutorialGameState(game: Game) {
+		public function TutorialMouseGameState(game: Game) {
 			super(game);
 
 			// Game Settings
@@ -36,29 +36,30 @@
 			
 			if (currentLevel == 0) {
 				this.textFields.updateCustomTextField("tutorial_text", "Press Space key to send the ball flying !");
-				if (this.ballsInHand(player.leftHand).length == 1) {
-					currentLevel++;
-				}
+				
+				if (this.ballsInHand(player.leftHand).length == 1) { currentLevel++; }
 			} else if (currentLevel == 1) {
 				this.textFields.updateCustomTextField("tutorial_text", "Click the left mouse button to pass \n\tthe ball to your right hand");
-				if (this.ballsInHand(player.rightHand).length == 1) {
-					currentLevel++;
-				}
+				
+				if (this.ballsInHand(player.rightHand).length == 1) { currentLevel++; }
 			} else if (currentLevel == 2) {
 				this.textFields.updateCustomTextField("tutorial_text", "Good Job now lets scale it up a bit!\n\t\t\t2 balls now!");
-				NUM_BALLS = 2;
+				
 				this.addBalls(1);
 				this.resetBallPosition();
+				
 				currentLevel++;
 			} else if (currentLevel == 3) {
 				if(game.keyMap[Keyboard.ENTER]) {
-					currentLevel++;
 					game.keyMap[Keyboard.ENTER] = false;
+					currentLevel++;
 				}
 			} else if (currentLevel == 4) {
 				this.textFields.updateCustomTextField("tutorial_text", "Now try it with three balls and continue when \n\tyou feel ready for the real challenge!");
+				
 				this.addBalls(1);
 				this.resetBallPosition();
+				
 				currentLevel++;
 			} else if (currentLevel == 5) {
 				if (game.keyMap[Keyboard.ENTER]) {
