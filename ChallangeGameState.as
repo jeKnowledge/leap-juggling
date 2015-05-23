@@ -17,11 +17,12 @@
 	public class ChallangeGameState extends GameState {
 		
 		// Random Gravitites
-		private var randomGravities: Array = [0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95];
+		private static var randomGravities: Array = [0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95];
 
 		public function ChallangeGameState(game: Game) {
 			super(game);
 			
+			// Game Settings
 			NUM_BALLS = 5;
 		}
 		

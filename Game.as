@@ -54,7 +54,7 @@
 			leapMap = new Object();
 			
 			// Load Settings
-			//loadSettings();
+			loadSettings();
 			
 			// Events
 			addEventListener(Event.ENTER_FRAME, enterFrameHandler);
@@ -125,17 +125,16 @@
 		}
 		
 		public function loadSettings(): void {
-			var loader: Loader = new Loader();
+			var loader: URLLoader = new URLLoader();
 			loader.addEventListener(Event.COMPLETE, onLoaded);
-			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, onLoadError);
+			loader.addEventListener(IOErrorEvent.IO_ERROR, onLoadError);
 
 			/* Called when the settings file fails to load (does not exist) */
 			function onLoadError(e: Event): void {
 				var pathToFile: String = File.applicationDirectory.resolvePath("settings.txt").nativePath;
 				var file: File = new File(pathToFile);
 
-
-				var stream:FileStream = new FileStream();
+				var stream: FileStream = new FileStream();
 				stream.open(file, FileMode.WRITE);
 				stream.writeUTFBytes("false\n0.5\nwindowSize\n");
 				stream.close();
@@ -143,7 +142,7 @@
 				loadSettingsFromTextFileAsArray(["false", "0.5", "windowSize"]);
 			}
 			
-			function onLoaded(e: Event):void {
+			function onLoaded(e: Event): void {
 				var array: Array = e.target.data.split(/\n/);
 				loadSettingsFromTextFileAsArray(array);
 			}
