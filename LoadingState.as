@@ -20,8 +20,17 @@
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
 	import flash.utils.Timer;
+	import flash.display.Shape;
+	import flash.utils.getTimer;
 	
 	public class LoadingState extends State {
+		
+		private var loadingRectangle: Shape;
+		private var loadingSeconds: int = 2000; // 2 seconds
+		private var loadingWidth: int;
+		
+		private var startState: Number;
+		private var myTimer: Timer;
 
 		public function LoadingState(game: Game) {
 			super(game);
@@ -40,9 +49,10 @@
 			}
 			
 			// AS3
-			var myTimer:Timer = new Timer(2000, 1); // 2 seconds
+			myTimer = new Timer(loadingSeconds, 1);
 			myTimer.addEventListener(TimerEvent.TIMER, loadingOver);
 			myTimer.start();
+			startState = getTimer();
 		}
 		
 		function loadingOver(event: TimerEvent):void {
@@ -62,16 +72,34 @@
 
 			trace("New object called " + resourceName + " has been added to resourceMap.");
 		}
-		
+
 		private function onSoundLoaded(e: Event): void {
 			var resourceName: String = e.target.url.slice(5);
 			game.resourceMap[resourceName] = e.target as Sound;
-						
+
 			trace("New sound called " + resourceName + " has been added to resourceMap.");
+		}
+
+		public override function setup(): void {
+			loadingWidth = 500;
+
+			var loadingRectangleBorder: Shape = game.getRectangleBorder(150, 250, loadingWidth, 30, 8);
+			game.addChild(loadingRectangleBorder);
+			
+			loadingRectangle = new Shape;
+			loadingRectangle.graphics.beginFill(0xF00);
+			loadingRectangle.graphics.drawRect(150, 250, 0, 30);
+			loadingRectangle.graphics.endFill();
+			game.addChild(loadingRectangle);
+			
 		}
 		
 		public override function update(): void {
+			trace(getTimer() / loadingSeconds * 500);
 			
+			loadingRectangle.graphics.beginFill(0xF00);
+			loadingRectangle.graphics.drawRect(150, 250, (getTimer() - startState) / loadingSeconds * 500, 30);
+			loadingRectangle.graphics.endFill();
 		}
 
 	}
