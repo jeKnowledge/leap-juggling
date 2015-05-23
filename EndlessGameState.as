@@ -18,6 +18,7 @@
 		public function EndlessGameState(game: Game) {
 			super(game);
 			
+			// Game Settings
 			NUM_BALLS = 4;
 		}
 
