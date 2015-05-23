@@ -15,16 +15,12 @@
 			var loader: URLLoader = new URLLoader();
 			var request: URLRequest = new URLRequest();
 
-			var variables : URLVariables = new URLVariables();  
-			variables.user = user;  
-			variables.score = score;
+			var data: String = "?score=" + score.toString() + "&name=" + user;
 			
-			request.url = this.url;
+			request.url = this.url + data;
 			request.method = URLRequestMethod.POST;
-			request.data = variables;
  
 			loader.addEventListener(Event.COMPLETE, onComplete);
-			loader.dataFormat = URLLoaderDataFormat.VARIABLES;
 			loader.load(request);
 		}
 		
