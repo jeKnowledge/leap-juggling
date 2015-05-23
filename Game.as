@@ -18,6 +18,7 @@
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
+	import flash.display.Shape;
 
 	public class Game extends MovieClip {
 
@@ -147,6 +148,29 @@
 			}
 			
 			loader.load(new URLRequest("settings.txt"));
+		}
+		
+		public function saveSettings(): void {
+			var pathToFile: String = File.applicationDirectory.resolvePath("settings.txt").nativePath;
+			var file: File = new File(pathToFile);
+
+			var stream: FileStream = new FileStream();
+			stream.open(file, FileMode.WRITE);
+			stream.writeUTFBytes(settings.leapMode.toString() + "\n" +
+								 settings.volume.toString() + "\n" + 
+								 settings.windowSize + "\n");
+			stream.close();
+		}
+		
+		public function getRectangleBorder(x: int, y: int, width: int, height: int, thickness: int): Shape {
+			var rectBorder: Shape = new Shape;
+			rectBorder.graphics.lineStyle(thickness, 0x000, 1);
+			rectBorder.graphics.moveTo(x, y); 
+			rectBorder.graphics.lineTo(x + width, y);
+			rectBorder.graphics.lineTo(x + width, y + height);
+			rectBorder.graphics.lineTo(x, y + height);
+			rectBorder.graphics.lineTo(x, y);
+			return rectBorder;
 		}
 	}
 
