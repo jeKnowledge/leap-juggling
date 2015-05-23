@@ -53,7 +53,7 @@
 				loader.load(new URLRequest(resourceURL));
 			}
 
-			var soundURLs: Array = [ "sounds/launch.mp3", "sounds/circus.mp3" ];
+			var soundURLs: Array = [ "sounds/launch.mp3", "sounds/circus.mp3", "sounds/transition.mp3" ];
 
 			for each (var soundURL in soundURLs) {
 				var s: Sound = new Sound();

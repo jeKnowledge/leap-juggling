@@ -16,41 +16,21 @@
 	
 	public class ChallangeGameState extends GameState {
 		
-		// Game Settings
-		private var NUM_BALLS: int = 5;
-		
 		// Random Gravitites
 		private var randomGravities: Array = [0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95];
-		
+
 		public function ChallangeGameState(game: Game) {
 			super(game);
+			
+			NUM_BALLS = 5;
 		}
 		
 		public override function setup(): void {
-			// Player
-			player = new Player(this);
-			player.setup();
-			
-			// Ball Sprites
-			balls = new Vector.<Ball>();
-			for (var i: int = 0; i < NUM_BALLS; i++) {
-				var newBall: Ball = new Ball(this);
-				newBall.setup();
-				balls.push(newBall);
-			}
-			
-			// Sounds
-			launchSound = game.resourceMap["sounds/launch.mp3"];
-			gameSound = game.resourceMap["sounds/circus.mp3"];
-			
-			volumeAdjust = new SoundTransform();
-			volumeAdjust.volume = game.settings.volume;
-			
-			gameSound.play(0, 1, volumeAdjust);			
+			super.setup();
 		}
 		
 		public override function update(): void {
-currentFrame ++;
+			currentFrame ++;
 			
 			// Restart and escape keys
 			if (game.keyMap[Keyboard.R]) {
@@ -68,6 +48,7 @@ currentFrame ++;
 			for each (var ball in balls) {
 			    var randomValue: int = int(randomGravities.length * Math.random());
 				ball.GRAVITY = randomGravities[randomValue];
+				
 				ball.update();
 			}
 			
