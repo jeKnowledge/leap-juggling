@@ -24,7 +24,9 @@
 		override public function setup(): void {
 			this.textFields = new CustomTextFields(this.game);
 			
-			textFields.createCustomTextField("menu", "[1] Play \n[2] Options\n[3] Credits", 200, 200);
+			textFields.createCustomTextField("menu-play", "[1] Play", 200, 200);
+			textFields.createCustomTextField("menu-options", "[2] Options", 200, 300);
+			textFields.createCustomTextField("menu-credits", "[3] Credits", 200, 400);
 		}
 		
 		override public function update(): void {
