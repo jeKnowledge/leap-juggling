@@ -24,6 +24,12 @@
 		// Current State
 		private var currentState: State;
 		
+		// Resources
+		public var resourceURLs: Array = [ "images/player.png", "images/ball.png", "images/left_hand.png",
+										   "images/right_hand.png", "images/heart.png", "images/background_image.png" ];
+		
+		public var soundURLs: Array = [ "sounds/launch.mp3", "sounds/circus.mp3", "sounds/transition.mp3" ];
+
 		// Maps
 		public var resourceMap: Object;
 		public var keyMap: Object;
@@ -46,32 +52,13 @@
 			leapMotion = new LeapListener(this);
 			leapMap = new Object();
 			
-			// Load Resources
-			var resourceURLs: Array = [ "images/player.png", "images/ball.png", "images/left_hand.png",
-										"images/right_hand.png", "images/heart.png", "images/background_image.png" ];
-			
-			for each (var resourceURL in resourceURLs) {
-				var loader: Loader = new Loader();
-				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoadComplete);
-				loader.load(new URLRequest(resourceURL));
-			}
-
-			var soundURLs: Array = [ "sounds/launch.mp3", "sounds/circus.mp3", "sounds/transition.mp3" ];
-
-			for each (var soundURL in soundURLs) {
-				var s: Sound = new Sound();
-				s.addEventListener(Event.COMPLETE, onSoundLoaded);
-				var req:URLRequest = new URLRequest(soundURL);
-				s.load(req);
-			}
-			
 			// Load Settings
 			//loadSettings();
 			
 			// Background Image
 			backgroundImage = new Sprite();
-			backgroundImage.addChild(this.resourceMap["images/background_image.png"]);
-			addChild(backgroundImage);
+			//backgroundImage.addChild(this.resourceMap["images/background_image.png"]);
+			//addChild(backgroundImage);
 
 			// Events
 			addEventListener(Event.ENTER_FRAME, enterFrameHandler);
@@ -83,29 +70,8 @@
 			stage.addEventListener(MouseEvent.MOUSE_UP, reportMouseUp);
 			
 			// Start game on the menu
-			currentState = new MenuState(this);
+			currentState = new LoadingState(this);
 			currentState.setup();
-		}
-
-		private function onLoadComplete(e: Event): void {
-			var loaderInfo: LoaderInfo = e.target as LoaderInfo;
-			
-			var resourceName: String = loaderInfo.url.slice(5);
-			var resourceExtension: String = resourceName.substring(resourceName.lastIndexOf(".") + 1, resourceName.length);
-						
-			if (resourceExtension == "png") {
-				var loadedBitmap: Bitmap = loaderInfo.content as Bitmap;
-				resourceMap[resourceName] = loadedBitmap;
-			}
-
-			trace("New object called " + resourceName + " has been added to resourceMap.");
-		}
-		
-		private function onSoundLoaded(e: Event): void {
-			var resourceName: String = e.target.url.slice(5);
-			resourceMap[resourceName] = e.target as Sound;
-						
-			trace("New sound called " + resourceName + " has been added to resourceMap.");
 		}
 		
 		public function reportKeyDown(event: KeyboardEvent): void {
