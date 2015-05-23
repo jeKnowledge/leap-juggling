@@ -22,7 +22,7 @@
 			if (game.keyMap[Keyboard.NUMBER_1]) {
 				this.game.changeState(new TutorialGameState(this.game));
 			} else if (game.keyMap[Keyboard.NUMBER_2]) {
-				this.game.changeState(new NormalGameState(this.game));
+				this.game.changeState(new EndlessGameState(this.game));
 			} else if (game.keyMap[Keyboard.NUMBER_3]) {
 				this.game.changeState(new ChallangeGameState(this.game));
 			}

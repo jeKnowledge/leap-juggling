@@ -94,7 +94,7 @@
 
 			// Text Fields
 			this.textFields = new CustomTextFields(this.gameState.game);
-			textFields.createCustomTextField("score", "Score: " + this.score.toString(), 700, 20, 20);
+			textFields.createCustomTextField("score", "Score: " + this.score.toString(), 660, 20, 20);
 		}
 
 		public override function update(): void {

@@ -13,12 +13,12 @@
 	import flash.media.Sound;
 	import flash.media.SoundTransform;
 	
-	public class NormalGameState extends GameState {
+	public class EndlessGameState extends GameState {
 		
 		// Game Settings
-		private var NUM_BALLS: int = 3;
+		private var NUM_BALLS: int = 4;
 		
-		public function NormalGameState(game: Game) {
+		public function EndlessGameState(game: Game) {
 			super(game);
 		}
 		
@@ -26,7 +26,7 @@
 			// Player
 			player = new Player(this);
 			player.setup();
-
+			
 			// Ball Sprites
 			balls = new Vector.<Ball>();
 			for (var i: int = 0; i < NUM_BALLS; i++) {
@@ -34,7 +34,7 @@
 				newBall.setup();
 				balls.push(newBall);
 			}
-
+			
 			// Sounds
 			launchSound = game.resourceMap["sounds/launch.mp3"];
 			gameSound = game.resourceMap["sounds/circus.mp3"];
@@ -42,7 +42,7 @@
 			volumeAdjust = new SoundTransform();
 			volumeAdjust.volume = game.settings.volume;
 			
-			gameSound.play(0, 1, volumeAdjust);	
+			gameSound.play(0, 1, volumeAdjust);			
 		}
 		
 		public override function update(): void {

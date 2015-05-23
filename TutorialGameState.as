@@ -23,8 +23,26 @@
 		}
 		
 		public override function setup(): void {
+			// Player
 			player = new Player(this);
 			player.setup();
+			
+			// Ball Sprites
+			balls = new Vector.<Ball>();
+			for (var i: int = 0; i < NUM_BALLS; i++) {
+				var newBall: Ball = new Ball(this);
+				newBall.setup();
+				balls.push(newBall);
+			}
+			
+			// Sounds
+			launchSound = game.resourceMap["sounds/launch.mp3"];
+			gameSound = game.resourceMap["sounds/circus.mp3"];
+			
+			volumeAdjust = new SoundTransform();
+			volumeAdjust.volume = game.settings.volume;
+			
+			gameSound.play(0, 1, volumeAdjust);			
 		}
 		
 		public override function update(): void {
@@ -41,6 +59,16 @@
 			
 			// Update Player
 			player.update();
+			
+			// Update Balls
+			for each (var ball in balls) {
+				ball.update();
+			}
+			
+			// Check if the player lost
+			if (player.lives.length == 0) {
+				game.changeState(new GameOverState(game, player.score, this));
+			}
 		}
 
 	}
