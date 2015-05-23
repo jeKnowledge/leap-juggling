@@ -12,11 +12,15 @@
 	import flash.events.TimerEvent;
 	import flash.media.Sound;
 	import flash.media.SoundTransform;	
+	import Math;
 	
 	public class ChallangeGameState extends GameState {
 		
 		// Game Settings
 		private var NUM_BALLS: int = 5;
+		
+		// Random Gravitites
+		private var randomGravities: Array = [0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95];
 		
 		public function ChallangeGameState(game: Game) {
 			super(game);
@@ -62,6 +66,8 @@ currentFrame ++;
 			
 			// Update Balls
 			for each (var ball in balls) {
+			    var randomValue: int = int(randomGravities.length * Math.random());
+				ball.GRAVITY = randomGravities[randomValue];
 				ball.update();
 			}
 			

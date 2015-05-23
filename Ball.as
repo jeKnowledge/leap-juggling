@@ -16,7 +16,7 @@
 		public var vy: Number;
 		
 		// Constants
-		private static const GRAVITY: Number = 0.96;
+		public var GRAVITY: Number = 0.96;
 		private static const FRICTION: Number = 0.98;
 		
 		// Aux Variables
