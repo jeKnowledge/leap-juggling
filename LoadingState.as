@@ -69,6 +69,10 @@
 						
 			trace("New sound called " + resourceName + " has been added to resourceMap.");
 		}
+		
+		public override function update(): void {
+			
+		}
 
 	}
 
