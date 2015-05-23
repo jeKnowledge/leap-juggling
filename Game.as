@@ -148,6 +148,18 @@
 			
 			loader.load(new URLRequest("settings.txt"));
 		}
+		
+		public function saveSettings(): void {
+			var pathToFile: String = File.applicationDirectory.resolvePath("settings.txt").nativePath;
+			var file: File = new File(pathToFile);
+
+			var stream: FileStream = new FileStream();
+			stream.open(file, FileMode.WRITE);
+			stream.writeUTFBytes(settings.leapMode.toString() + "\n" +
+								 settings.volume.toString() + "\n" + 
+								 settings.windowSize + "\n");
+			stream.close();
+		}
 	}
 
 }
