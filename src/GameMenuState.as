@@ -37,6 +37,7 @@
 				this.game.changeState(new MenuState(this.game));
 			}
 		}
+		
 	}
 	
 }

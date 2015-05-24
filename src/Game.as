@@ -205,6 +205,7 @@
 			volumeAdjust.volume = settings.volume;
 			soundChannel.soundTransform = volumeAdjust;
 		}
+		
 	}
 
 }

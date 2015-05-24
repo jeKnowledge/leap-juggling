@@ -27,6 +27,7 @@
 		private function onComplete(e: Event): void {
 			trace("Score sent.");
 		}
+		
 	}
 	
 }

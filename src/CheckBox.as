@@ -43,6 +43,7 @@
 		public function getChecked(): Boolean {
 			return checked;
 		}
+		
 	}
 
 }

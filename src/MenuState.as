@@ -44,6 +44,7 @@
 				this.game.changeState(new CreditsState(this.game));
 			}
 		}
+		
 	}
 	
 }
