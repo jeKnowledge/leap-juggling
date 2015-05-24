@@ -25,6 +25,24 @@
 		
 		override public function update(): void {
 			game.updateLeapPointer();
+			
+			if (game.checkBounds(textFields.getKeyValue("gamemenu-tutorial")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
+				if (game.settings.leapMode) {
+					this.game.changeState(new TutorialLeapGameState(this.game));
+				} else {
+					this.game.changeState(new TutorialMouseGameState(this.game));
+				}
+			} else if (game.checkBounds(textFields.getKeyValue("gamemenu-endless")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
+				this.game.changeState(new EndlessGameState(this.game));
+			} else if (game.checkBounds(textFields.getKeyValue("gamemenu-challenge")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
+				this.game.changeState(new ChallangeGameState(this.game));
+			} else if (game.checkBounds(textFields.getKeyValue("menu")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
+				this.game.changeState(new MenuState(this.game));
+			}
 		}
 
 		override public function onMouseClick(event: MouseEvent): void {

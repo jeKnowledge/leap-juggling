@@ -43,6 +43,17 @@
 		
 		override public function update(): void {
 			game.updateLeapPointer();
+			
+			if (game.checkBounds(textFields.getKeyValue("menu-play")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
+				this.game.changeState(new GameMenuState(this.game));
+			} else if (game.checkBounds(textFields.getKeyValue("menu-options")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
+				this.game.changeState(new OptionsMenuState(this.game));
+			} else if (game.checkBounds(textFields.getKeyValue("menu-credits")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
+				this.game.changeState(new CreditsState(this.game));
+			}
 		}
 
 		override public function onMouseClick(event: MouseEvent): void {

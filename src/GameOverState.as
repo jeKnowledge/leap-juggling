@@ -50,9 +50,18 @@
 		
 		override public function update(): void {
 			game.updateLeapPointer();
-
-			if (game.keyMap[Keyboard.ENTER]) {
+			
+			if (game.checkBounds(textFields.getKeyValue("restart")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
 				sendHighScore();
+				this.game.changeState(this.lastState);
+			} else if (game.checkBounds(textFields.getKeyValue("menu")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
+				sendHighScore();
+				this.game.changeState(new MenuState(this.game));	
+			} else if (game.keyMap[Keyboard.ENTER]) {
+				sendHighScore();
+				this.game.changeState(new MenuState(this.game));
 			}
 		}
 		

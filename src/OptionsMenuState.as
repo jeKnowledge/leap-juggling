@@ -26,7 +26,18 @@
 		override public function update(): void {
 			game.updateLeapPointer();
 			
-			if (game.keyMap[Keyboard.U]) {
+			if (game.checkBounds(textFields.getKeyValue("menu")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.changeState(new MenuState(this.game));
+			} else if ((game.checkBounds(textFields.getKeyValue("leap_mode")) || game.checkBounds(leapModeCheckBox.sprite)) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				leapModeCheckBox.check();
+				if (game.settings.leapMode) {
+					game.settings.leapMode = false;
+				} else {
+					game.settings.leapMode = true;
+				}
+				
+				game.saveSettings();
+			} else if (game.keyMap[Keyboard.U]) {
 				game.keyMap[Keyboard.U] = false;
 				
 				if ((game.settings.volume + 0.1) <= 1) {
