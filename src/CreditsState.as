@@ -5,6 +5,7 @@
 	import flash.ui.Keyboard;
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
+	import flash.events.*;
 	
 	public class CreditsState extends State {
 		
@@ -24,28 +25,21 @@
 			textFields.createCustomTextField("menu", "Back", 350, 500);
 		}
 		
-		override public function update(): void {
-			if (game.checkBounds(textFields.getKeyValue("david_twitter")) && this.game.mouseDown) {
-				this.game.mouseDown = false;
-				
+		override public function onMouseClick(event: MouseEvent): void {
+			if (event.target == textFields.getKeyValue("david_twitter")) {
 				url = new URLRequest("https://twitter.com/davidrfgomes");
 				navigateToURL(url, "_blank");
-			} else if (game.checkBounds(textFields.getKeyValue("jb_twitter")) && this.game.mouseDown) {
-				this.game.mouseDown = false;
-				
+			} else if (event.target == textFields.getKeyValue("jb_twitter")) {
 				url = new URLRequest("https://twitter.com/JBAmaro");
 				navigateToURL(url, "_blank");
-			} else if (game.checkBounds(textFields.getKeyValue("tiago_twitter")) && this.game.mouseDown) {
-				this.game.mouseDown = false;
-				
+			} else if (event.target == textFields.getKeyValue("tiago_twitter")) {
 				url = new URLRequest("https://twitter.com/TiagoBotelho9");
 				navigateToURL(url, "_blank");
-			} else if (game.checkBounds(textFields.getKeyValue("menu")) && this.game.mouseDown) {
-				this.game.mouseDown = false;
+			} else if (event.target == textFields.getKeyValue("menu")) {
 				this.game.changeState(new MenuState(this.game));
 			}
 		}
-
+		
 	}
 	
 }

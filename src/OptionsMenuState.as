@@ -3,6 +3,7 @@
 	import flash.text.*;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
+	import flash.events.*;
 	
 	public class OptionsMenuState extends State {
 		
@@ -23,11 +24,7 @@
 		}
 		
 		override public function update(): void {
-			if (game.checkBounds(textFields.getKeyValue("menu")) && game.mouseDown) {
-				game.mouseDown = false;
-				
-				game.changeState(new MenuState(this.game));
-			} else if (game.keyMap[Keyboard.U]) {
+			if (game.keyMap[Keyboard.U]) {
 				game.keyMap[Keyboard.U] = false;
 				
 				if ((game.settings.volume + 0.1) <= 1) {
@@ -45,9 +42,13 @@
 					game.saveSettings();
 					game.updateVolume();
 				}
-			} else if ((game.checkBounds(textFields.getKeyValue("leap_mode")) || game.checkBounds(leapModeCheckBox.sprite)) && game.mouseDown) {
-				game.mouseDown = false;
-				
+			}
+		}
+		
+		override public function onMouseClick(event: MouseEvent): void {
+			if (event.target == textFields.getKeyValue("menu")) {
+				game.changeState(new MenuState(this.game));
+			} else if (event.target == textFields.getKeyValue("leap_mode") || event.target == leapModeCheckBox.sprite) {
 				leapModeCheckBox.check();
 				if (game.settings.leapMode) {
 					game.settings.leapMode = false;

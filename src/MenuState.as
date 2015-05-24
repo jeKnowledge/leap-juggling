@@ -4,6 +4,7 @@
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 	import flash.display.Sprite;
+	import flash.events.*;
 	
 	public class MenuState extends State {
 		
@@ -33,20 +34,17 @@
 			game.addChild(game.backgroundImage);
 			game.setChildIndex(game.backgroundImage, 0);
 		}
-		
-		override public function update(): void {
-			if (this.game.checkBounds(textFields.getKeyValue("menu-play")) && this.game.mouseDown) {
-				this.game.mouseDown = false;
+
+		override public function onMouseClick(event: MouseEvent): void {
+			if (event.target == textFields.getKeyValue("menu-play")) {
 				this.game.changeState(new GameMenuState(this.game));
-			} else if (game.checkBounds(textFields.getKeyValue("menu-options")) && this.game.mouseDown) {
-				this.game.mouseDown = false;
+			} else if (event.target == textFields.getKeyValue("menu-options")) {
 				this.game.changeState(new OptionsMenuState(this.game));
-			} else if (game.checkBounds(textFields.getKeyValue("menu-credits")) && this.game.mouseDown) {
-				this.game.mouseDown = false;
+			} else if (event.target == textFields.getKeyValue("menu-credits")) {
 				this.game.changeState(new CreditsState(this.game));
 			}
 		}
-
+		
 	}
 	
 }

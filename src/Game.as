@@ -89,15 +89,7 @@
 			currentState = new LoadingState(this);
 			currentState.setup();
 		}
-		
-		public function checkBounds(object: DisplayObject): Boolean {
-			if(this.stage.mouseX >= object.x && this.stage.mouseX <= object.x + object.width && this.stage.mouseY >= object.y && this.stage.mouseY <= object.y + object.height) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-		
+	
 		public function reportKeyDown(event: KeyboardEvent): void {
 			keyMap[event.keyCode] = true;
 		}
@@ -123,6 +115,7 @@
 				removeChildAt(0);
 			}
 			
+			// Add background image again
 			this.backgroundImage = new Sprite();
 			this.backgroundImage.addChild(this.resourceMap["images/background_image.png"]);
 			this.backgroundImage.width = this.stage.stageWidth;
@@ -212,6 +205,7 @@
 			volumeAdjust.volume = settings.volume;
 			soundChannel.soundTransform = volumeAdjust;
 		}
+		
 	}
 
 }

@@ -15,6 +15,7 @@
 		}
 
 		public function setup(): void { }
+		
 		public function update(): void { }
 
 	}

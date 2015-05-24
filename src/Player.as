@@ -110,7 +110,7 @@
 			}
 
 			// Mouse Click / Leap Tap
-			if (gameState.game.mouseDown || gameState.game.leapMap[LeapPosition.RIGHT_TAP]) {
+			if ((!gameState.game.settings.leapMode && gameState.game.mouseDown) || (gameState.game.settings.leapMode && gameState.game.leapMap[LeapPosition.RIGHT_TAP])) {
 				if (gameState.game.leapMap[LeapPosition.RIGHT_TAP]) {
 					gameState.game.leapMap[LeapPosition.RIGHT_TAP] = false;
 				}
