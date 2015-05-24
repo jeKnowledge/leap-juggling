@@ -122,6 +122,13 @@
 			while (numChildren > 0) {
 				removeChildAt(0);
 			}
+			
+			this.backgroundImage = new Sprite();
+			this.backgroundImage.addChild(this.resourceMap["images/background_image.png"]);
+			this.backgroundImage.width = this.stage.stageWidth;
+			this.backgroundImage.height = this.stage.stageHeight;
+			this.addChild(this.backgroundImage);
+			this.setChildIndex(this.backgroundImage, 0);
 		}
 		
 		public function changeState(newState: State) {
