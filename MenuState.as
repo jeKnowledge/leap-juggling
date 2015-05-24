@@ -14,11 +14,6 @@
 				This is the first function called after the LoadingState. Global resources
 				should be loaded here.
 			*/
-
-			// Background Image
-			game.backgroundImage = new Sprite();
-			game.backgroundImage.addChild(game.resourceMap["images/background_image.png"]);
-			game.addChild(game.backgroundImage);
 		}
 		
 		override public function setup(): void {
@@ -29,6 +24,14 @@
 			textFields.createCustomTextField("menu-credits", "Credits", 280, 400);
 			
 			game.updateVolume();
+			
+			// Background Image
+			game.backgroundImage = new Sprite();
+			game.backgroundImage.addChild(game.resourceMap["images/background_image.png"]);
+			game.backgroundImage.width = game.stage.stageWidth;
+			game.backgroundImage.height = game.stage.stageHeight;
+			game.addChild(game.backgroundImage);
+			game.setChildIndex(game.backgroundImage, 0);
 		}
 		
 		override public function update(): void {

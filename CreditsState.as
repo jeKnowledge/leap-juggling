@@ -8,6 +8,8 @@
 	
 	public class CreditsState extends State {
 		
+		public var url: URLRequest;
+		
 		public function CreditsState(game: Game) {
 			super(game);
 		}
@@ -26,17 +28,17 @@
 			if (game.checkBounds(textFields.getKeyValue("david_twitter")) && this.game.mouseDown) {
 				this.game.mouseDown = false;
 				
-				var url: URLRequest = new URLRequest("https://twitter.com/davidrfgomes");
+				url = new URLRequest("https://twitter.com/davidrfgomes");
 				navigateToURL(url, "_blank");
 			} else if (game.checkBounds(textFields.getKeyValue("jb_twitter")) && this.game.mouseDown) {
 				this.game.mouseDown = false;
 				
-				var url: URLRequest = new URLRequest("https://twitter.com/JBAmaro");
+				url = new URLRequest("https://twitter.com/JBAmaro");
 				navigateToURL(url, "_blank");
 			} else if (game.checkBounds(textFields.getKeyValue("tiago_twitter")) && this.game.mouseDown) {
 				this.game.mouseDown = false;
 				
-				var url: URLRequest = new URLRequest("https://twitter.com/TiagoBotelho9");
+				url = new URLRequest("https://twitter.com/TiagoBotelho9");
 				navigateToURL(url, "_blank");
 			} else if (game.checkBounds(textFields.getKeyValue("menu")) && this.game.mouseDown) {
 				this.game.mouseDown = false;
