@@ -78,6 +78,8 @@
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, reportMouseDown);
 			stage.addEventListener(MouseEvent.MOUSE_UP, reportMouseUp);
 			
+			stage.addEventListener(MouseEvent.CLICK, 
+			
 			// Server
 			highScoreSender = new HighScoreSender("http://malabarismo.herokuapp.com/new-score");
 			
