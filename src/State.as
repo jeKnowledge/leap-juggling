@@ -1,6 +1,7 @@
 ﻿package {
 
 	import flash.events.KeyboardEvent;
+	import flash.events.*;
 
 	public class State {
 
@@ -9,12 +10,15 @@
 		
 		public function State(game: Game) {
 			this.game = game;
+			
+			game.stage.addEventListener(MouseEvent.CLICK, onMouseClick);
 		}
 
 		public function setup(): void { }
+		
 		public function update(): void { }
-		public function onMouseClick(): void { }
-
+		
+		public function onMouseClick(event: MouseEvent): void { }
 	}
 
 }

@@ -15,9 +15,9 @@
 			
 			sprite = new Sprite();
 			if (checked) {
-				sprite.addChild(state.game.resourceMap["images/checkbox_checked.png"]);
+				sprite.addChild(state.game.resourceMap["assets/images/checkbox_checked.png"]);
 			} else {
-				sprite.addChild(state.game.resourceMap["images/checkbox_unchecked.png"]);
+				sprite.addChild(state.game.resourceMap["assets/images/checkbox_unchecked.png"]);
 			}
 			sprite.x = x;
 			sprite.y = y;
@@ -30,13 +30,13 @@
 			if (checked) {
 				checked = false;
 				
-				sprite.removeChild(state.game.resourceMap["images/checkbox_checked.png"]);
-				sprite.addChild(state.game.resourceMap["images/checkbox_unchecked.png"]);
+				sprite.removeChild(state.game.resourceMap["assets/images/checkbox_checked.png"]);
+				sprite.addChild(state.game.resourceMap["assets/images/checkbox_unchecked.png"]);
 			} else {
 				checked = true;
 				
-				sprite.removeChild(state.game.resourceMap["images/checkbox_unchecked.png"]);
-				sprite.addChild(state.game.resourceMap["images/checkbox_checked.png"]);
+				sprite.removeChild(state.game.resourceMap["assets/images/checkbox_unchecked.png"]);
+				sprite.addChild(state.game.resourceMap["assets/images/checkbox_checked.png"]);
 			}
 		}
 		
