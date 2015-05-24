@@ -96,7 +96,7 @@
 		
 		public override function update(): void {
 			loadingRectangle.graphics.beginFill(0xF00);
-			loadingRectangle.graphics.drawRect(150, 250, (getTimer() - startState) / loadingSeconds * 500, 30);
+			loadingRectangle.graphics.drawRect(150, 250, (getTimer() - startState) / loadingSeconds * 505, 30);
 			loadingRectangle.graphics.endFill();
 		}
 
