@@ -133,7 +133,7 @@
 						timer.start();
 						score++;
 						
-						gameState.transitionSound.play();
+						gameState.transitionSound.play(0, 1, gameState.game.volumeAdjust);
 					}
 				}
 			}
