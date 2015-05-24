@@ -27,7 +27,8 @@
 		
 		// Resources
 		public var resourceURLs: Array = [ "images/player.png", "images/ball.png", "images/left_hand.png",
-										   "images/right_hand.png", "images/heart.png", "images/background_image.png" ];
+										   "images/right_hand.png", "images/heart.png", "images/background_image.png",
+										   "images/checkbox_checked.png", "images/checkbox_unchecked.png"];
 		
 		public var soundURLs: Array = [ "sounds/launch.mp3", "sounds/circus.mp3", "sounds/transition.mp3" ];
 
