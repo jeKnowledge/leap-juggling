@@ -22,7 +22,7 @@
 		public var rightHand: GameHand;
 
 		// Lives
-		public var lives: Vector.<Sprite> ;
+		public var lives: Vector.<Sprite>;
 
 		// Score
 		public var score: int = 0;
@@ -133,7 +133,7 @@
 						timer.start();
 						score++;
 						
-						gameState.transitionSound.play();
+						gameState.transitionSound.play(0, 1, gameState.game.volumeAdjust);
 					}
 				}
 			}

@@ -28,6 +28,7 @@
 
 		// Aux Variables
 		public var currentFrame: int;
+		public var paused: Boolean;
 
 		// Sounds
 		public var launchSound: Sound;
@@ -69,6 +70,16 @@
 				this.balls.push(newBall);
 			}
 		}
+		
+		protected function changePaused(): void {
+			if (paused) {
+				paused = false;
+				textFields.updateCustomTextField("pause", "");
+			} else {
+				paused = true;
+				textFields.updateCustomTextField("pause", "Game paused");
+			}
+		}
 
 		override public function setup(): void {
 			// Player
@@ -86,6 +97,10 @@
 			// Sounds
 			launchSound = game.resourceMap["sounds/launch.mp3"];
 			transitionSound = game.resourceMap["sounds/transition.mp3"];
+			
+			// TextFields
+			textFields = new CustomTextFields(game);
+			textFields.createCustomTextField("pause", "", 280, 100);
 		}
 
 		override public function update(): void { }

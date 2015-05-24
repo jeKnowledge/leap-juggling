@@ -31,20 +31,28 @@
 			
 			// Escape key
 			if (game.keyMap[Keyboard.ESCAPE]) {
+				game.keyMap[Keyboard.ESCAPE] = false;
+				changePaused();
+			}
+			
+			// Exit key
+			if (game.keyMap[Keyboard.Q]) {
 				game.changeState(new MenuState(game));
 			}
 			
-			// Update Player
-			player.update();
+			if (!paused) {
+				// Update Player
+				player.update();
 			
-			// Update Balls
-			for each (var ball in balls) {
-				ball.update();
-			}
+				// Update Balls
+				for each (var ball in balls) {
+					ball.update();
+				}
 			
-			// Check if the player lost
-			if (player.lives.length == 0) {
-				game.changeState(new GameOverState(game, player.score, this));
+				// Check if the player lost
+				if (player.lives.length == 0) {
+					game.changeState(new GameOverState(game, player.score, this));
+				}
 			}
 		}
 
