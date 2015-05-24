@@ -3,6 +3,7 @@
 	import flash.text.*;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
+	import flash.events.*;
 	
 	public class GameOverState extends State {
 
@@ -48,21 +49,20 @@
 		}
 		
 		override public function update(): void {
-			if (game.checkBounds(textFields.getKeyValue("restart")) && game.mouseDown) {
-				game.mouseDown = false;
-				
-				sendHighScore();
-				this.game.changeState(this.lastState);
-			} else if (game.checkBounds(textFields.getKeyValue("menu")) && game.mouseDown) {
-				game.mouseDown = false;
-				
-				sendHighScore();
-				this.game.changeState(new MenuState(this.game));	
-			} else if (game.keyMap[Keyboard.ENTER]) {
+			if (game.keyMap[Keyboard.ENTER]) {
 				sendHighScore();
 			}
 		}
-
+		
+		override public function onMouseClick(event: MouseEvent): void {
+			if (event.target == textFields.getKeyValue("restart")) {
+				sendHighScore();
+				this.game.changeState(this.lastState);
+			} else if (event.target == textFields.getKeyValue("menu")) {
+				sendHighScore();
+				this.game.changeState(new MenuState(this.game));	
+			} 
+		}
 	}
 	
 }
