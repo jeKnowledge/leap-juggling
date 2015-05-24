@@ -15,7 +15,7 @@
 	
 	public class TutorialMouseGameState extends GameState {
 		
-		private var currentLevel: Number = 0;
+		private var currentLevel: int = 0;
 		
 		public function TutorialMouseGameState(game: Game) {
 			super(game);
@@ -28,22 +28,22 @@
 			super.setup();
 			
 			this.textFields = new CustomTextFields(this.game);
-			this.textFields.createCustomTextField("tutorial_text", "", 0, 100);
+			this.textFields.createCustomTextField("tutorial_text", "", 20, 80, 18);
 		}
 		
 		public override function update(): void {
 			currentFrame ++;
 			
 			if (currentLevel == 0) {
-				this.textFields.updateCustomTextField("tutorial_text", "Press Space key to send the ball flying !");
+				this.textFields.updateCustomTextField("tutorial_text", "Press space to get the first ball flying");
 				
 				if (this.ballsInHand(player.leftHand).length == 1) { currentLevel++; }
 			} else if (currentLevel == 1) {
-				this.textFields.updateCustomTextField("tutorial_text", "Click the left mouse button to pass \n\tthe ball to your right hand");
+				this.textFields.updateCustomTextField("tutorial_text", "Now, click the left mouse button to pass the ball to your \nleft hand");
 				
 				if (this.ballsInHand(player.rightHand).length == 1) { currentLevel++; }
 			} else if (currentLevel == 2) {
-				this.textFields.updateCustomTextField("tutorial_text", "Good Job now lets scale it up a bit!\n\t\t\t2 balls now!");
+				this.textFields.updateCustomTextField("tutorial_text", "Good job ! Now lets scale it up a bit. \n2 balls now ! \nPress the same keys to play and enter to continue");
 				
 				this.addBalls(1);
 				this.resetBallPosition();
@@ -55,7 +55,7 @@
 					currentLevel++;
 				}
 			} else if (currentLevel == 4) {
-				this.textFields.updateCustomTextField("tutorial_text", "Now try it with three balls and continue when \n\tyou feel ready for the real challenge!");
+				this.textFields.updateCustomTextField("tutorial_text", "Now try it with three balls and continue when \nyou feel ready for the real challenge ! \nPress enter to continue");
 				
 				this.addBalls(1);
 				this.resetBallPosition();

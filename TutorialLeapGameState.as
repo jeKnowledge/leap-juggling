@@ -15,10 +15,12 @@
 	
 	public class TutorialLeapGameState extends GameState {
 		
-		private var currentLevel: Number = 0;
+		private var currentLevel: int = 0;
 
 		public function TutorialLeapGameState(game: Game) {
 			super(game);
+			
+			// Game settings
 			NUM_BALLS = 1;
 		}
 		
@@ -26,26 +28,26 @@
 			super.setup();
 			
 			this.textFields = new CustomTextFields(this.game);
-			this.textFields.createCustomTextField("tutorial_text", "", 0, 100, 20);
+			this.textFields.createCustomTextField("tutorial_text", "", 20, 80, 18);
 		}
 		
 		public override function update(): void {
 			currentFrame ++;
 			
 			if (currentLevel == 0) {
-				this.textFields.updateCustomTextField("tutorial_text", "Make the Tap Movement with the Left Hand key to send the ball flying !");
+				this.textFields.updateCustomTextField("tutorial_text", "Make a tapping movement with the left hand to get the \nfirst ball flying");
 				
 				// FIX: Image missing
 				
 				if (this.ballsInHand(player.leftHand).length == 1) { currentLevel++; }
 			} else if (currentLevel == 1) {
-				this.textFields.updateCustomTextField("tutorial_text", "Make Tap Movement with right Hand to pass \n\tthe ball to your right hand!");
+				this.textFields.updateCustomTextField("tutorial_text", "Now, make a tapping movemnt with right hand to pass \nthe ball to your left hand");
 				
 				// FIX: Image Missing
 				
 				if (this.ballsInHand(player.rightHand).length == 1) { currentLevel++;}
 			} else if (currentLevel == 2) {
-				this.textFields.updateCustomTextField("tutorial_text", "Good Job now lets scale it up a bit!\n\t\t\t2 balls now!\n Do a screen Tap to continue!");
+				this.textFields.updateCustomTextField("tutorial_text", "Good job ! Now lets scale it up a bit.\n2 balls now !\n Do the same gestures to play");
 				
 				this.addBalls(1);
 				this.resetBallPosition();
@@ -57,7 +59,7 @@
 					currentLevel++;
 				}
 			} else if (currentLevel == 4) {
-				this.textFields.updateCustomTextField("tutorial_text", "Now try it with three balls and continue when \n\tyou feel ready for the real challenge!\n Do a screen Tap to continue!");
+				this.textFields.updateCustomTextField("tutorial_text", "Now try it with three balls and continue when \nyou feel ready for the real challenge !\n Do a screen tap gesture to continue");
 				
 				this.addBalls(1);
 				this.resetBallPosition();

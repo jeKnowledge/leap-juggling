@@ -15,7 +15,9 @@
 		override public function setup(): void {
 			this.textFields = new CustomTextFields(this.game);
 			
-			textFields.createCustomTextField("menu", "[1] Tutorial\n[2] Endless\n[3] Challenge", 200, 200);
+			textFields.createCustomTextField("gamemenu-tutorial", "[1] Tutorial", 280, 200);
+			textFields.createCustomTextField("gamemenu-endless", "[2] Endless", 280, 300);
+			textFields.createCustomTextField("gamemenu-challange", "[3] Challenge", 280, 400);
 		}
 		
 		override public function update(): void {
