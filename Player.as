@@ -22,7 +22,7 @@
 		public var rightHand: GameHand;
 
 		// Lives
-		public var lives: Vector.<Sprite> ;
+		public var lives: Vector.<Sprite>;
 
 		// Score
 		public var score: int = 0;
