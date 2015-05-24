@@ -16,7 +16,7 @@
 			this.textFields = new CustomTextFields(this.game);
 			
 			textFields.createCustomTextField("info", "Game developed by:", 250, 100, 25);
-			textFields.createCustomTextField("david_twitter", "@dadivrfgomes", 250, 200, 25);
+			textFields.createCustomTextField("david_twitter", "@davidrfgomes", 250, 200, 25);
 			textFields.createCustomTextField("jb_twitter", "@JBAmaro", 250, 250, 25);
 			textFields.createCustomTextField("tiago_twitter", "@TiagoBotelho9", 250, 300, 25);
 			textFields.createCustomTextField("menu", "Back", 350, 500);
