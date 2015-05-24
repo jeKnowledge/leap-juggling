@@ -8,6 +8,8 @@
 	
 	public class MenuState extends State {
 		
+		public var pointer: Sprite;
+		
 		public function MenuState(game: Game) {
 			super(game);
 			
@@ -33,6 +35,14 @@
 			game.backgroundImage.height = game.stage.stageHeight;
 			game.addChild(game.backgroundImage);
 			game.setChildIndex(game.backgroundImage, 0);
+			
+			game.pointer = new Sprite();
+			game.pointer.addChild(game.resourceMap["assets/images/point.png"]);
+			game.addChild(game.pointer);
+		}
+		
+		override public function update(): void {
+			game.updateLeapPointer();
 		}
 
 		override public function onMouseClick(event: MouseEvent): void {

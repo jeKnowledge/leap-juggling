@@ -25,6 +25,10 @@
 			textFields.createCustomTextField("menu", "Back", 350, 500);
 		}
 		
+		override public function update(): void {
+			game.updateLeapPointer();
+		}
+
 		override public function onMouseClick(event: MouseEvent): void {
 			if (event.target == textFields.getKeyValue("david_twitter")) {
 				url = new URLRequest("https://twitter.com/davidrfgomes");

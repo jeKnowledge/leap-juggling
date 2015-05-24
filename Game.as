@@ -31,7 +31,7 @@
 		// Resources
 		public var resourceURLs: Array = [ "assets/images/player.png", "assets/images/ball.png", "assets/images/left_hand.png",
 										   "assets/images/right_hand.png", "assets/images/heart.png", "assets/images/background_image.png",
-										   "assets/images/checkbox_checked.png", "assets/images/checkbox_unchecked.png"];
+										   "assets/images/checkbox_checked.png", "assets/images/checkbox_unchecked.png", "assets/images/point.png"];
 		
 		public var soundURLs: Array = [ "assets/sounds/launch.mp3", "assets/sounds/circus.mp3", "assets/sounds/transition.mp3" ];
 		
@@ -52,6 +52,9 @@
 		
 		// Background Image
 		public var backgroundImage: Sprite;
+		
+		// Pointer Leap Motion
+		public var pointer: Sprite;
 		
 		// Server
 		public var highScoreSender: HighScoreSender;
@@ -90,8 +93,15 @@
 			currentState.setup();
 		}
 		
+		public function updateLeapPointer(): void {
+			if(this.settings.leapMode) {
+				this.pointer.x = this.leapMotion.hands.rightX + 250;
+				this.pointer.y = this.leapMotion.hands.rightY + 100;
+			}
+		}
+		
 		public function checkBounds(object: DisplayObject): Boolean {
-			if(this.stage.mouseX >= object.x && this.stage.mouseX <= object.x + object.width && this.stage.mouseY >= object.y && this.stage.mouseY <= object.y + object.height) {
+			if(this.leapMotion.hands.rightX + 250 >= object.x && this.leapMotion.hands.rightX + 250 <= object.x + object.width && this.leapMotion.hands.rightY + 100 >= object.y && this.leapMotion.hands.rightY + 100 <= object.y + object.height) {
 				return true;
 			} else {
 				return false;
@@ -130,6 +140,10 @@
 			this.backgroundImage.height = this.stage.stageHeight;
 			this.addChild(this.backgroundImage);
 			this.setChildIndex(this.backgroundImage, 0);
+			
+			this.pointer = new Sprite();
+			this.pointer.addChild(this.resourceMap["assets/images/point.png"]);
+			this.addChild(this.pointer);
 		}
 		
 		public function changeState(newState: State) {

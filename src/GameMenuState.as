@@ -20,8 +20,13 @@
 			textFields.createCustomTextField("gamemenu-endless", "Endless", 280, 200);
 			textFields.createCustomTextField("gamemenu-challenge", "Challenge", 280, 300);
 			textFields.createCustomTextField("menu", "Back", 350, 500);
+			
 		}
 		
+		override public function update(): void {
+			game.updateLeapPointer();
+		}
+
 		override public function onMouseClick(event: MouseEvent): void {
 			if (event.target == textFields.getKeyValue("gamemenu-tutorial")) {
 				if (game.settings.leapMode) {

@@ -24,6 +24,8 @@
 		}
 		
 		override public function update(): void {
+			game.updateLeapPointer();
+			
 			if (game.keyMap[Keyboard.U]) {
 				game.keyMap[Keyboard.U] = false;
 				

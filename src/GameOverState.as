@@ -49,6 +49,8 @@
 		}
 		
 		override public function update(): void {
+			game.updateLeapPointer();
+
 			if (game.keyMap[Keyboard.ENTER]) {
 				sendHighScore();
 			}
