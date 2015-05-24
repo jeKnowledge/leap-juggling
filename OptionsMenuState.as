@@ -23,7 +23,8 @@
 		}
 		
 		override public function update(): void {
-			if (game.keyMap[Keyboard.ESCAPE]) {
+			if (game.checkBounds(350, 400, 500, 550) && game.mouseDown) {
+				game.mouseDown = false;
 				this.game.saveSettings();
 				this.game.changeState(new MenuState(this.game));
 			} else if (game.keyMap[Keyboard.U]) {
@@ -35,6 +36,14 @@
 				if((this.game.settings.volume - 0.1) >= 0) {
 					this.game.settings.volume -= 0.1;
 					game.keyMap[Keyboard.D] = false;
+				}
+			} else if (game.checkBounds(500, 535, 105, 135) && game.mouseDown) {
+				game.mouseDown = false;
+				leapModeCheckBox.check();
+				if (leapModeCheckBox.getChecked() == true) {
+					game.settings.leapMode = true;
+				} else {
+					game.settings.leapMode = false;
 				}
 			}
 		}

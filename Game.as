@@ -77,6 +77,14 @@
 			currentState.setup();
 		}
 		
+		public function checkBounds(minX: Number, maxX: Number, minY: Number, maxY: Number): Boolean {
+			if(this.stage.mouseX >= minX && this.stage.mouseX <= maxX && this.stage.mouseY >= minY && this.stage.mouseY <= maxY) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
 		public function reportKeyDown(event: KeyboardEvent): void {
 			keyMap[event.keyCode] = true;
 		}
