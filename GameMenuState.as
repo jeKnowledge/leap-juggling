@@ -17,25 +17,25 @@
 			
 			textFields.createCustomTextField("gamemenu-tutorial", "Tutorial", 280, 100);
 			textFields.createCustomTextField("gamemenu-endless", "Endless", 280, 200);
-			textFields.createCustomTextField("gamemenu-challange", "Challenge", 280, 300);
+			textFields.createCustomTextField("gamemenu-challenge", "Challenge", 280, 300);
 			textFields.createCustomTextField("menu", "Back", 350, 500);
 		}
 		
 		override public function update(): void {
-			if (game.checkBounds(280, 500, 100, 150) && this.game.mouseDown) {
+			if (game.checkBounds(textFields.getKeyValue("gamemenu-tutorial")) && this.game.mouseDown) {
 				this.game.mouseDown = false;
 				if (game.settings.leapMode) {
 					this.game.changeState(new TutorialLeapGameState(this.game));
 				} else {
 					this.game.changeState(new TutorialMouseGameState(this.game));
 				}
-			} else if (game.checkBounds(280, 500, 200, 250) && this.game.mouseDown) {
+			} else if (game.checkBounds(textFields.getKeyValue("gamemenu-endless")) && this.game.mouseDown) {
 				this.game.mouseDown = false;
 				this.game.changeState(new EndlessGameState(this.game));
-			} else if (this.game.checkBounds(280, 500, 300, 350) && this.game.mouseDown) {
+			} else if (this.game.checkBounds(textFields.getKeyValue("gamemenu-challenge")) && this.game.mouseDown) {
 				this.game.mouseDown = false;
 				this.game.changeState(new ChallangeGameState(this.game));
-			} else if (this.game.checkBounds(350, 450, 500, 550) && this.game.mouseDown) {
+			} else if (this.game.checkBounds(textFields.getKeyValue("menu")) && this.game.mouseDown) {
 				this.game.mouseDown = false;
 				this.game.changeState(new MenuState(this.game));
 			}

@@ -19,6 +19,7 @@
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
 	import flash.display.Shape;
+	import flash.display.DisplayObject;
 
 	public class Game extends MovieClip {
 
@@ -77,8 +78,8 @@
 			currentState.setup();
 		}
 		
-		public function checkBounds(minX: Number, maxX: Number, minY: Number, maxY: Number): Boolean {
-			if(this.stage.mouseX >= minX && this.stage.mouseX <= maxX && this.stage.mouseY >= minY && this.stage.mouseY <= maxY) {
+		public function checkBounds(object: DisplayObject): Boolean {
+			if(this.stage.mouseX >= object.x && this.stage.mouseX <= object.x + object.width && this.stage.mouseY >= object.y && this.stage.mouseY <= object.y + object.height) {
 				return true;
 			} else {
 				return false;

@@ -29,10 +29,6 @@
 		public override function update(): void {
 			currentFrame ++;
 			
-			if (game.keyMap[Keyboard.R]) {
-				game.highScoreSender.sendScore("manel", 12);
-			}
-
 			// Escape key
 			if (game.keyMap[Keyboard.ESCAPE]) {
 				game.changeState(new MenuState(game));

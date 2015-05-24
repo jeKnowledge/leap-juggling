@@ -30,13 +30,13 @@
 		}
 		
 		override public function update(): void {
-			if (this.game.checkBounds(280, 500, 200, 250) && this.game.mouseDown) {
+			if (this.game.checkBounds(textFields.getKeyValue("menu-play")) && this.game.mouseDown) {
 				this.game.mouseDown = false;
 				this.game.changeState(new GameMenuState(this.game));
-			} else if (game.checkBounds(280, 500, 300, 350) && this.game.mouseDown) {
+			} else if (game.checkBounds(textFields.getKeyValue("menu-options")) && this.game.mouseDown) {
 				this.game.mouseDown = false;
 				this.game.changeState(new OptionsMenuState(this.game));
-			} else if (game.checkBounds(280, 500, 400, 450) && this.game.mouseDown) {
+			} else if (game.checkBounds(textFields.getKeyValue("menu-credits")) && this.game.mouseDown) {
 				this.game.mouseDown = false;
 				this.game.changeState(new CreditsState(this.game));
 			}

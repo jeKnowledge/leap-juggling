@@ -1,6 +1,7 @@
 ﻿package  {
 	
 	import flash.text.*;
+	import flash.display.DisplayObject;
 	
 	public class CustomTextFields {
 		
@@ -13,7 +14,6 @@
 		}
 		
 		public function createCustomTextField(key: String, text: String, x: int = 0, y: int = 0, fontSize: int = 30): void {
-			
 			var textField: TextField = new TextField();
 			textField.x = x;
 			textField.y = y;
@@ -26,8 +26,12 @@
 			this.textFields[key] = textField;
 		}
 		
-		public function updateCustomTextField(key: String, text: String) {
+		public function updateCustomTextField(key: String, text: String): void {
 			this.textFields[key].text = text;
+		}
+		
+		public function getKeyValue(key: String): DisplayObject {
+			return this.textFields[key];
 		}
 	}
 	

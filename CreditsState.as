@@ -18,7 +18,7 @@
 		}
 		
 		override public function update(): void {
-			if (game.checkBounds(350, 450, 500, 550) && this.game.mouseDown) {
+			if (game.checkBounds(textFields.getKeyValue("info")) && this.game.mouseDown) {
 				this.game.mouseDown = false;
 				this.game.changeState(new MenuState(this.game));
 			}
