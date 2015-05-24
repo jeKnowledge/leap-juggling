@@ -17,13 +17,14 @@
 			
 			textFields.createCustomTextField("leap_mode", "Leap Motion Mode", 145, 100);
 			textFields.createCustomTextField("volume", "[U] Volume Up\n[D] Volume Down", 145, 160);
-			textFields.createCustomTextField("menu", "[ESC] Go back to the menu", 145, 240);
+			textFields.createCustomTextField("menu", "Back", 350, 500);
 			
-			leapModeCheckBox = new CheckBox(this, 100, 100);
+			leapModeCheckBox = new CheckBox(this, 500, 105);
 		}
 		
 		override public function update(): void {
-			if (game.keyMap[Keyboard.ESCAPE]) {
+			if (game.checkBounds(350, 400, 500, 550) && game.mouseDown) {
+				game.mouseDown = false;
 				this.game.saveSettings();
 				this.game.changeState(new MenuState(this.game));
 			} else if (game.keyMap[Keyboard.U]) {
@@ -35,6 +36,14 @@
 				if((this.game.settings.volume - 0.1) >= 0) {
 					this.game.settings.volume -= 0.1;
 					game.keyMap[Keyboard.D] = false;
+				}
+			} else if (game.checkBounds(500, 535, 105, 135) && game.mouseDown) {
+				game.mouseDown = false;
+				leapModeCheckBox.check();
+				if (leapModeCheckBox.getChecked() == true) {
+					game.settings.leapMode = true;
+				} else {
+					game.settings.leapMode = false;
 				}
 			}
 		}

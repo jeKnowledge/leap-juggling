@@ -24,22 +24,22 @@
 		override public function setup(): void {
 			this.textFields = new CustomTextFields(this.game);
 			
-			textFields.createCustomTextField("menu-play", "[1] Play", 280, 200);
-			textFields.createCustomTextField("menu-options", "[2] Options", 280, 300);
-			textFields.createCustomTextField("menu-credits", "[3] Credits", 280, 400);
+			textFields.createCustomTextField("menu-play", "Play", 280, 200);
+			textFields.createCustomTextField("menu-options", "Options", 280, 300);
+			textFields.createCustomTextField("menu-credits", "Credits", 280, 400);
 			
 			game.updateVolume();
 		}
 		
 		override public function update(): void {
-			if (game.keyMap[Keyboard.NUMBER_1]) {
+			if (this.game.checkBounds(280, 500, 200, 250) && this.game.mouseDown) {
+				this.game.mouseDown = false;
 				this.game.changeState(new GameMenuState(this.game));
-				game.keyMap[Keyboard.NUMBER_1] = false;
-				game.keyMap[Keyboard.NUMBER_2] = false;
-				game.keyMap[Keyboard.NUMBER_3] = false;
-			} else if (game.keyMap[Keyboard.NUMBER_2]) {
+			} else if (game.checkBounds(280, 500, 300, 350) && this.game.mouseDown) {
+				this.game.mouseDown = false;
 				this.game.changeState(new OptionsMenuState(this.game));
-			} else if (game.keyMap[Keyboard.NUMBER_3]) {
+			} else if (game.checkBounds(280, 500, 400, 450) && this.game.mouseDown) {
+				this.game.mouseDown = false;
 				this.game.changeState(new CreditsState(this.game));
 			}
 		}
