@@ -95,8 +95,8 @@
 			}
 
 			// Sounds
-			launchSound = game.resourceMap["sounds/launch.mp3"];
-			transitionSound = game.resourceMap["sounds/transition.mp3"];
+			launchSound = game.resourceMap["assets/sounds/launch.mp3"];
+			transitionSound = game.resourceMap["assets/sounds/transition.mp3"];
 			
 			// TextFields
 			textFields = new CustomTextFields(game);
