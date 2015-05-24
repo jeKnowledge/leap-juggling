@@ -15,9 +15,10 @@
 		override public function setup(): void {
 			this.textFields = new CustomTextFields(this.game);
 			
-			textFields.createCustomTextField("gamemenu-tutorial", "[1] Tutorial", 280, 200);
-			textFields.createCustomTextField("gamemenu-endless", "[2] Endless", 280, 300);
-			textFields.createCustomTextField("gamemenu-challange", "[3] Challenge", 280, 400);
+			textFields.createCustomTextField("gamemenu-tutorial", "[1] Tutorial", 280, 100);
+			textFields.createCustomTextField("gamemenu-endless", "[2] Endless", 280, 200);
+			textFields.createCustomTextField("gamemenu-challange", "[3] Challenge", 280, 300);
+			textFields.createCustomTextField("menu", "Back", 350, 500);
 		}
 		
 		override public function update(): void {
@@ -31,6 +32,8 @@
 				this.game.changeState(new EndlessGameState(this.game));
 			} else if (game.keyMap[Keyboard.NUMBER_3]) {
 				this.game.changeState(new ChallangeGameState(this.game));
+			} else if (game.keyMap[Keyboard.ESCAPE]) {
+				this.game.changeState(new MenuState(this.game));
 			}
 		}
 

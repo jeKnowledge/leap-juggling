@@ -17,9 +17,9 @@
 			
 			textFields.createCustomTextField("leap_mode", "Leap Motion Mode", 145, 100);
 			textFields.createCustomTextField("volume", "[U] Volume Up\n[D] Volume Down", 145, 160);
-			textFields.createCustomTextField("menu", "[ESC] Go back to the menu", 145, 240);
+			textFields.createCustomTextField("menu", "Back", 350, 500);
 			
-			leapModeCheckBox = new CheckBox(this, 100, 100);
+			leapModeCheckBox = new CheckBox(this, 500, 105);
 		}
 		
 		override public function update(): void {
