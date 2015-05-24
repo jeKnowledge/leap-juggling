@@ -9,7 +9,7 @@
 		private var score: int;
 		private var lastState: State;
 		public var inputField: TextField;
-		private static var randomNames: Array = ["Tiago", "Jason", "David", "Inês", "Margarida", "joão", "Marie", "Alex", "Jordan", "André"];
+		private static var randomNames: Array = ["Tiago", "Jason", "David", "Inês", "Margarida", "João", "Marie", "Alex", "Jordan", "André"];
 		
 		public function GameOverState(game: Game, score: int, lastState: State) {
 			super(game);
@@ -58,8 +58,6 @@
 				
 				sendHighScore();
 				this.game.changeState(new MenuState(this.game));	
-			} else if (game.keyMap[Keyboard.ENTER]) {
-				sendHighScores();
 			}
 		}
 
