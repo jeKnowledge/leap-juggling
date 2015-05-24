@@ -87,11 +87,17 @@
 		public override function setup(): void {
 			loadingWidth = 500;
 
+			var backgroundRectangle: Shape = new Shape;
+			backgroundRectangle.graphics.beginFill(0x000);
+			backgroundRectangle.graphics.drawRect(0, 0, 800, 640); // FIX windowsize
+			backgroundRectangle.graphics.endFill();
+			game.addChild(backgroundRectangle);
+
 			var loadingRectangleBorder: Shape = game.getRectangleBorder(150, 250, loadingWidth, 30, 8);
 			game.addChild(loadingRectangleBorder);
 			
 			loadingRectangle = new Shape;
-			loadingRectangle.graphics.beginFill(0xF00);
+			loadingRectangle.graphics.beginFill(0xFFFFFF);
 			loadingRectangle.graphics.drawRect(150, 250, 0, 30);
 			loadingRectangle.graphics.endFill();
 			game.addChild(loadingRectangle);
@@ -99,7 +105,7 @@
 		}
 		
 		public override function update(): void {
-			loadingRectangle.graphics.beginFill(0xF00);
+			loadingRectangle.graphics.beginFill(0xFFFFFF);
 			loadingRectangle.graphics.drawRect(150, 250, (getTimer() - startState) / loadingSeconds * 505, 30);
 			loadingRectangle.graphics.endFill();
 		}
