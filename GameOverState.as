@@ -59,7 +59,7 @@
 				sendHighScore();
 				this.game.changeState(new MenuState(this.game));	
 			} else if (game.keyMap[Keyboard.ENTER]) {
-				sendHighScores();
+				sendHighScore();
 			}
 		}
 
