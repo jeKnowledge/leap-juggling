@@ -73,7 +73,7 @@
 		public override function setup(): void {
 			// Sprite
 			sprite.addChild(gameState.game.resourceMap["assets/images/player.png"]);
-			sprite.x = 800 / 2 - 150;
+			sprite.x = 800 / 2 - 100;
 			sprite.y = 640 - 220;
 			this.gameState.game.addChild(sprite);
 
