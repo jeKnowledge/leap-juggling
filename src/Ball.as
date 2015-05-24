@@ -82,7 +82,7 @@
 			
 			floor = gameState.game.stage.height;
 			
-			sprite.addChild(new Bitmap(gameState.game.resourceMap["images/ball.png"].bitmapData));
+			sprite.addChild(new Bitmap(gameState.game.resourceMap["assets/images/ball.png"].bitmapData));
 			gameState.game.addChild(sprite);
 
 			sprite.addEventListener(Event.ENTER_FRAME, handleCollision);

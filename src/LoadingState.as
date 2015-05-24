@@ -58,7 +58,7 @@
 		
 		function loadingOver(event: TimerEvent): void {
 			// Start Game Sound
-			game.soundChannel = game.resourceMap["sounds/circus.mp3"].play();
+			game.soundChannel = game.resourceMap["assets/sounds/circus.mp3"].play();
 			
 			game.changeState(new MenuState(game));
 		}

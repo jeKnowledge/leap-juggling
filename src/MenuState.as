@@ -27,7 +27,7 @@
 			
 			// Background Image
 			game.backgroundImage = new Sprite();
-			game.backgroundImage.addChild(game.resourceMap["images/background_image.png"]);
+			game.backgroundImage.addChild(game.resourceMap["assets/images/background_image.png"]);
 			game.backgroundImage.width = game.stage.stageWidth;
 			game.backgroundImage.height = game.stage.stageHeight;
 			game.addChild(game.backgroundImage);

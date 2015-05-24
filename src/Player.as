@@ -72,20 +72,20 @@
 
 		public override function setup(): void {
 			// Sprite
-			sprite.addChild(gameState.game.resourceMap["images/player.png"]);
+			sprite.addChild(gameState.game.resourceMap["assets/images/player.png"]);
 			sprite.x = 800 / 2 - 150;
 			sprite.y = 640 - 220;
 			this.gameState.game.addChild(sprite);
 
 			// Hands
-			this.leftHand = new GameHand(this.gameState, 440, 520, "images/left_hand.png", HandType.LEFT_HAND);
-			this.rightHand = new GameHand(this.gameState, 230, 520, "images/right_hand.png", HandType.RIGHT_HAND);
+			this.leftHand = new GameHand(this.gameState, 440, 520, "assets/images/left_hand.png", HandType.LEFT_HAND);
+			this.rightHand = new GameHand(this.gameState, 230, 520, "assets/images/right_hand.png", HandType.RIGHT_HAND);
 
 			// Lives Sprites
 			lives = new Vector.<Sprite>();
 			for (var i: Number = 0; i < NUM_LIVES; i++) {
 				var live: Sprite = new Sprite();
-				live.addChild(new Bitmap(gameState.game.resourceMap["images/heart.png"].bitmapData));
+				live.addChild(new Bitmap(gameState.game.resourceMap["assets/images/heart.png"].bitmapData));
 				live.x = (i + 1) * 20;
 				live.y = 20;
 				gameState.game.addChild(live);

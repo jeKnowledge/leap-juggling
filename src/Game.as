@@ -29,11 +29,11 @@
 		private var currentState: State;
 		
 		// Resources
-		public var resourceURLs: Array = [ "assets/images/player.png", "assets/images/ball.png", "assets/images/left_hand.png",
-										   "assets/images/right_hand.png", "assets/images/heart.png", "assets/images/background_image.png",
-										   "assets/images/checkbox_checked.png", "assets/images/checkbox_unchecked.png"];
+		public var resourceURLs: Array = [ "images/player.png", "images/ball.png", "images/left_hand.png",
+										   "images/right_hand.png", "images/heart.png", "images/background_image.png",
+										   "images/checkbox_checked.png", "images/checkbox_unchecked.png"];
 		
-		public var soundURLs: Array = [ "assets/sounds/launch.mp3", "assets/sounds/circus.mp3", "assets/sounds/transition.mp3" ];
+		public var soundURLs: Array = [ "sounds/launch.mp3", "sounds/circus.mp3", "sounds/transition.mp3" ];
 		
 		public var soundChannel: SoundChannel;
 		public var volumeAdjust: SoundTransform;
@@ -123,9 +123,8 @@
 				removeChildAt(0);
 			}
 			
-			// Add background image again
 			this.backgroundImage = new Sprite();
-			this.backgroundImage.addChild(this.resourceMap["assets/images/background_image.png"]);
+			this.backgroundImage.addChild(this.resourceMap["images/background_image.png"]);
 			this.backgroundImage.width = this.stage.stageWidth;
 			this.backgroundImage.height = this.stage.stageHeight;
 			this.addChild(this.backgroundImage);
