@@ -19,40 +19,44 @@
 		
 		override public function setup(): void {
 			this.textFields = new CustomTextFields(this.game);
+			
+			// Player name input field
 			this.inputField = new TextField();
 			this.game.addChild(inputField);
-			this.inputField.defaultTextFormat = new TextFormat('pixelmix', 20, 0x000);
+			this.inputField.defaultTextFormat = new TextFormat('pixelmix', 30, 0x000);
+			this.inputField.type = TextFieldType.INPUT;
 			this.inputField.border = true;
 			this.inputField.width = 400;
-			this.inputField.height = 50;
+			this.inputField.height = 40;
 			this.inputField.x = 200;
 			this.inputField.y = 250;
-			this.inputField.type = TextFieldType.INPUT;
 					
 			textFields.createCustomTextField("game-over", "GAME OVER", 300, 150);
-			textFields.createCustomTextField("username", "Enter your Username", 190, 200);
+			textFields.createCustomTextField("username", "Enter your username", 190, 200);
 			textFields.createCustomTextField("restart", "Restart", 200, 400);
 			textFields.createCustomTextField("menu", "Menu", 500, 400);
 		}
 		
 		// Sends the User score to the Server
-		public function sendHighScores(): void {
+		public function sendHighScore(): void {
 			if(inputField.text == "") {
-				var randomName: int = int(randomNames.length * Math.random());
-				game.highScoreSender.sendScore(randomNames[randomName], this.score);
+				var randomNumber: int = int(randomNames.length * Math.random());
+				game.highScoreSender.sendScore(randomNames[randomNumber], score);
 			} else {
-				game.highScoreSender.sendScore(inputField.text, this.score);
+				game.highScoreSender.sendScore(inputField.text, score);
 			}
 		}
 		
 		override public function update(): void {
 			if (game.checkBounds(textFields.getKeyValue("restart")) && game.mouseDown) {
 				game.mouseDown = false;
-				sendHighScores();
+				
+				sendHighScore();
 				this.game.changeState(this.lastState);
 			} else if (game.checkBounds(textFields.getKeyValue("menu")) && game.mouseDown) {
 				game.mouseDown = false;
-				sendHighScores();
+				
+				sendHighScore();
 				this.game.changeState(new MenuState(this.game));	
 			} else if (game.keyMap[Keyboard.ENTER]) {
 				sendHighScores();
