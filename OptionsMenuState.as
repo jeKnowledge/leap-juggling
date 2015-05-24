@@ -19,32 +19,37 @@
 			textFields.createCustomTextField("volume", "[U] Volume Up\n[D] Volume Down", 145, 160);
 			textFields.createCustomTextField("menu", "Back", 350, 500);
 			
-			leapModeCheckBox = new CheckBox(this, 500, 105);
+			leapModeCheckBox = new CheckBox(this, 500, 105, game.settings.leapMode);
 		}
 		
 		override public function update(): void {
 			if (game.checkBounds(textFields.getKeyValue("menu")) && game.mouseDown) {
 				game.mouseDown = false;
-				this.game.saveSettings();
-				this.game.changeState(new MenuState(this.game));
+				
+				game.changeState(new MenuState(this.game));
 			} else if (game.keyMap[Keyboard.U]) {
-				if ((this.game.settings.volume + 0.1) <= 1) {
-					this.game.settings.volume += 0.1;
+				if ((game.settings.volume + 0.1) <= 1) {
+					game.settings.volume += 0.1;
 					game.keyMap[Keyboard.U] = false;
+					game.saveSettings();
 				}
 			} else if (game.keyMap[Keyboard.D]) {
 				if((this.game.settings.volume - 0.1) >= 0) {
 					this.game.settings.volume -= 0.1;
 					game.keyMap[Keyboard.D] = false;
+					game.saveSettings();
 				}
-			} else if (game.checkBounds(textFields.getKeyValue("leap_mode")) && game.mouseDown) {
+			} else if ((game.checkBounds(textFields.getKeyValue("leap_mode")) || game.checkBounds(leapModeCheckBox.sprite)) && game.mouseDown) {
 				game.mouseDown = false;
+				
 				leapModeCheckBox.check();
-				if (leapModeCheckBox.getChecked() == true) {
-					game.settings.leapMode = true;
-				} else {
+				if (game.settings.leapMode) {
 					game.settings.leapMode = false;
+				} else {
+					game.settings.leapMode = true;
 				}
+				
+				game.saveSettings();
 			}
 		}
 

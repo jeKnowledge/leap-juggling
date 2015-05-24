@@ -9,11 +9,16 @@
 		public var sprite: Sprite;
 		private var checked: Boolean = false;
 		
-		public function CheckBox(state: State, x: int, y: int) {
+		public function CheckBox(state: State, x: int, y: int, checked: Boolean) {
 			this.state = state;
+			this.checked = checked;
 			
 			sprite = new Sprite();
-			sprite.addChild(state.game.resourceMap["images/checkbox_unchecked.png"]);
+			if (checked) {
+				sprite.addChild(state.game.resourceMap["images/checkbox_checked.png"]);
+			} else {
+				sprite.addChild(state.game.resourceMap["images/checkbox_unchecked.png"]);
+			}
 			sprite.x = x;
 			sprite.y = y;
 			sprite.height = 35;
