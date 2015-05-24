@@ -31,8 +31,6 @@
 
 		// Sounds
 		public var launchSound: Sound;
-		public var gameSound: Sound;
-		public var volumeAdjust: SoundTransform;
 		public var transitionSound: Sound;
 
 		public function GameState(game: Game) {
@@ -87,13 +85,7 @@
 
 			// Sounds
 			launchSound = game.resourceMap["sounds/launch.mp3"];
-			gameSound = game.resourceMap["sounds/circus.mp3"];
 			transitionSound = game.resourceMap["sounds/transition.mp3"];
-			
-			volumeAdjust = new SoundTransform();
-			volumeAdjust.volume = game.settings.volume;
-			
-			gameSound.play(0, 1, volumeAdjust);
 		}
 
 		override public function update(): void { }

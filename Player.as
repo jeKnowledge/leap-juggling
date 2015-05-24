@@ -61,7 +61,7 @@
 					ballToLaunch.launch(gameState.ballChargeBeginning);
 				}
 				
-				gameState.launchSound.play(0, 1, gameState.volumeAdjust);
+				gameState.launchSound.play(0, 1, gameState.game.volumeAdjust);
 			}
 		}
 

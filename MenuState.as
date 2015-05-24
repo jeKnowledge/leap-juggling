@@ -27,6 +27,8 @@
 			textFields.createCustomTextField("menu-play", "[1] Play", 280, 200);
 			textFields.createCustomTextField("menu-options", "[2] Options", 280, 300);
 			textFields.createCustomTextField("menu-credits", "[3] Credits", 280, 400);
+			
+			game.updateVolume();
 		}
 		
 		override public function update(): void {

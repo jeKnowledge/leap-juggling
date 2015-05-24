@@ -41,6 +41,7 @@
 				loader.load(new URLRequest(resourceURL));
 			}
 
+			// Sounds
 			for each (var soundURL in game.soundURLs) {
 				var s: Sound = new Sound();
 				s.addEventListener(Event.COMPLETE, onSoundLoaded);
@@ -55,7 +56,10 @@
 			startState = getTimer();
 		}
 		
-		function loadingOver(event: TimerEvent):void {
+		function loadingOver(event: TimerEvent): void {
+			// Start Game Sound
+			game.soundChannel = game.resourceMap["sounds/circus.mp3"].play();
+			
 			game.changeState(new MenuState(game));
 		}
 		
