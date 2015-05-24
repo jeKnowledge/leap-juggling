@@ -20,6 +20,8 @@
 	import flash.filesystem.FileStream;
 	import flash.display.Shape;
 	import flash.display.DisplayObject;
+	import flash.media.SoundTransform;
+	import flash.media.SoundChannel;
 
 	public class Game extends MovieClip {
 
@@ -32,6 +34,9 @@
 										   "images/checkbox_checked.png", "images/checkbox_unchecked.png"];
 		
 		public var soundURLs: Array = [ "sounds/launch.mp3", "sounds/circus.mp3", "sounds/transition.mp3" ];
+		
+		public var soundChannel: SoundChannel;
+		public var volumeAdjust: SoundTransform;
 
 		// Maps
 		public var resourceMap: Object;
@@ -43,7 +48,7 @@
 		public var leapMotion: LeapListener;
 		
 		// Settings
-		public var settings: Object = { leapMode: false, volume: 1, windowSize: 'size' };
+		public var settings: Object;
 		
 		// Background Image
 		public var backgroundImage: Sprite;
@@ -52,13 +57,16 @@
 		public var highScoreSender: HighScoreSender;
 
 		public function Game() {
+			// Maps
 			resourceMap = new Object();
 			keyMap = new Object();
 
+			// Leap Motion
 			leapMotion = new LeapListener(this);
 			leapMap = new Object();
 			
 			// Load Settings
+			settings = new Object();
 			loadSettings();
 			
 			// Events
@@ -72,6 +80,10 @@
 			
 			// Server
 			highScoreSender = new HighScoreSender("http://malabarismo.herokuapp.com/new-score");
+			
+			// Sounds
+			soundChannel = new SoundChannel();
+			volumeAdjust = new SoundTransform();
 			
 			// Start game on the menu
 			currentState = new LoadingState(this);
@@ -187,6 +199,11 @@
 			rectBorder.graphics.lineTo(x, y + height);
 			rectBorder.graphics.lineTo(x, y);
 			return rectBorder;
+		}
+		
+		public function updateVolume(): void {
+			volumeAdjust.volume = settings.volume;
+			soundChannel.soundTransform = volumeAdjust;
 		}
 	}
 
