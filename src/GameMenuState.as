@@ -19,24 +19,27 @@
 			textFields.createCustomTextField("gamemenu-endless", "Endless", 280, 200);
 			textFields.createCustomTextField("gamemenu-challenge", "Challenge", 280, 300);
 			textFields.createCustomTextField("menu", "Back", 350, 500);
+			
 		}
 		
 		override public function update(): void {
-			if (game.checkBounds(textFields.getKeyValue("gamemenu-tutorial")) && this.game.mouseDown) {
-				this.game.mouseDown = false;
+			game.updateLeapPointer();
+			
+			if (game.checkBounds(textFields.getKeyValue("gamemenu-tutorial")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
 				if (game.settings.leapMode) {
 					this.game.changeState(new TutorialLeapGameState(this.game));
 				} else {
 					this.game.changeState(new TutorialMouseGameState(this.game));
 				}
-			} else if (game.checkBounds(textFields.getKeyValue("gamemenu-endless")) && this.game.mouseDown) {
-				this.game.mouseDown = false;
+			} else if (game.checkBounds(textFields.getKeyValue("gamemenu-endless")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
 				this.game.changeState(new EndlessGameState(this.game));
-			} else if (this.game.checkBounds(textFields.getKeyValue("gamemenu-challenge")) && this.game.mouseDown) {
-				this.game.mouseDown = false;
+			} else if (this.game.checkBounds(textFields.getKeyValue("gamemenu-challenge")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
 				this.game.changeState(new ChallangeGameState(this.game));
-			} else if (this.game.checkBounds(textFields.getKeyValue("menu")) && this.game.mouseDown) {
-				this.game.mouseDown = false;
+			} else if (this.game.checkBounds(textFields.getKeyValue("menu")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
 				this.game.changeState(new MenuState(this.game));
 			}
 		}

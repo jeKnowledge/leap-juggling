@@ -7,6 +7,8 @@
 	
 	public class MenuState extends State {
 		
+		public var pointer: Sprite;
+		
 		public function MenuState(game: Game) {
 			super(game);
 			
@@ -32,16 +34,24 @@
 			game.backgroundImage.height = game.stage.stageHeight;
 			game.addChild(game.backgroundImage);
 			game.setChildIndex(game.backgroundImage, 0);
+			
+			game.pointer = new Sprite();
+			game.pointer.addChild(game.resourceMap["assets/images/point.png"]);
+			game.addChild(game.pointer);
 		}
 		
 		override public function update(): void {
-			if (this.game.checkBounds(textFields.getKeyValue("menu-play")) && this.game.mouseDown) {
-				this.game.mouseDown = false;
+			game.updateLeapPointer();
+			
+			if (this.game.checkBounds(textFields.getKeyValue("menu-play")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
 				this.game.changeState(new GameMenuState(this.game));
-			} else if (game.checkBounds(textFields.getKeyValue("menu-options")) && this.game.mouseDown) {
+			} else if (game.checkBounds(textFields.getKeyValue("menu-options")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
 				this.game.mouseDown = false;
 				this.game.changeState(new OptionsMenuState(this.game));
-			} else if (game.checkBounds(textFields.getKeyValue("menu-credits")) && this.game.mouseDown) {
+			} else if (game.checkBounds(textFields.getKeyValue("menu-credits")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
 				this.game.mouseDown = false;
 				this.game.changeState(new CreditsState(this.game));
 			}
