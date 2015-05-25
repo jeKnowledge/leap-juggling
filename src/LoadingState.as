@@ -16,9 +16,6 @@
 	import flash.media.Sound;
     import flash.net.URLLoader;
     import flash.net.URLRequest;
-	import flash.filesystem.File;
-	import flash.filesystem.FileMode;
-	import flash.filesystem.FileStream;
 	import flash.utils.Timer;
 	import flash.display.Shape;
 	import flash.utils.getTimer;
