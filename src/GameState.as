@@ -77,7 +77,7 @@
 				textFields.updateCustomTextField("pause", "");
 			} else {
 				paused = true;
-				textFields.updateCustomTextField("pause", "Game paused\nPress Q to quit.");
+				textFields.updateCustomTextField("pause", "  Game paused\nPress Q to quit");
 			}
 		}
 
@@ -101,7 +101,7 @@
 			
 			// TextFields
 			textFields = new CustomTextFields(game);
-			textFields.createCustomTextField("pause", "", 280, 100);
+			textFields.createCustomTextField("pause", "", 240, 100);
 		}
 
 		override public function update(): void { }

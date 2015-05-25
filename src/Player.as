@@ -79,8 +79,7 @@
 
 			// Hands
 			this.leftHand = new GameHand(this.gameState, 440, 520, "assets/images/left_hand.png", HandType.LEFT_HAND);
-			this.rightHand = new GameHand(this.gameState, 230, 520, "assets/images/right_hand.png", HandType.RIGHT_HAND);
-			this.rightHand.sprite.visible = false;
+			this.rightHand = new GameHand(this.gameState, 200, 520, "assets/images/right_hand.png", HandType.RIGHT_HAND);
 
 			// Lives Sprites
 			lives = new Vector.<Sprite>();
@@ -129,7 +128,7 @@
 						ballsInLeftHand[0].vx = -0.05 * (leftHand.sprite.x - rightHand.sprite.x);
 						ballsInLeftHand[0].state = BallPosition.NONE;
 
-						var timer: Timer = new Timer(200, 1);
+						var timer: Timer = new Timer(500, 1);
 						timer.addEventListener("timer", ballsInLeftHand[0].updateCanCollide);
 						timer.start();
 						score++;
