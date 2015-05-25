@@ -80,7 +80,6 @@
 			// Hands
 			this.leftHand = new GameHand(this.gameState, 440, 520, "assets/images/left_hand.png", HandType.LEFT_HAND);
 			this.rightHand = new GameHand(this.gameState, 230, 520, "assets/images/right_hand.png", HandType.RIGHT_HAND);
-			this.rightHand.sprite.visible = false;
 
 			// Lives Sprites
 			lives = new Vector.<Sprite>();

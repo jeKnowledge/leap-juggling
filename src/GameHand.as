@@ -17,6 +17,8 @@
 			sprite.addChild(new Bitmap(gameState.game.resourceMap[imageName].bitmapData));
 			sprite.x = xPosition;
 			sprite.y = yPosition;
+			sprite.width = 150;
+			sprite.height = 150;
 			gameState.game.addChild(sprite);
 		}
 
