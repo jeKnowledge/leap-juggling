@@ -127,7 +127,7 @@
 						
 						ballsInLeftHand[0].canCollide = false;
 						ballsInLeftHand[0].vy = -10;
-						ballsInLeftHand[0].vx = -0.05 * (leftHand.sprite.x - rightHand.sprite.x);
+						ballsInLeftHand[0].vx = -0.075 * (leftHand.sprite.x - rightHand.sprite.x);
 						ballsInLeftHand[0].state = BallPosition.NONE;
 
 						var timer: Timer = new Timer(500, 1);
