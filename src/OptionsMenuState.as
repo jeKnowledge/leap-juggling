@@ -74,6 +74,7 @@
 				leapModeCheckBox.check();
 				if (game.settings.leapMode) {
 					game.settings.leapMode = false;
+					game.removeChild(game.pointer);
 				} else {
 					game.settings.leapMode = true;
 					
