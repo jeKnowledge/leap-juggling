@@ -93,21 +93,6 @@
 			currentState.setup();
 		}
 		
-		public function updateLeapPointer(): void {
-			if (this.settings.leapMode) {
-				this.pointer.x = this.leapMotion.hands.rightX + 250;
-				this.pointer.y = -this.leapMotion.hands.rightY + 500;
-			}
-		}
-		
-		public function checkBounds(object: DisplayObject): Boolean {
-			if (this.leapMotion.hands.rightX + 250 >= object.x && this.leapMotion.hands.rightX + 250 <= object.x + object.width && -this.leapMotion.hands.rightY + 500 >= object.y && -this.leapMotion.hands.rightY + 500 <= object.y + object.height) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-		
 		public function reportKeyDown(event: KeyboardEvent): void {
 			keyMap[event.keyCode] = true;
 		}
@@ -229,6 +214,22 @@
 			volumeAdjust.volume = settings.volume;
 			soundChannel.soundTransform = volumeAdjust;
 		}
+		
+		public function updateLeapPointer(): void {
+			if (this.settings.leapMode) {
+				this.pointer.x = this.leapMotion.hands.rightX + 250;
+				this.pointer.y = -this.leapMotion.hands.rightY + 500;
+			}
+		}
+		
+		public function checkBounds(object: DisplayObject): Boolean {
+			if (this.leapMotion.hands.rightX + 250 >= object.x && this.leapMotion.hands.rightX + 250 <= object.x + object.width && -this.leapMotion.hands.rightY + 500 >= object.y && -this.leapMotion.hands.rightY + 500 <= object.y + object.height) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
 	}
 
 }
