@@ -17,6 +17,7 @@
 
 		// Game Settings
 		protected var NUM_BALLS: int;
+		public var name: String;
 
 		// Player
 		public var player: Player;

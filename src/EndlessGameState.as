@@ -20,6 +20,7 @@
 			
 			// Game Settings
 			NUM_BALLS = 4;
+			this.name = "endless";
 		}
 
 		public override function setup(): void {

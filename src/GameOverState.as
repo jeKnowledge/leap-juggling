@@ -8,11 +8,11 @@
 	public class GameOverState extends State {
 
 		private var score: int;
-		private var lastState: State;
+		private var lastState: GameState;
 		public var inputField: TextField;
 		private static var randomNames: Array = ["Tiago", "Jason", "David", "Inês", "Margarida", "João", "Marie", "Alex", "Jordan", "André"];
 
-		public function GameOverState(game: Game, score: int, lastState: State) {
+		public function GameOverState(game: Game, score: int, lastState: GameState) {
 			super(game);
 
 			this.score = score;
@@ -45,9 +45,9 @@
 		public function sendHighScore(): void {
 			if (inputField.text == "") {
 				var randomNumber: int = int(randomNames.length * Math.random());
-				game.highScoreSender.sendScore(randomNames[randomNumber], score);
+				game.highScoreSender.sendScore(randomNames[randomNumber], score, lastState.name);
 			} else {
-				game.highScoreSender.sendScore(inputField.text, score);
+				game.highScoreSender.sendScore(inputField.text, score, lastState.name);
 			}
 		}
 

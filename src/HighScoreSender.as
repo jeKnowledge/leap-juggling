@@ -11,11 +11,11 @@
 			this.url = url;
 		}
 		
-		public function sendScore(user: String, score: int) {
+		public function sendScore(user: String, score: int, gameMode: String) {
 			var loader: URLLoader = new URLLoader();
 			var request: URLRequest = new URLRequest();
 
-			var data: String = "?score=" + score.toString() + "&name=" + user;
+			var data: String = "?score=" + score.toString() + "&name=" + user + "&gameMode=" + gameMode;
 			
 			request.url = this.url + data;
 			request.method = URLRequestMethod.POST;
