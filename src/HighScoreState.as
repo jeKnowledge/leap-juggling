@@ -18,6 +18,7 @@
 			this.url = url;
 			this.gameMode = gameMode;
 			this.useLeapPointer = true;
+			highScoresString = "";
 		}
 		
 		override public function setup(): void {
@@ -33,7 +34,7 @@
 		
 		override public function update(): void {
 			this.highScores = game.serverCommunicator.highScores;
-			if (this.highScores != null && highScoresString == null) {
+			if (this.highScores != null && highScoresString == "") {
 				if (this.highScores.length == 0) {
 					highScoresString = "There are no highscores";
 				} else {
