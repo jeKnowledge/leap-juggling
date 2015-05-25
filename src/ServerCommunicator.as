@@ -5,6 +5,8 @@
 	
 	public class ServerCommunicator {
 		
+		public var highScores: Object;
+		
 		public function ServerCommunicator() { }
 		
 		public function sendScore(url: String, user: String, score: int, gameMode: String) {
@@ -20,7 +22,7 @@
 			loader.load(request);
 		}
 		
-		public function getHighScores(url: String, gameMode: String) {
+		public function getHighScores(url: String) {
 			var loader: URLLoader = new URLLoader();
 			var request: URLRequest = new URLRequest();
 			
@@ -29,6 +31,8 @@
  
 			loader.addEventListener(Event.COMPLETE, getHighScoresComplete);
 			loader.load(request);
+			trace(loader.data);
+			
 		}
 		
 		private function sendScoreComplete(e: Event): void {
@@ -36,7 +40,8 @@
 		}
 		
 		private function getHighScoresComplete(e: Event): void {
-			trace(e.target.data);
+			highScores = JSON.parse(e.target.data);
+			//trace(highScores);
 		}
 		
 	}
