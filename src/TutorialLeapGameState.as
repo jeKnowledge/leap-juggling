@@ -27,7 +27,7 @@
 
 		public override function setup(): void {
 			super.setup();
-			this.useLeapPointer = false;
+			
 			this.textFields.createCustomTextField("tutorial_text", "", 20, 80, 18);
 		}
 

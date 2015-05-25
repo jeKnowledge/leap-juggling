@@ -83,9 +83,9 @@
 					sendHighScore();
 					this.game.changeState(new MenuState(this.game));
 				} else if (event.target == textFields.getKeyValue("challenge-highscores")) {
-					this.game.changeState(new HighScoreState(this.game, "http://malabarismo.herokuapp.com/top-challenge", "Challenge"));
+					this.game.changeState(new HighScoreState(this.game, "http://malabarismo.herokuapp.com/top-challenge", "Challenge", this));
 				} else if (event.target == textFields.getKeyValue("endless-highscores")) {
-					this.game.changeState(new HighScoreState(this.game, "http://malabarismo.herokuapp.com/top-endless", "Endless"));
+					this.game.changeState(new HighScoreState(this.game, "http://malabarismo.herokuapp.com/top-endless", "Endless", this));
 				}
 			}
 		}
