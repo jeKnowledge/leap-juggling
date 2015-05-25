@@ -25,7 +25,15 @@
 			this.textFields[key] = textField;
 		}
 		
-		public function updateCustomTextField(key: String, text: String): void {
+		public function updateCustomTextField(key: String, text: String, x: int = -1, y: int = -1): void {
+			if (x != -1) {
+				this.textFields[key].x = x;
+			}
+			
+			if (y != -1) {
+				this.textFields[key].y = y;
+			}
+			
 			this.textFields[key].text = text;
 		}
 		

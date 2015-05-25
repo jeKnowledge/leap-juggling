@@ -70,7 +70,7 @@
 						currentLevel++;
 					}
 				} else if (currentLevel == 4) {
-					this.textFields.updateCustomTextField("tutorial_text", " Now try it with three balls and continue \nwhen you feel ready for the real challenge! \n\n\t\tPress enter to continue");
+					this.textFields.updateCustomTextField("tutorial_text", " Now try it with three balls and continue \nwhen you feel ready for the real challenge! \n\n\t\t\t\tPress enter to continue", 110);
 
 					this.addBalls(1);
 					this.resetBallPosition();
@@ -93,7 +93,7 @@
 
 				// Check if the player lost
 				if (player.lives.length == 0) {
-					this.textFields.updateCustomTextField("tutorial_text", "\tUh Oh! You lost all your lives!\nPress Enter to Restart Tutorial.");
+					this.textFields.updateCustomTextField("tutorial_text", "\tUh Oh! You lost all your lives!\nPress Enter to Restart Tutorial.", 170);
 					if(game.keyMap[Keyboard.ENTER]) {
 						game.keyMap[Keyboard.ENTER] = false;
 						game.changeState(new TutorialMouseGameState(this.game));

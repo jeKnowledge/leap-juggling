@@ -115,6 +115,14 @@
 			while (numChildren > 0) {
 				removeChildAt(0);
 			}
+		}
+		
+		public function changeState(newState: State) {
+			clearStage();
+
+			addEventListener(Event.ENTER_FRAME, enterFrameHandler);
+			newState.setup();
+			currentState = newState;
 			
 			// Add background image again
 			this.backgroundImage = new Sprite();
@@ -129,14 +137,6 @@
 				pointer.addChild(resourceMap["assets/images/point.png"]);
 				this.addChild(pointer);
 			}
-		}
-		
-		public function changeState(newState: State) {
-			clearStage();
-
-			addEventListener(Event.ENTER_FRAME, enterFrameHandler);
-			newState.setup();
-			currentState = newState;
 		}
 		
 		private function stringToBoolean(string: String): Boolean {
