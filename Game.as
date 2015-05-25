@@ -55,7 +55,7 @@
 		public var backgroundImage: Sprite;
 		
 		// Server
-		public var highScoreSender: HighScoreSender;
+		public var serverCommunicator: ServerCommunicator;
 
 		public function Game() {
 			// Maps
@@ -80,7 +80,7 @@
 			stage.addEventListener(MouseEvent.MOUSE_UP, reportMouseUp);
 			
 			// Server
-			highScoreSender = new HighScoreSender("http://malabarismo.herokuapp.com/new-score");
+			serverCommunicator = new ServerCommunicator();
 			
 			// Sounds
 			soundChannel = new SoundChannel();

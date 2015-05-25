@@ -45,9 +45,9 @@
 		public function sendHighScore(): void {
 			if (inputField.text == "") {
 				var randomNumber: int = int(randomNames.length * Math.random());
-				game.highScoreSender.sendScore(randomNames[randomNumber], score, lastState.name);
+				game.serverCommunicator.sendScore("http://malabarismo.herokuapp.com/new-score", randomNames[randomNumber], score, lastState.name);
 			} else {
-				game.highScoreSender.sendScore(inputField.text, score, lastState.name);
+				game.serverCommunicator.sendScore("http://malabarismo.herokuapp.com/new-score", inputField.text, score, lastState.name);
 			}
 		}
 

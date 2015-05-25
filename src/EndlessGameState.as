@@ -34,6 +34,7 @@
 			if (game.keyMap[Keyboard.ESCAPE]) {
 				game.keyMap[Keyboard.ESCAPE] = false;
 				changePaused();
+				game.serverCommunicator.getHighScores("http://malabarismo.herokuapp.com/top-challenge", "ola");
 			}
 			
 			// Exit key
