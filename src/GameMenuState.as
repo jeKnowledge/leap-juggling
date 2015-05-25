@@ -24,6 +24,7 @@
 		}
 		
 		override public function update(): void {
+			this.useLeapPointer = true;
 			game.updateLeapPointer();
 			
 			if (game.checkBounds(textFields.getKeyValue("gamemenu-tutorial")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
@@ -43,6 +44,8 @@
 				game.leapMap[LeapPosition.SCREEN_TAP] = false;
 				this.game.changeState(new MenuState(this.game));
 			}
+			
+			game.leapMap[LeapPosition.SCREEN_TAP] = false;
 		}
 
 		override public function onMouseClick(event: MouseEvent): void {

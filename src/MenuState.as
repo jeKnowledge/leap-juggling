@@ -20,6 +20,7 @@
 		}
 		
 		override public function setup(): void {
+			this.useLeapPointer = true;
 			this.textFields = new CustomTextFields(this.game);
 			
 			textFields.createCustomTextField("menu-play", "Play", 280, 200);
@@ -54,6 +55,8 @@
 				game.leapMap[LeapPosition.SCREEN_TAP] = false;
 				this.game.changeState(new CreditsState(this.game));
 			}
+			
+			game.leapMap[LeapPosition.SCREEN_TAP] = false;
 		}
 
 		override public function onMouseClick(event: MouseEvent): void {

@@ -86,6 +86,7 @@
 			player = new Player(this);
 			player.setup();
 			
+			this.useLeapPointer = false;
 			// Ball Sprites
 			balls = new Vector.<Ball>();
 			for (var i: int = 0; i < NUM_BALLS; i++) {

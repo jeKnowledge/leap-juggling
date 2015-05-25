@@ -94,14 +94,14 @@
 		}
 		
 		public function updateLeapPointer(): void {
-			if(this.settings.leapMode) {
+			if (this.settings.leapMode) {
 				this.pointer.x = this.leapMotion.hands.rightX + 250;
-				this.pointer.y = this.leapMotion.hands.rightY + 100;
+				this.pointer.y = -this.leapMotion.hands.rightY + 500;
 			}
 		}
 		
 		public function checkBounds(object: DisplayObject): Boolean {
-			if(this.leapMotion.hands.rightX + 250 >= object.x && this.leapMotion.hands.rightX + 250 <= object.x + object.width && this.leapMotion.hands.rightY + 100 >= object.y && this.leapMotion.hands.rightY + 100 <= object.y + object.height) {
+			if (this.leapMotion.hands.rightX + 250 >= object.x && this.leapMotion.hands.rightX + 250 <= object.x + object.width && -this.leapMotion.hands.rightY + 500 >= object.y && -this.leapMotion.hands.rightY + 500 <= object.y + object.height) {
 				return true;
 			} else {
 				return false;

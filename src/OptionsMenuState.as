@@ -27,8 +27,10 @@
 			game.updateLeapPointer();
 			
 			if (game.checkBounds(textFields.getKeyValue("menu")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
 				game.changeState(new MenuState(this.game));
 			} else if ((game.checkBounds(textFields.getKeyValue("leap_mode")) || game.checkBounds(leapModeCheckBox.sprite)) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
 				leapModeCheckBox.check();
 				if (game.settings.leapMode) {
 					game.settings.leapMode = false;
@@ -56,6 +58,8 @@
 					game.updateVolume();
 				}
 			}
+			
+			game.leapMap[LeapPosition.SCREEN_TAP] = false;
 		}
 		
 		override public function onMouseClick(event: MouseEvent): void {

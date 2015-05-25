@@ -8,6 +8,8 @@
 		public var game: Game;
 		public var textFields: CustomTextFields;
 		
+		public var useLeapPointer: Boolean;
+		
 		public function State(game: Game) {
 			this.game = game;
 			
