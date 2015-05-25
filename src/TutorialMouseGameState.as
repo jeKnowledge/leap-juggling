@@ -28,7 +28,7 @@
 		public override function setup(): void {
 			super.setup();
 
-			this.textFields.createCustomTextField("tutorial_text", "", 130, 250, 20);
+			this.textFields.createCustomTextField("tutorial_text", "", 350, 250, 20);
 		}
 
 		public override function update(): void {
@@ -59,7 +59,7 @@
 						currentLevel++;
 					}
 				} else if (currentLevel == 2) {
-					this.textFields.updateCustomTextField("tutorial_text", "Good job ! Now lets scale it up a bit. \n\n\t\t\t\ttwo balls now! \n\t\tPress enter to continue");
+					this.textFields.updateCustomTextField("tutorial_text", "Good job ! Now lets scale it up a bit. \n\n\t\t\t\t\tTwo balls now ! \n\t\t\tPress enter to continue");
 
 					this.addBalls(1);
 					this.resetBallPosition();
@@ -71,7 +71,7 @@
 						currentLevel++;
 					}
 				} else if (currentLevel == 4) {
-					this.textFields.updateCustomTextField("tutorial_text", " Now try it with three balls and continue \nwhen you feel ready for the real challenge! \n\n\t\t\t\tPress enter to continue", 110);
+					this.textFields.updateCustomTextField("tutorial_text", "Now try it with three balls and continue when\n\tyou feel ready for the real challenge! \n\n\t\t\t\tPress enter to continue");
 
 					this.addBalls(1);
 					this.resetBallPosition();

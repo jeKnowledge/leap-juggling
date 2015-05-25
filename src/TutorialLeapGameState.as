@@ -28,7 +28,7 @@
 		public override function setup(): void {
 			super.setup();
 			
-			this.textFields.createCustomTextField("tutorial_text", "", 20, 80, 18);
+			this.textFields.createCustomTextField("tutorial_text", "", 350, 80, 18);
 		}
 
 		public override function update(): void {

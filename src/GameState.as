@@ -102,7 +102,7 @@
 			
 			// TextFields
 			textFields = new CustomTextFields(game);
-			textFields.createCustomTextField("pause", "", 240, 100);
+			textFields.createCustomTextField("pause", "", 350, 100);
 		}
 
 		override public function update(): void { }

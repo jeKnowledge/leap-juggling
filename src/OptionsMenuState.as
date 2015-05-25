@@ -19,18 +19,19 @@
 		override public function setup(): void {
 			this.textFields = new CustomTextFields(this.game);
 
-			textFields.createCustomTextField("leap_mode", "Leap Motion Mode", 145, 100);
-			textFields.createCustomTextField("volume", "[U] Volume Up\n[D] Volume Down", 145, 160);
-			textFields.createCustomTextField("menu", "Back", 350, 400);
+			textFields.createCustomTextField("leap_mode", "Leap Motion Mode", 350, 100, 25);
+			textFields.createCustomTextField("volume_up", "Press U to higher the volume", 350, 150, 25);
+			textFields.createCustomTextField("volume_down", "Press D to lower the volume", 350, 200, 25);
+			textFields.createCustomTextField("back", "Back", 350, 400, 20);
 
-			leapModeCheckBox = new CheckBox(this, 500, 105, game.settings.leapMode);
+			leapModeCheckBox = new CheckBox(this, 560, 100, game.settings.leapMode);
 		}
 
 		override public function update(): void {
 			if (game.settings.leapMode) {
 				game.updateLeapPointer();
 
-				if (game.checkBounds(textFields.getKeyValue("menu")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				if (game.checkBounds(textFields.getKeyValue("back")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
 					game.changeState(new MenuState(this.game));
 				} else if ((game.checkBounds(textFields.getKeyValue("leap_mode")) || game.checkBounds(leapModeCheckBox.sprite)) && game.leapMap[LeapPosition.SCREEN_TAP]) {
 					leapModeCheckBox.check();
@@ -71,7 +72,7 @@
 
 		override public function onMouseClick(event: MouseEvent): void {
 			if (!game.settings.leapMode) {
-				if (event.target == textFields.getKeyValue("menu")) {
+				if (event.target == textFields.getKeyValue("back")) {
 					game.changeState(new MenuState(this.game));
 				} else if (event.target == textFields.getKeyValue("leap_mode") || event.target == leapModeCheckBox.sprite) {
 					leapModeCheckBox.check();

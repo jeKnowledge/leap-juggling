@@ -31,7 +31,6 @@
  
 			loader.addEventListener(Event.COMPLETE, getHighScoresComplete);
 			loader.load(request);
-			trace(loader.data);
 			
 		}
 		
@@ -40,8 +39,8 @@
 		}
 		
 		private function getHighScoresComplete(e: Event): void {
+			trace("High scores recieved.");
 			highScores = JSON.parse(e.target.data);
-			//trace(highScores);
 		}
 		
 	}
