@@ -20,11 +20,11 @@
 		override public function setup(): void {
 			this.textFields = new CustomTextFields(this.game);
 
-			textFields.createCustomTextField("info", "Game developed by:", 250, 100, 25);
-			textFields.createCustomTextField("david_twitter", "@davidrfgomes", 250, 200, 25);
-			textFields.createCustomTextField("jb_twitter", "@JBAmaro", 250, 250, 25);
-			textFields.createCustomTextField("tiago_twitter", "@TiagoBotelho9", 250, 300, 25);
-			textFields.createCustomTextField("menu", "Back", 350, 400);
+			textFields.createCustomTextField("info", "Game developed by:", 350, 100, 25);
+			textFields.createCustomTextField("david_twitter", "@davidrfgomes", 350, 200, 25);
+			textFields.createCustomTextField("jb_twitter", "@JBAmaro", 350, 250, 25);
+			textFields.createCustomTextField("tiago_twitter", "@TiagoBotelho9", 350, 300, 25);
+			textFields.createCustomTextField("back", "Back", 350, 400, 20);
 		}
 
 		override public function update(): void {
@@ -40,7 +40,7 @@
 				} else if (game.checkBounds(textFields.getKeyValue("tiago_twitter")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
 					url = new URLRequest("https://twitter.com/TiagoBotelho9");
 					navigateToURL(url, "_blank");
-				} else if (game.checkBounds(textFields.getKeyValue("menu")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				} else if (game.checkBounds(textFields.getKeyValue("back")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
 					this.game.changeState(new MenuState(this.game));
 				}
 
@@ -59,7 +59,7 @@
 				} else if (event.target == textFields.getKeyValue("tiago_twitter")) {
 					url = new URLRequest("https://twitter.com/TiagoBotelho9");
 					navigateToURL(url, "_blank");
-				} else if (event.target == textFields.getKeyValue("menu")) {
+				} else if (event.target == textFields.getKeyValue("back")) {
 					this.game.changeState(new MenuState(this.game));
 				}
 			}

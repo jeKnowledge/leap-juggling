@@ -18,10 +18,10 @@
 		override public function setup(): void {
 			this.textFields = new CustomTextFields(this.game);
 
-			textFields.createCustomTextField("gamemenu-tutorial", "Tutorial", 280, 100);
-			textFields.createCustomTextField("gamemenu-endless", "Endless", 280, 200);
-			textFields.createCustomTextField("gamemenu-challenge", "Challenge", 280, 300);
-			textFields.createCustomTextField("menu", "Back", 350, 500);
+			textFields.createCustomTextField("gamemenu-tutorial", "Tutorial", 350, 150);
+			textFields.createCustomTextField("gamemenu-endless", "Endless", 350, 250);
+			textFields.createCustomTextField("gamemenu-challenge", "Challenge", 350, 350);
+			textFields.createCustomTextField("back", "Back", 350, 500, 20);
 		}
 
 		override public function update(): void {
@@ -38,7 +38,7 @@
 					this.game.changeState(new EndlessGameState(this.game));
 				} else if (game.checkBounds(textFields.getKeyValue("gamemenu-challenge")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
 					this.game.changeState(new ChallengeGameState(this.game));
-				} else if (game.checkBounds(textFields.getKeyValue("menu")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				} else if (game.checkBounds(textFields.getKeyValue("back")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
 					this.game.changeState(new MenuState(this.game));
 				}
 
@@ -58,7 +58,7 @@
 					this.game.changeState(new EndlessGameState(this.game));
 				} else if (event.target == textFields.getKeyValue("gamemenu-challenge")) {
 					this.game.changeState(new ChallengeGameState(this.game));
-				} else if (event.target == textFields.getKeyValue("menu")) {
+				} else if (event.target == textFields.getKeyValue("back")) {
 					this.game.changeState(new MenuState(this.game));
 				}
 			}

@@ -24,12 +24,12 @@
 		override public function setup(): void {
 			this.textFields = new CustomTextFields(this.game);
 
-			textFields.createCustomTextField("game-over", "GAME OVER", 300, 150);
-			textFields.createCustomTextField("username", "Enter your username", 190, 200);
-			textFields.createCustomTextField("challenge-highscores", "Challenge\nHighScores", 200, 300, 18);
-			textFields.createCustomTextField("endless-highscores", "Endless\nHighScores", 500, 300, 18);
-			textFields.createCustomTextField("restart", "Restart", 200, 400);
-			textFields.createCustomTextField("menu", "Menu", 500, 400);
+			textFields.createCustomTextField("game-over", "GAME OVER", 350, 150);
+			textFields.createCustomTextField("username", "Enter your username", 350, 200, 25);
+			textFields.createCustomTextField("challenge-highscores", "\tChallenge\nHighScores", 200, 300, 18);
+			textFields.createCustomTextField("endless-highscores", "\tEndless\nHighScores", 500, 300, 18);
+			textFields.createCustomTextField("restart", "Restart", 200, 400, 25);
+			textFields.createCustomTextField("back", "Menu", 500, 400, 25);
 
 			// Player name input field
 			this.inputField = new TextField();
@@ -60,7 +60,7 @@
 				if (game.checkBounds(textFields.getKeyValue("restart")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
 					sendHighScore();
 					this.game.changeState(this.lastState);
-				} else if (game.checkBounds(textFields.getKeyValue("menu")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				} else if (game.checkBounds(textFields.getKeyValue("back")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
 					sendHighScore();
 					this.game.changeState(new MenuState(this.game));
 				}
@@ -79,7 +79,7 @@
 				if (event.target == textFields.getKeyValue("restart")) {
 					sendHighScore();
 					this.game.changeState(this.lastState);
-				} else if (event.target == textFields.getKeyValue("menu")) {
+				} else if (event.target == textFields.getKeyValue("back")) {
 					sendHighScore();
 					this.game.changeState(new MenuState(this.game));
 				} else if (event.target == textFields.getKeyValue("challenge-highscores")) {

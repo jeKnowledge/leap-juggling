@@ -89,7 +89,7 @@
 
 			var backgroundRectangle: Shape = new Shape;
 			backgroundRectangle.graphics.beginFill(0x000);
-			backgroundRectangle.graphics.drawRect(0, 0, 800, 640); // FIX windowsize
+			backgroundRectangle.graphics.drawRect(0, 0, 800, 600);
 			backgroundRectangle.graphics.endFill();
 			game.addChild(backgroundRectangle);
 

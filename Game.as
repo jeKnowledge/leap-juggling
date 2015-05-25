@@ -155,8 +155,6 @@
 					settings.leapMode = stringToBoolean(array[i]);
 				} else if (i == 1) {
 					settings.volume = Number(array[i]);
-				} else if (i == 2) {
-					settings.windowSize = array[i];
 				}
 			}
 		}
@@ -173,10 +171,10 @@
 
 				var stream: FileStream = new FileStream();
 				stream.open(file, FileMode.WRITE);
-				stream.writeUTFBytes("false\n0.5\nwindowSize\n");
+				stream.writeUTFBytes("false\n0.5\n");
 				stream.close();
 				
-				loadSettingsFromTextFileAsArray(["false", "0.5", "windowSize"]);
+				loadSettingsFromTextFileAsArray(["false", "0.5"]);
 			}
 			
 			function onLoaded(e: Event): void {
@@ -194,8 +192,7 @@
 			var stream: FileStream = new FileStream();
 			stream.open(file, FileMode.WRITE);
 			stream.writeUTFBytes(settings.leapMode.toString() + "\n" +
-								 settings.volume.toString() + "\n" + 
-								 settings.windowSize + "\n");
+								 settings.volume.toString() + "\n");
 			stream.close();
 		}
 		

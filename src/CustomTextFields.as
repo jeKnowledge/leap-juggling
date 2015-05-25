@@ -17,7 +17,7 @@
 			var textField: TextField = new TextField();
 			textField.x = x;
 			textField.y = y;
-			textField.autoSize = TextFieldAutoSize.LEFT;
+			textField.autoSize = TextFieldAutoSize.CENTER;
 			textField.defaultTextFormat = new TextFormat('pixelmix', fontSize, 0x000);
 			textField.text = text;
 			
