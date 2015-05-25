@@ -26,6 +26,8 @@
 
 			textFields.createCustomTextField("game-over", "GAME OVER", 300, 150);
 			textFields.createCustomTextField("username", "Enter your username", 190, 200);
+			textFields.createCustomTextField("challenge-highscores", "Challenge\nHighScores", 200, 300, 18);
+			textFields.createCustomTextField("endless-highscores", "Endless\nHighScores", 500, 300, 18);
 			textFields.createCustomTextField("restart", "Restart", 200, 400);
 			textFields.createCustomTextField("menu", "Menu", 500, 400);
 
@@ -45,9 +47,9 @@
 		public function sendHighScore(): void {
 			if (inputField.text == "") {
 				var randomNumber: int = int(randomNames.length * Math.random());
-				game.highScoreSender.sendScore(randomNames[randomNumber], score, lastState.name);
+				game.serverCommunicator.sendScore("http://malabarismo.herokuapp.com/new-score", randomNames[randomNumber], score, lastState.name);
 			} else {
-				game.highScoreSender.sendScore(inputField.text, score, lastState.name);
+				game.serverCommunicator.sendScore("http://malabarismo.herokuapp.com/new-score", inputField.text, score, lastState.name);
 			}
 		}
 
@@ -80,6 +82,10 @@
 				} else if (event.target == textFields.getKeyValue("menu")) {
 					sendHighScore();
 					this.game.changeState(new MenuState(this.game));
+				} else if (event.target == textFields.getKeyValue("challenge-highscores")) {
+					this.game.changeState(new HighScoreState(this.game, "http://malabarismo.herokuapp.com/top-challenge", "Challenge"));
+				} else if (event.target == textFields.getKeyValue("endless-highscores")) {
+					this.game.changeState(new HighScoreState(this.game, "http://malabarismo.herokuapp.com/top-endless", "Endless"));
 				}
 			}
 		}

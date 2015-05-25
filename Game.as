@@ -55,7 +55,7 @@
 		public var backgroundImage: Sprite;
 		
 		// Server
-		public var highScoreSender: HighScoreSender;
+		public var serverCommunicator: ServerCommunicator;
 
 		public function Game() {
 			// Maps
@@ -80,7 +80,7 @@
 			stage.addEventListener(MouseEvent.MOUSE_UP, reportMouseUp);
 			
 			// Server
-			highScoreSender = new HighScoreSender("http://malabarismo.herokuapp.com/new-score");
+			serverCommunicator = new ServerCommunicator();
 			
 			// Sounds
 			soundChannel = new SoundChannel();
@@ -89,6 +89,8 @@
 			// Start game on the menu
 			currentState = new LoadingState(this);
 			currentState.setup();
+			
+			stage.nativeWindow.title = "Leap Juggling";
 		}
 		
 		public function reportKeyDown(event: KeyboardEvent): void {
@@ -115,6 +117,14 @@
 			while (numChildren > 0) {
 				removeChildAt(0);
 			}
+		}
+		
+		public function changeState(newState: State) {
+			clearStage();
+
+			addEventListener(Event.ENTER_FRAME, enterFrameHandler);
+			newState.setup();
+			currentState = newState;
 			
 			// Add background image again
 			this.backgroundImage = new Sprite();
@@ -129,14 +139,6 @@
 				pointer.addChild(resourceMap["assets/images/point.png"]);
 				this.addChild(pointer);
 			}
-		}
-		
-		public function changeState(newState: State) {
-			clearStage();
-
-			addEventListener(Event.ENTER_FRAME, enterFrameHandler);
-			newState.setup();
-			currentState = newState;
 		}
 		
 		private function stringToBoolean(string: String): Boolean {
