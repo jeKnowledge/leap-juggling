@@ -13,6 +13,8 @@
 		public function State(game: Game) {
 			this.game = game;
 			
+			this.useLeapPointer = false;
+			
 			game.stage.addEventListener(MouseEvent.CLICK, onMouseClick);
 		}
 

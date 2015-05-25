@@ -46,15 +46,13 @@
 		// Leap Motion
 		public var leapMap: Object;
 		public var leapMotion: LeapListener;
+		public var pointer: Sprite;
 		
 		// Settings
 		public var settings: Object;
 		
 		// Background Image
 		public var backgroundImage: Sprite;
-		
-		// Pointer Leap Motion
-		public var pointer: Sprite;
 		
 		// Server
 		public var highScoreSender: HighScoreSender;
@@ -223,7 +221,10 @@
 		}
 		
 		public function checkBounds(object: DisplayObject): Boolean {
-			if (this.leapMotion.hands.rightX + 250 >= object.x && this.leapMotion.hands.rightX + 250 <= object.x + object.width && -this.leapMotion.hands.rightY + 500 >= object.y && -this.leapMotion.hands.rightY + 500 <= object.y + object.height) {
+			if (this.leapMotion.hands.rightX + 250 >= object.x &&
+				this.leapMotion.hands.rightX + 250 <= object.x + object.width && 
+				-this.leapMotion.hands.rightY + 500 >= object.y &&
+				-this.leapMotion.hands.rightY + 500 <= object.y + object.height) {
 				return true;
 			} else {
 				return false;
