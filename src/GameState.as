@@ -77,7 +77,7 @@
 				textFields.updateCustomTextField("pause", "");
 			} else {
 				paused = true;
-				textFields.updateCustomTextField("pause", "Game paused");
+				textFields.updateCustomTextField("pause", "Game paused\nPress Q to quit.");
 			}
 		}
 
