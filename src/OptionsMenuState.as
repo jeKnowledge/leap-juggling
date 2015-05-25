@@ -46,25 +46,25 @@
 				}
 
 				game.leapMap[LeapPosition.SCREEN_TAP] = false;
-			} else {
-				if (game.keyMap[Keyboard.U]) {
-					game.keyMap[Keyboard.U] = false;
+			}
 
-					if ((game.settings.volume + 0.1) <= 1) {
-						game.settings.volume += 0.1;
+			if (game.keyMap[Keyboard.U]) {
+				game.keyMap[Keyboard.U] = false;
 
-						game.saveSettings();
-						game.updateVolume();
-					}
-				} else if (game.keyMap[Keyboard.D]) {
-					game.keyMap[Keyboard.D] = false;
+				if ((game.settings.volume + 0.1) <= 1) {
+					game.settings.volume += 0.1;
 
-					if ((this.game.settings.volume - 0.1) >= 0) {
-						this.game.settings.volume -= 0.1;
+					game.saveSettings();
+					game.updateVolume();
+				}
+			} else if (game.keyMap[Keyboard.D]) {
+				game.keyMap[Keyboard.D] = false;
 
-						game.saveSettings();
-						game.updateVolume();
-					}
+				if ((this.game.settings.volume - 0.1) >= 0) {
+					this.game.settings.volume -= 0.1;
+
+					game.saveSettings();
+					game.updateVolume();
 				}
 			}
 		}
