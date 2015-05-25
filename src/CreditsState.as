@@ -16,7 +16,7 @@
 		}
 		
 		override public function setup(): void {
-			this.useLeapPointer = true;
+			useLeapPointer = true;
 			this.textFields = new CustomTextFields(this.game);
 			
 			textFields.createCustomTextField("info", "Game developed by:", 250, 100, 25);

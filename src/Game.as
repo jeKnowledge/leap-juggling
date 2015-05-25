@@ -122,6 +122,12 @@
 			this.backgroundImage.height = this.stage.stageHeight;
 			this.addChild(this.backgroundImage);
 			this.setChildIndex(this.backgroundImage, 0);
+			
+			if (this.settings.leapMode && this.currentState.useLeapPointer) {
+				this.pointer = new Sprite();
+				this.pointer.addChild(game.resourceMap["assets/images/point.png"]);
+				this.addChild(this.pointer);
+			}
 		}
 		
 		public function changeState(newState: State) {

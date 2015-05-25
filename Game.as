@@ -141,9 +141,11 @@
 			this.addChild(this.backgroundImage);
 			this.setChildIndex(this.backgroundImage, 0);
 			
-			this.pointer = new Sprite();
-			this.pointer.addChild(this.resourceMap["assets/images/point.png"]);
-			this.addChild(this.pointer);
+			if (settings.leapMode && currentState.useLeapPointer) {
+				pointer = new Sprite();
+				pointer.addChild(resourceMap["assets/images/point.png"]);
+				this.addChild(pointer);
+			}
 		}
 		
 		public function changeState(newState: State) {

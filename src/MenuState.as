@@ -20,7 +20,7 @@
 		}
 		
 		override public function setup(): void {
-			this.useLeapPointer = true;
+			useLeapPointer = true;
 			this.textFields = new CustomTextFields(this.game);
 			
 			textFields.createCustomTextField("menu-play", "Play", 280, 200);
@@ -37,9 +37,11 @@
 			game.addChild(game.backgroundImage);
 			game.setChildIndex(game.backgroundImage, 0);
 			
-			game.pointer = new Sprite();
-			game.pointer.addChild(game.resourceMap["assets/images/point.png"]);
-			game.addChild(game.pointer);
+			if (game.settings.leapMode) {
+				game.pointer = new Sprite();
+				game.pointer.addChild(game.resourceMap["assets/images/point.png"]);
+				game.addChild(game.pointer);
+			}
 		}
 		
 		override public function update(): void {

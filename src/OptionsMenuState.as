@@ -14,6 +14,7 @@
 		}
 		
 		override public function setup(): void {
+			useLeapPointer = true;
 			this.textFields = new CustomTextFields(this.game);
 			
 			textFields.createCustomTextField("leap_mode", "Leap Motion Mode", 145, 100);
