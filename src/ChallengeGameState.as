@@ -23,7 +23,7 @@
 			super(game);
 			
 			// Game Settings
-			NUM_BALLS = 5;
+			NUM_BALLS = 4;
 			this.name = "challenge";
 		}
 		
