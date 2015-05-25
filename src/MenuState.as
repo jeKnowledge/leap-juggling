@@ -17,10 +17,11 @@
 				This is the first function called after the LoadingState. Global resources
 				should be loaded here.
 			*/
+			
+			useLeapPointer = true;
 		}
 		
 		override public function setup(): void {
-			useLeapPointer = true;
 			this.textFields = new CustomTextFields(this.game);
 			
 			textFields.createCustomTextField("menu-play", "Play", 280, 200);
@@ -37,6 +38,7 @@
 			game.addChild(game.backgroundImage);
 			game.setChildIndex(game.backgroundImage, 0);
 			
+			// Leap Motion Pointer
 			if (game.settings.leapMode) {
 				game.pointer = new Sprite();
 				game.pointer.addChild(game.resourceMap["assets/images/point.png"]);
@@ -47,29 +49,28 @@
 		override public function update(): void {
 			if (game.settings.leapMode) {
 				game.updateLeapPointer();
+
+				if (game.checkBounds(textFields.getKeyValue("menu-play")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+					this.game.changeState(new GameMenuState(this.game));
+				} else if (game.checkBounds(textFields.getKeyValue("menu-options")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+					this.game.changeState(new OptionsMenuState(this.game));
+				} else if (game.checkBounds(textFields.getKeyValue("menu-credits")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+					this.game.changeState(new CreditsState(this.game));
+				}
+				
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
 			}
-			
-			if (game.checkBounds(textFields.getKeyValue("menu-play")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
-				game.leapMap[LeapPosition.SCREEN_TAP] = false;
-				this.game.changeState(new GameMenuState(this.game));
-			} else if (game.checkBounds(textFields.getKeyValue("menu-options")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
-				game.leapMap[LeapPosition.SCREEN_TAP] = false;
-				this.game.changeState(new OptionsMenuState(this.game));
-			} else if (game.checkBounds(textFields.getKeyValue("menu-credits")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
-				game.leapMap[LeapPosition.SCREEN_TAP] = false;
-				this.game.changeState(new CreditsState(this.game));
-			}
-			
-			game.leapMap[LeapPosition.SCREEN_TAP] = false;
 		}
 
 		override public function onMouseClick(event: MouseEvent): void {
-			if (event.target == textFields.getKeyValue("menu-play")) {
-				this.game.changeState(new GameMenuState(this.game));
-			} else if (event.target == textFields.getKeyValue("menu-options")) {
-				this.game.changeState(new OptionsMenuState(this.game));
-			} else if (event.target == textFields.getKeyValue("menu-credits")) {
-				this.game.changeState(new CreditsState(this.game));
+			if (!game.settings.leapMode) {
+				if (event.target == textFields.getKeyValue("menu-play")) {
+					this.game.changeState(new GameMenuState(this.game));
+				} else if (event.target == textFields.getKeyValue("menu-options")) {
+					this.game.changeState(new OptionsMenuState(this.game));
+				} else if (event.target == textFields.getKeyValue("menu-credits")) {
+					this.game.changeState(new CreditsState(this.game));
+				}
 			}
 		}
 		
