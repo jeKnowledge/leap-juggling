@@ -45,7 +45,9 @@
 		}
 		
 		override public function update(): void {
-			game.updateLeapPointer();
+			if (game.settings.leapMode) {
+				game.updateLeapPointer();
+			}
 			
 			if (game.checkBounds(textFields.getKeyValue("menu-play")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
 				game.leapMap[LeapPosition.SCREEN_TAP] = false;

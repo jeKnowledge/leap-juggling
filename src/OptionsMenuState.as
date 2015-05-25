@@ -4,6 +4,7 @@
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 	import flash.events.*;
+	import flash.display.Sprite;
 	
 	public class OptionsMenuState extends State {
 		
@@ -25,7 +26,9 @@
 		}
 		
 		override public function update(): void {
-			game.updateLeapPointer();
+			if (game.settings.leapMode) {
+				game.updateLeapPointer();
+			}
 			
 			if (game.checkBounds(textFields.getKeyValue("menu")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
 				game.leapMap[LeapPosition.SCREEN_TAP] = false;
@@ -35,6 +38,7 @@
 				leapModeCheckBox.check();
 				if (game.settings.leapMode) {
 					game.settings.leapMode = false;
+					game.removeChild(game.pointer);
 				} else {
 					game.settings.leapMode = true;
 				}
@@ -72,6 +76,10 @@
 					game.settings.leapMode = false;
 				} else {
 					game.settings.leapMode = true;
+					
+					game.pointer = new Sprite();
+					game.pointer.addChild(game.resourceMap["assets/images/point.png"]);
+					game.addChild(game.pointer);
 				}
 				
 				game.saveSettings();
