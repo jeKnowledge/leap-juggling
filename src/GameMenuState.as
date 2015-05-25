@@ -37,7 +37,7 @@
 				} else if (game.checkBounds(textFields.getKeyValue("gamemenu-endless")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
 					this.game.changeState(new EndlessGameState(this.game));
 				} else if (game.checkBounds(textFields.getKeyValue("gamemenu-challenge")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
-					this.game.changeState(new ChallangeGameState(this.game));
+					this.game.changeState(new ChallengeGameState(this.game));
 				} else if (game.checkBounds(textFields.getKeyValue("menu")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
 					this.game.changeState(new MenuState(this.game));
 				}
@@ -57,7 +57,7 @@
 				} else if (event.target == textFields.getKeyValue("gamemenu-endless")) {
 					this.game.changeState(new EndlessGameState(this.game));
 				} else if (event.target == textFields.getKeyValue("gamemenu-challenge")) {
-					this.game.changeState(new ChallangeGameState(this.game));
+					this.game.changeState(new ChallengeGameState(this.game));
 				} else if (event.target == textFields.getKeyValue("menu")) {
 					this.game.changeState(new MenuState(this.game));
 				}

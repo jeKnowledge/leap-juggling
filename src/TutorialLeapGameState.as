@@ -22,6 +22,7 @@
 
 			// Game settings
 			NUM_BALLS = 1;
+			this.name = "tutorial";
 		}
 
 		public override function setup(): void {

@@ -14,16 +14,17 @@
 	import flash.media.SoundTransform;	
 	import Math;
 	
-	public class ChallangeGameState extends GameState {
-		
+	public class ChallengeGameState extends GameState {
+
 		// Random Gravitites
 		private static var randomGravities: Array = [0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95];
 
-		public function ChallangeGameState(game: Game) {
+		public function ChallengeGameState(game: Game) {
 			super(game);
 			
 			// Game Settings
 			NUM_BALLS = 5;
+			this.name = "challenge";
 		}
 		
 		public override function setup(): void {
