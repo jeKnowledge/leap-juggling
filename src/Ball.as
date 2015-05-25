@@ -90,7 +90,7 @@
 
 		public override function update(): void {
 			if (state == BallPosition.LEFT_HAND) {
-				sprite.x = gameState.player.leftHand.sprite.x;
+				sprite.x = gameState.player.leftHand.sprite.x + 50;
 				sprite.y = gameState.player.leftHand.sprite.y;
 			} else if (state == BallPosition.RIGHT_HAND) {
 				sprite.x = gameState.player.rightHand.sprite.x;
