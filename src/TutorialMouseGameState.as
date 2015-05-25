@@ -27,7 +27,7 @@
 		public override function setup(): void {
 			super.setup();
 
-			this.textFields.createCustomTextField("tutorial_text", "", 20, 200, 18);
+			this.textFields.createCustomTextField("tutorial_text", "", 130, 250, 20);
 		}
 
 		public override function update(): void {
@@ -46,19 +46,19 @@
 
 			if (!paused) {
 				if (currentLevel == 0) {
-					this.textFields.updateCustomTextField("tutorial_text", "Press space to get the first ball flying");
+					this.textFields.updateCustomTextField("tutorial_text", "Press space to get the first ball to fly\n(the longer you press the higher it gets)");
 
 					if (this.ballsInHand(player.leftHand).length == 1) {
 						currentLevel++;
 					}
 				} else if (currentLevel == 1) {
-					this.textFields.updateCustomTextField("tutorial_text", "Now, click the left mouse button to pass the ball to your \nleft hand");
+					this.textFields.updateCustomTextField("tutorial_text", "  Now, click the left mouse button\nto pass the ball to your left hand");
 
 					if (this.ballsInHand(player.rightHand).length == 1) {
 						currentLevel++;
 					}
 				} else if (currentLevel == 2) {
-					this.textFields.updateCustomTextField("tutorial_text", "Good job ! Now lets scale it up a bit. \n2 balls now ! \nPress the same keys to play and enter to continue");
+					this.textFields.updateCustomTextField("tutorial_text", "Good job ! Now lets scale it up a bit. \n\n\t\t\t\ttwo balls now! \n\t\tPress enter to continue");
 
 					this.addBalls(1);
 					this.resetBallPosition();
@@ -70,7 +70,7 @@
 						currentLevel++;
 					}
 				} else if (currentLevel == 4) {
-					this.textFields.updateCustomTextField("tutorial_text", "Now try it with three balls and continue when \nyou feel ready for the real challenge ! \nPress enter to continue");
+					this.textFields.updateCustomTextField("tutorial_text", " Now try it with three balls and continue \nwhen you feel ready for the real challenge! \n\n\t\tPress enter to continue");
 
 					this.addBalls(1);
 					this.resetBallPosition();
@@ -93,7 +93,11 @@
 
 				// Check if the player lost
 				if (player.lives.length == 0) {
-					game.changeState(new GameOverState(game, player.score, this));
+					this.textFields.updateCustomTextField("tutorial_text", "\tUh Oh! You lost all your lives!\nPress Enter to Restart Tutorial.");
+					if(game.keyMap[Keyboard.ENTER]) {
+						game.keyMap[Keyboard.ENTER] = false;
+						game.changeState(new TutorialMouseGameState(this.game));
+					}
 				}
 			}
 		}
