@@ -89,6 +89,8 @@
 			// Start game on the menu
 			currentState = new LoadingState(this);
 			currentState.setup();
+			
+			stage.nativeWindow.title = "Leap Juggling";
 		}
 		
 		public function reportKeyDown(event: KeyboardEvent): void {
