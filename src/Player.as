@@ -52,7 +52,7 @@
 				}
 
 				if (gameState.game.settings.leapMode) {
-					ballToLaunch.launch(10);
+					ballToLaunch.launch(6);
 					canLaunch = false;
 					var timer: Timer = new Timer(200, 1);
 					timer.addEventListener("timer", this.updateCanLaunch);
