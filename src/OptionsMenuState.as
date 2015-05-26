@@ -23,9 +23,9 @@
 
 			textFields.createCustomTextField("leap_mode", "Leap Motion Mode", 350, 350, 25);
 			textFields.createCustomTextField("volume-index", "Volume", 350, 200, 25);
-			textFields.createCustomTextField("volume", int(game.settings.volume * 100).toString() + "%" , 470, 200, 25);
+			textFields.createCustomTextField("volume", int(game.settings.volume * 100).toString() + "%", 470, 200, 25);
 			textFields.createCustomTextField("back", "Back", 350, 100, 20);
-			
+
 			soundUp = new Sprite();
 			soundUp.addChild(game.resourceMap["assets/images/uparrow.png"]);
 			soundUp.x = 500;
@@ -33,7 +33,7 @@
 			soundUp.width = 40;
 			soundUp.height = 40;
 			game.addChild(soundUp);
-			
+
 			soundDown = new Sprite();
 			soundDown.addChild(game.resourceMap["assets/images/downarrow.png"]);
 			soundDown.x = 500;
@@ -62,25 +62,26 @@
 					}
 
 					game.saveSettings();
-				}
-			} else if (game.checkBounds(soundUp) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+				} else if (game.checkBounds(soundUp) && game.leapMap[LeapPosition.SCREEN_TAP]) {
 
-				if ((game.settings.volume + 0.1) <= 1) {
-					game.settings.volume += 0.1;
-					textFields.updateCustomTextField("volume", int(game.settings.volume * 100).toString() + "%");
-					game.saveSettings();
-					game.updateVolume();
-				}
-			} else if (game.checkBounds(soundDown) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+					if ((game.settings.volume + 0.1) <= 1) {
+						game.settings.volume += 0.1;
+						textFields.updateCustomTextField("volume", int(game.settings.volume * 100).toString() + "%");
+						game.saveSettings();
+						game.updateVolume();
+					}
+				} else if (game.checkBounds(soundDown) && game.leapMap[LeapPosition.SCREEN_TAP]) {
 
-				if ((this.game.settings.volume - 0.1) >= 0) {
-					this.game.settings.volume -= 0.1;
-					textFields.updateCustomTextField("volume", int(game.settings.volume * 100).toString() + "%");
-					game.saveSettings();
-					game.updateVolume();
+					if ((this.game.settings.volume - 0.1) >= 0) {
+						this.game.settings.volume -= 0.1;
+						textFields.updateCustomTextField("volume", int(game.settings.volume * 100).toString() + "%");
+						game.saveSettings();
+						game.updateVolume();
+					}
 				}
+				
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
 			}
-			game.leapMap[LeapPosition.SCREEN_TAP] = false;
 		}
 
 		override public function onMouseClick(event: MouseEvent): void {
@@ -107,7 +108,7 @@
 						textFields.updateCustomTextField("volume", int(game.settings.volume * 100).toString() + "%");
 						game.saveSettings();
 						game.updateVolume();
-					}	
+					}
 				} else if (event.target == soundDown) {
 					if ((this.game.settings.volume - 0.1) >= 0) {
 						this.game.settings.volume -= 0.1;
