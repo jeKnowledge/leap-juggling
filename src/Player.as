@@ -113,15 +113,10 @@
 
 			// Mouse Click / Leap Tap
 			if ((!gameState.game.settings.leapMode && gameState.game.mouseDown) || (gameState.game.settings.leapMode && gameState.game.leapMap[LeapPosition.RIGHT_TAP])) {
-				if (gameState.game.leapMap[LeapPosition.RIGHT_TAP]) {
-					gameState.game.leapMap[LeapPosition.RIGHT_TAP] = false;
-				}
-				
 				if (gameState.balls.length > 0) {
 					var ballsInLeftHand: Vector.<Ball> = gameState.ballsInHand(leftHand);
-					
 					if (ballsInLeftHand.length > 0) {
-						if (firstLaunch) {
+						if (firstLaunch && gameState.ballsInHand(rightHand).length == 0) {
 							firstLaunch = false;
 						}
 						
@@ -130,15 +125,21 @@
 						ballsInLeftHand[0].vx = -0.05 * (leftHand.sprite.x - rightHand.sprite.x);
 						ballsInLeftHand[0].state = BallPosition.NONE;
 
-						var timer: Timer = new Timer(500, 1);
+						var timer: Timer = new Timer(300, 1);
 						timer.addEventListener("timer", ballsInLeftHand[0].updateCanCollide);
 						timer.start();
-						score++;
+						if (!firstLaunch) {
+							score ++;
+						}
 						
 						gameState.transitionSound.play(0, 1, gameState.game.volumeAdjust);
 					}
 				}
 			}
+			
+			gameState.game.mouseDown = false;
+			gameState.game.leapMap[LeapPosition.RIGHT_TAP] = false;
+			gameState.game.leapMap[LeapPosition.SWIPE_UP] = false;
 
 			// Space Bar Click
 			if (gameState.game.settings.leapMode) {
