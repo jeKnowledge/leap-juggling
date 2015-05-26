@@ -40,7 +40,7 @@
 				gameState.resetBallPosition();
 			}
 			
-			if (gameState.ballsInHand(gameState.player.rightHand).length > 1 && gameState.player.firstLaunch == false) {
+			if (gameState.ballsInHand(gameState.player.rightHand).length > 1 && !gameState.player.firstLaunch) {
 				gameState.player.decreaseLives();
 				gameState.resetBallPosition();
 			}
