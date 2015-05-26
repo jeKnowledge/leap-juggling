@@ -67,8 +67,8 @@
 			var force: int = (gameState.currentFrame - ballChargeBeginning);
 			
 			vx = 6 + (force * 0.5);
-			if (vx > 15) {
-				vx = 15;
+			if (vx > 14) {
+				vx = 14;
 			}
 
 			vy = -(force * 4) - 16;
