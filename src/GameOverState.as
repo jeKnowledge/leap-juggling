@@ -26,8 +26,8 @@
 
 			textFields.createCustomTextField("game-over", "GAME OVER", 350, 150);
 			textFields.createCustomTextField("username", "Enter your username", 350, 200, 25);
-			textFields.createCustomTextField("challenge-highscores", "\tChallenge\nHighScores", 200, 300, 18);
-			textFields.createCustomTextField("endless-highscores", "\tEndless\nHighScores", 500, 300, 18);
+			textFields.createCustomTextField("challenge-highscores", "\tChallenge\nHighScores", 250, 300, 18);
+			textFields.createCustomTextField("endless-highscores", "\tEndless\nHighScores", 450, 300, 18);
 			textFields.createCustomTextField("restart", "Restart", 200, 400, 25);
 			textFields.createCustomTextField("back", "Menu", 500, 400, 25);
 
@@ -63,8 +63,11 @@
 				} else if (game.checkBounds(textFields.getKeyValue("back")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
 					sendHighScore();
 					this.game.changeState(new MenuState(this.game));
+				} else if (game.checkBounds(textFields.getKeyValue("challenge-highscores")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+					this.game.changeState(new HighScoreState(this.game, "http://malabarismo.herokuapp.com/top-challenge", "Challenge", this));
+				} else if (game.checkBounds(textFields.getKeyValue("endless-highscores")) && game.leapMap[LeapPosition.SCREEN_TAP]) {
+					this.game.changeState(new HighScoreState(this.game, "http://malabarismo.herokuapp.com/top-endless", "Endless", this));
 				}
-
 				game.leapMap[LeapPosition.SCREEN_TAP] = false;
 			} else {
 				if (game.keyMap[Keyboard.ENTER]) {

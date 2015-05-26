@@ -28,7 +28,7 @@
 		public override function setup(): void {
 			super.setup();
 			
-			this.textFields.createCustomTextField("tutorial_text", "", 350, 80, 18);
+			this.textFields.createCustomTextField("tutorial_text", "", 350, 200, 20);
 		}
 
 		public override function update(): void {
@@ -47,19 +47,19 @@
 
 			if (!paused) {
 				if (currentLevel == 0) {
-					this.textFields.updateCustomTextField("tutorial_text", "Make a tapping movement with the left hand to get the \nfirst ball flying");
+					this.textFields.updateCustomTextField("tutorial_text", "Make a tapping movement with the left hand.\n\t\t\tGet the first ball flying");
 
 					if (this.ballsInHand(player.leftHand).length == 1) {
 						currentLevel++;
 					}
 				} else if (currentLevel == 1) {
-					this.textFields.updateCustomTextField("tutorial_text", "Now, make a tapping movemnt with right hand to pass \nthe ball to your left hand");
+					this.textFields.updateCustomTextField("tutorial_text", "Now, make the same with your right hand.\n\t\tPass the ball to your left hand");
 
 					if (this.ballsInHand(player.rightHand).length == 1) {
 						currentLevel++;
 					}
 				} else if (currentLevel == 2) {
-					this.textFields.updateCustomTextField("tutorial_text", "Good job ! Now lets scale it up a bit.\n2 balls now !\n Do the same gestures to play");
+					this.textFields.updateCustomTextField("tutorial_text", "Good job ! Now lets scale it up a bit!\n\t\t\t\ttwo balls now!\n\t\tDo the same gestures to play");
 
 					this.addBalls(1);
 					this.resetBallPosition();
@@ -67,11 +67,10 @@
 					currentLevel++;
 				} else if (currentLevel == 3) {
 					if (game.leapMap[LeapPosition.SCREEN_TAP]) {
-						game.leapMap[LeapPosition.SCREEN_TAP] = false;
 						currentLevel++;
 					}
 				} else if (currentLevel == 4) {
-					this.textFields.updateCustomTextField("tutorial_text", "Now try it with three balls and continue when \nyou feel ready for the real challenge !\n Do a screen tap gesture to continue");
+					this.textFields.updateCustomTextField("tutorial_text", "\t\t\t\tNow try it out with three balls.\nContinue when you feel ready for the real challenge!\n\t\t\t\tDo a tap screen to continue", 150);
 
 					this.addBalls(1);
 					this.resetBallPosition();
@@ -79,10 +78,11 @@
 					currentLevel++;
 				} else if (currentLevel == 5) {
 					if (game.leapMap[LeapPosition.SCREEN_TAP]) {
-						game.leapMap[LeapPosition.SCREEN_TAP] = false;
 						game.changeState(new GameMenuState(game));
 					}
 				}
+				
+				game.leapMap[LeapPosition.SCREEN_TAP] = false;
 
 				// Update Player
 				player.update();

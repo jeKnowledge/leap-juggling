@@ -21,15 +21,15 @@
 		override public function setup(): void {
 			this.textFields = new CustomTextFields(this.game);
 
-			textFields.createCustomTextField("leap_mode", "Leap Motion Mode", 350, 100, 25);
-			textFields.createCustomTextField("volume-index", "Volume", 350, 250, 25);
-			textFields.createCustomTextField("volume", int(game.settings.volume * 100).toString() + "%" , 470, 250, 25);
-			textFields.createCustomTextField("back", "Back", 350, 400, 20);
+			textFields.createCustomTextField("leap_mode", "Leap Motion Mode", 350, 350, 25);
+			textFields.createCustomTextField("volume-index", "Volume", 350, 200, 25);
+			textFields.createCustomTextField("volume", int(game.settings.volume * 100).toString() + "%" , 470, 200, 25);
+			textFields.createCustomTextField("back", "Back", 350, 100, 20);
 			
 			soundUp = new Sprite();
 			soundUp.addChild(game.resourceMap["assets/images/uparrow.png"]);
 			soundUp.x = 500;
-			soundUp.y = 200;
+			soundUp.y = 150;
 			soundUp.width = 40;
 			soundUp.height = 40;
 			game.addChild(soundUp);
@@ -37,12 +37,12 @@
 			soundDown = new Sprite();
 			soundDown.addChild(game.resourceMap["assets/images/downarrow.png"]);
 			soundDown.x = 500;
-			soundDown.y = 300;
+			soundDown.y = 250;
 			soundDown.width = 40;
 			soundDown.height = 40;
 			game.addChild(soundDown);
 
-			leapModeCheckBox = new CheckBox(this, 560, 100, game.settings.leapMode);
+			leapModeCheckBox = new CheckBox(this, 560, 350, game.settings.leapMode);
 		}
 
 		override public function update(): void {

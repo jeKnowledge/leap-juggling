@@ -29,9 +29,9 @@
 		override public function setup(): void {
 			textFields = new CustomTextFields(this.game);
 			
-			textFields.createCustomTextField("title", gameMode + " HighScores", 350, 100);
-			textFields.createCustomTextField("highscores", "", 350, 200, 20);
-			textFields.createCustomTextField("menu", "Back", 350, 500, 20);
+			textFields.createCustomTextField("title", gameMode + " HighScores", 350, 200);
+			textFields.createCustomTextField("highscores", "", 350, 300, 20);
+			textFields.createCustomTextField("menu", "Back", 350, 100, 20);
 			
 			game.serverCommunicator.getHighScores(url);
 		}
