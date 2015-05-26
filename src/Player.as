@@ -113,6 +113,10 @@
 
 			// Mouse Click / Leap Tap
 			if ((!gameState.game.settings.leapMode && gameState.game.mouseDown) || (gameState.game.settings.leapMode && gameState.game.leapMap[LeapPosition.RIGHT_TAP])) {
+				if (gameState.game.leapMap[LeapPosition.RIGHT_TAP]) {
+					gameState.game.leapMap[LeapPosition.RIGHT_TAP] = false;
+				}
+				
 				if (gameState.balls.length > 0) {
 					var ballsInLeftHand: Vector.<Ball> = gameState.ballsInHand(leftHand);
 					if (ballsInLeftHand.length > 0) {
@@ -136,10 +140,6 @@
 					}
 				}
 			}
-			
-			gameState.game.mouseDown = false;
-			gameState.game.leapMap[LeapPosition.RIGHT_TAP] = false;
-			gameState.game.leapMap[LeapPosition.SWIPE_UP] = false;
 
 			// Space Bar Click
 			if (gameState.game.settings.leapMode) {
