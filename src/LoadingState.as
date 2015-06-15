@@ -14,8 +14,8 @@
 	import flash.ui.Keyboard;
 	import flash.events.MouseEvent;
 	import flash.media.Sound;
-    import flash.net.URLLoader;
-    import flash.net.URLRequest;
+	import flash.net.URLLoader;
+	import flash.net.URLRequest;
 	import flash.utils.Timer;
 	import flash.display.Shape;
 	import flash.utils.getTimer;
