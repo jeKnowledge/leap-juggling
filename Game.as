@@ -13,8 +13,8 @@
 	import flash.ui.Keyboard;
 	import flash.events.MouseEvent;
 	import flash.media.Sound;
-    import flash.net.URLLoader;
-    import flash.net.URLRequest;
+	import flash.net.URLLoader;
+	import flash.net.URLRequest;
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
